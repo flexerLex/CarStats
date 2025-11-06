@@ -1,0 +1,9 @@
+# IDE settings
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
