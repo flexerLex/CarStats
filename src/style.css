@@ -1,11 +1,11 @@
 root {
-    --green-main: #284E41;
-    --green-accent: #2BB673;
-    --mint-bg: #EAF6F3;
+    --green-main: #415B2B;
+    --green-accent: #628243;
+    --mint-bg: #595959;
     --white: #FFFFFF;
-    --text-main: #212B27;
-    --yellow-accent: #FFD600;
-    --gray-border: #DDE7E3;
+    --text-main: #000000;
+    --yellow-accent: #E5EAE3;
+    --gray-border: #E5EAE3;
     --header-height: 72px;
 }
 
