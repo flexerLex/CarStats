@@ -1,0 +1,229 @@
+root {
+    --green-main: #284E41;
+    --green-accent: #2BB673;
+    --mint-bg: #EAF6F3;
+    --white: #FFFFFF;
+    --text-main: #212B27;
+    --yellow-accent: #FFD600;
+    --gray-border: #DDE7E3;
+    --header-height: 72px;
+}
+
+body {
+    background: var(--mint-bg);
+    color: var(--text-main);
+}
+
+.main-header {
+    background: var(--white);
+    color: var(--green-main);
+    box-shadow: 0 2px 8px rgba(40,78,65,0.07);
+}
+
+.nav-link {
+    color: var(--green-main);
+}
+.nav-link.active, .nav-link:focus {
+    background: var(--green-accent);
+    color: var(--white);
+}
+.nav-link:hover {
+    background: var(--mint-bg);
+    color: var(--green-accent);
+}
+
+.lang-switch {
+    background: var(--mint-bg);
+    color: var(--green-main);
+}
+.lang-switch:hover {
+    background: var(--green-accent);
+    color: var(--white);
+}
+
+.profile-btn {
+    background: var(--mint-bg);
+}
+.profile-btn:hover {
+    background: var(--green-accent);
+}
+
+.sidebar, .rightbar, .center {
+    background: var(--white);
+    box-shadow: 0 1px 8px rgba(40,78,65,0.04);
+}
+
+footer {
+    background: var(--mint-bg);
+    color: var(--green-main);
+    border-top: 1px solid var(--gray-border);
+}
+
+form#cost-form button {
+    background: var(--green-accent);
+    color: var(--white);
+}
+form#cost-form button:hover {
+    background: var(--green-main);
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fa;
+    color: #284E41;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 220px 1fr 320px;
+    grid-template-rows: var(--header-height) 1fr 56px;
+    min-height: 100vh;
+    grid-template-areas:
+        "header header header"
+        "sidebar center rightbar"
+        "footer footer footer";
+}
+
+.main-header {
+    grid-area: header;
+    height: var(--header-height);
+    background: #fff;
+    color: #284E41;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+    position: relative;
+    z-index: 10;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo {
+    height: 38px;
+    width: 38px;
+}
+.brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.header-nav {
+    display: flex;
+    gap: 24px;
+}
+.nav-link {
+    text-decoration: none;
+    color: #284E41;
+    font-size: 1.1rem;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-link.active, .nav-link:focus {
+    background: var(--accent);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+}
+.nav-link:hover {
+    background: #eaf6fb;
+    color: var(--accent);
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.lang-switch {
+    background: #f2f2f2;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #284E41;
+    margin-right: 8px;
+    transition: background 0.2s;
+}
+.lang-switch:hover {
+    background: var(--accent);
+    color: #fff;
+}
+.profile-btn {
+    display: flex;
+    align-items: center;
+    background: #f2f2f2;
+    border-radius: 50%;
+    padding: 4px;
+    transition: background 0.2s;
+}
+.profile-btn:hover {
+    background: var(--accent);
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background: #fff;
+    box-shadow: 1px 0 8px rgba(44,62,80,0.04);
+    padding: 24px 16px;
+}
+
+.center {
+    grid-area: center;
+    padding: 32px 40px;
+    background: #fff;
+    box-shadow: 0 1px 8px rgba(44,62,80,0.04);
+}
+
+.rightbar {
+    grid-area: rightbar;
+    background: #fff;
+    box-shadow: -1px 0 8px rgba(44,62,80,0.04);
+    padding: 24px 16px;
+}
+
+footer {
+    grid-area: footer;
+    background: #eaf6fb;
+    color: #284E41;
+    text-align: center;
+    font-size: 1rem;
+    padding: 16px 0;
+    border-top: 1px solid #dbeaf0;
+}
+
+form#cost-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 340px;
+    margin-top: 24px;
+}
+form#cost-form label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+form#cost-form input,
+form#cost-form select,
+form#cost-form button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #dbeaf0;
+    font-size: 1rem;
+}
+form#cost-form button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+form#cost-form button:hover {
+    background: #284E41;
+}
