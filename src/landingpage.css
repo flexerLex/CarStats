@@ -1,0 +1,217 @@
+/* ====== GLOBAL ====== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ====== HEADER ====== */
+.header {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1rem 0;
+}
+
+.header__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: #007b4f;
+}
+
+.lang-switch button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* ====== HERO ====== */
+.hero {
+    background: linear-gradient(to right, #f8f8f8 50%, #d6f0d1 50%);
+    padding: 5rem 0;
+}
+
+.hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hero__text h4 {
+    color: #6dbf4b;
+    margin-bottom: 0.5rem;
+}
+
+.hero__text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero__text p {
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.btn {
+    background-color: #007b4f;
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #00643f;
+}
+
+/* ====== TESTIMONIALS ====== */
+.testimonials {
+    padding: 4rem 0;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    text-align: left;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.user img {
+    border-radius: 50%;
+}
+
+.role {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.text {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    color: #ffb400;
+    font-size: 1.2rem;
+}
+
+/* ====== FOOTER ====== */
+.footer {
+    background: #007b4f;
+    color: #fff;
+    padding: 1.5rem 0;
+}
+
+.footer__grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer__nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.footer__nav a:hover {
+    text-decoration: underline;
+}
+
+.socials a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+    .hero__grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero__text {
+        order: 2;
+    }
+
+    .hero__image {
+        order: 1;
+    }
+
+    .footer__grid {
+        flex-direction: column;
+        text-align: center;
+    }
+}
