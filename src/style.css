@@ -1,229 +1,294 @@
 root {
-    --green-main: #415B2B;
-    --green-accent: #628243;
-    --mint-bg: #595959;
-    --white: #FFFFFF;
-    --text-main: #000000;
-    --yellow-accent: #E5EAE3;
-    --gray-border: #E5EAE3;
-    --header-height: 72px;
+	--green-main: #415b2b;
+	--green-accent: #628243;
+	--mint-bg: #595959;
+	--white: #ffffff;
+	--text-main: #000000;
+	--yellow-accent: #e5eae3;
+	--gray-border: #e5eae3;
+	--header-height: 72px;
 }
 
 body {
-    background: var(--mint-bg);
-    color: var(--text-main);
+	background: var(--mint-bg);
+	color: var(--text-main);
 }
 
 .main-header {
-    background: var(--white);
-    color: var(--green-main);
-    box-shadow: 0 2px 8px rgba(40,78,65,0.07);
+	background: var(--white);
+	color: var(--green-main);
+	box-shadow: 0 2px 8px rgba(40, 78, 65, 0.07);
 }
 
 .nav-link {
-    color: var(--green-main);
+	color: var(--green-main);
 }
-.nav-link.active, .nav-link:focus {
-    background: var(--green-accent);
-    color: var(--white);
+.nav-link.active,
+.nav-link:focus {
+	background: var(--green-accent);
+	color: var(--white);
 }
 .nav-link:hover {
-    background: var(--mint-bg);
-    color: var(--green-accent);
+	background: var(--mint-bg);
+	color: var(--green-accent);
 }
 
 .lang-switch {
-    background: var(--mint-bg);
-    color: var(--green-main);
+	background: var(--mint-bg);
+	color: var(--green-main);
 }
 .lang-switch:hover {
-    background: var(--green-accent);
-    color: var(--white);
+	background: var(--green-accent);
+	color: var(--white);
 }
 
 .profile-btn {
-    background: var(--mint-bg);
+	background: var(--mint-bg);
 }
 .profile-btn:hover {
-    background: var(--green-accent);
+	background: var(--green-accent);
 }
 
-.sidebar, .rightbar, .center {
-    background: var(--white);
-    box-shadow: 0 1px 8px rgba(40,78,65,0.04);
-}
-
-footer {
-    background: var(--mint-bg);
-    color: var(--green-main);
-    border-top: 1px solid var(--gray-border);
+.sidebar,
+.rightbar,
+.center {
+	background: var(--white);
+	box-shadow: 0 1px 8px rgba(40, 78, 65, 0.04);
 }
 
 form#cost-form button {
-    background: var(--green-accent);
-    color: var(--white);
+	background: var(--green-accent);
+	color: var(--white);
 }
 form#cost-form button:hover {
-    background: var(--green-main);
+	background: var(--green-main);
 }
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f7f9fa;
-    color: #284E41;
+	margin: 0;
+	font-family: 'Segoe UI', Arial, sans-serif;
+	background: #f7f9fa;
+	color: #284e41;
 }
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 220px 1fr 320px;
-    grid-template-rows: var(--header-height) 1fr 56px;
-    min-height: 100vh;
-    grid-template-areas:
-        "header header header"
-        "sidebar center rightbar"
-        "footer footer footer";
+	display: grid;
+	grid-template-columns: 220px 1fr 320px;
+	grid-template-rows: var(--header-height) 1fr 56px;
+	min-height: 100vh;
+	grid-template-areas:
+		'header header header'
+		'sidebar center rightbar'
+		'footer footer footer';
 }
 
 .main-header {
-    grid-area: header;
-    height: var(--header-height);
-    background: #fff;
-    color: #284E41;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
-    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
-    position: relative;
-    z-index: 10;
+	grid-area: header;
+	height: var(--header-height);
+	background: #fff;
+	color: #284e41;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 32px;
+	box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
+	position: relative;
+	z-index: 10;
 }
 .header-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
 }
 .logo {
-    height: 38px;
-    width: 38px;
+	height: 38px;
+	width: 38px;
 }
 .brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
+	font-size: 1.5rem;
+	font-weight: bold;
+	letter-spacing: 1px;
 }
 .header-nav {
-    display: flex;
-    gap: 24px;
+	display: flex;
+	gap: 24px;
 }
 .nav-link {
-    text-decoration: none;
-    color: #284E41;
-    font-size: 1.1rem;
-    padding: 8px 18px;
-    border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
+	text-decoration: none;
+	color: #284e41;
+	font-size: 1.1rem;
+	padding: 8px 18px;
+	border-radius: 8px;
+	transition: background 0.2s, color 0.2s;
 }
-.nav-link.active, .nav-link:focus {
-    background: var(--accent);
-    color: #fff;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(44,62,80,0.07);
+.nav-link.active,
+.nav-link:focus {
+	background: var(--accent);
+	color: #fff;
+	font-weight: bold;
+	box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
 }
 .nav-link:hover {
-    background: #eaf6fb;
-    color: var(--accent);
+	background: #eaf6fb;
+	color: var(--accent);
 }
 .header-right {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+	display: flex;
+	align-items: center;
+	gap: 18px;
 }
 .lang-switch {
-    background: #f2f2f2;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 14px;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #284E41;
-    margin-right: 8px;
-    transition: background 0.2s;
+	background: #f2f2f2;
+	border: none;
+	border-radius: 6px;
+	padding: 6px 14px;
+	font-size: 1rem;
+	cursor: pointer;
+	color: #284e41;
+	margin-right: 8px;
+	transition: background 0.2s;
 }
 .lang-switch:hover {
-    background: var(--accent);
-    color: #fff;
+	background: var(--accent);
+	color: #fff;
 }
 .profile-btn {
-    display: flex;
-    align-items: center;
-    background: #f2f2f2;
-    border-radius: 50%;
-    padding: 4px;
-    transition: background 0.2s;
+	display: flex;
+	align-items: center;
+	background: #f2f2f2;
+	border-radius: 50%;
+	padding: 4px;
+	transition: background 0.2s;
 }
 .profile-btn:hover {
-    background: var(--accent);
+	background: var(--accent);
 }
 
 .sidebar {
-    grid-area: sidebar;
-    background: #fff;
-    box-shadow: 1px 0 8px rgba(44,62,80,0.04);
-    padding: 24px 16px;
+	grid-area: sidebar;
+	background: #fff;
+	box-shadow: 1px 0 8px rgba(44, 62, 80, 0.04);
+	padding: 24px 16px;
 }
 
 .center {
-    grid-area: center;
-    padding: 32px 40px;
-    background: #fff;
-    box-shadow: 0 1px 8px rgba(44,62,80,0.04);
+	grid-area: center;
+	padding: 32px 40px;
+	background: #fff;
+	box-shadow: 0 1px 8px rgba(44, 62, 80, 0.04);
 }
 
 .rightbar {
-    grid-area: rightbar;
-    background: #fff;
-    box-shadow: -1px 0 8px rgba(44,62,80,0.04);
-    padding: 24px 16px;
+	grid-area: rightbar;
+	background: #fff;
+	box-shadow: -1px 0 8px rgba(44, 62, 80, 0.04);
+	padding: 24px 16px;
+}
+/* ------------------------------------------------------ */
+/* FOOTER Styles */
+/* 1. Stil für den gesamten Footer */
+.site-footer {
+	background-color: #8fc260;
+	width: 100%;
+	padding: 15px 0;
+	font-size: 14px;
+	color: #4e4d4d;
+	font-family: 'Mulish', sans-serif;
 }
 
-footer {
-    grid-area: footer;
-    background: #eaf6fb;
-    color: #284E41;
-    text-align: center;
-    font-size: 1rem;
-    padding: 16px 0;
-    border-top: 1px solid #dbeaf0;
+/* 2. Der Flex-Container */
+.site-footer__container {
+	display: flex;
+	justify-content: space-between; /* Die drei Unterelemente (Copyright, Links, Social) gleichmäßig aufteilen */
+	align-items: center;
+
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px; /* Innenabstand links und rechts, um den Inhalt vom Rand abzuheben */
 }
+
+/* 2. Der Flex-Container */
+.site-footer__copyrigt {
+	color: white;
+}
+
+/* 3. Stil für Links und Navigation */
+.site-footer__links a {
+	color: #4e4d4d;
+	text-decoration: none; /* Unterstreichung entfernen */
+	margin: 0 10px;
+	padding: 5px 0;
+	transition: color 0.3s;
+}
+
+/* 4. Stil für footer-btn */
+.site-footer__links a.site-footer__btn {
+	/* Löse das Problem, dass Padding keine Wirkung zeigt */
+	display: inline-block;
+	margin-right: 5px;
+	padding: 8px 8px;
+	border-radius: 20px;
+	font-weight: 500;
+}
+a.site-footer__btn:hover {
+	background-color: #4e4d4d;
+	color: white;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+} /* Hier prüfen, ob die Button-Stile mit denen des Headers übereinstimmen sollen */
+
+/* 5. Style für social Media Icon */
+.site-footer__social a {
+	text-decoration: none;
+	margin-left: 8px; /* Abstand zwischen den Icons */
+}
+
+.site-footer__social i {
+	/* Das eigentliche Font Awesome Icon */
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px; /* Breite des Icons */
+	height: 30px; /* Höhe des Icons */
+	border-radius: 50%; /* Runder Hintergrund */
+	background-color: #4e4d4d; /* Dunkelgrauer runder Hintergrund */
+	color: white; /* Farbe des Icons selbst */
+	font-size: 16px; /* Icon-Größe */
+	transition: background-color 0.3s;
+}
+
+.site-footer__social i:hover {
+	background-color: #000;
+} /* Hintergrundfarbe wird beim Hovern Schwarz */
+
+/* ------------------------------------------------------ */
 
 form#cost-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 340px;
-    margin-top: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	max-width: 340px;
+	margin-top: 24px;
 }
 form#cost-form label {
-    font-weight: 500;
-    margin-bottom: 4px;
+	font-weight: 500;
+	margin-bottom: 4px;
 }
 form#cost-form input,
 form#cost-form select,
 form#cost-form button {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid #dbeaf0;
-    font-size: 1rem;
+	padding: 8px 12px;
+	border-radius: 6px;
+	border: 1px solid #dbeaf0;
+	font-size: 1rem;
 }
 form#cost-form button {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+	background: var(--accent);
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background 0.2s;
 }
 form#cost-form button:hover {
-    background: #284E41;
+	background: #284e41;
 }
