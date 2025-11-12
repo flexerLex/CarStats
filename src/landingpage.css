@@ -13,7 +13,7 @@ body {
 }
 
 img {
-    max-width: 100%;
+    max-width: 20%;
     height: auto;
     display: block;
 }
@@ -68,13 +68,52 @@ img {
     border: none;
     cursor: pointer;
     font-weight: 600;
+    color: #333;
+    transition: color 0.2s;
 }
 
-/* ====== HERO ====== */
-.hero {
-    background: linear-gradient(to right, #f8f8f8 50%, #d6f0d1 50%);
-    padding: 5rem 0;
+.lang-switch button:hover {
+    color: #007b4f;
 }
+
+.nav-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger Animation */
+.nav-toggle:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.nav-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hero {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+    url('../assets/images/Hero.png');
+    background-size: cover;
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    min-height: 70vh;
+}
+
 
 .hero__grid {
     display: grid;
@@ -124,18 +163,59 @@ img {
     margin-bottom: 2rem;
 }
 
+/* Container für horizontales Scrollen */
 .testimonial-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    display: flex;                /* nebeneinander anordnen */
+    gap: 20px;                    /* Abstand zwischen den Items */
+    overflow-x: auto;             /* horizontal scrollen */
+    scroll-behavior: smooth;      /* sanftes Scrollen */
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch; /* für Mobile */
 }
 
 .testimonial-card {
-    background: #fff;
+    flex: 0 0 30%; /* jede Karte nimmt 30% der Breite ein */
+    min-width: 280px; /* Mindestbreite für kleinere Bildschirme */
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     text-align: left;
+    background: #fff;
+}
+
+
+.testimonial-card .user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.testimonial-card .user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.testimonial-card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.testimonial-card .role {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.testimonial-card .text {
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.testimonial-card .stars {
+    color: gold;
+    font-size: 1rem;
 }
 
 .user {
@@ -169,6 +249,9 @@ img {
     background: #007b4f;
     color: #fff;
     padding: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* horizontal zentrieren */
 }
 
 .footer__grid {
@@ -189,10 +272,21 @@ img {
     text-decoration: underline;
 }
 
-.socials a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 0.5rem;
+.socials {
+    display: flex;
+    gap: 5px;                   /* sehr kleiner Abstand zwischen den Icons */
+}
+
+.socials a img {
+    width: clamp(100px, 4vw, 120px);   /* min 30px, max 50px, skaliert mit der Viewport-Breite */
+    height: auto;                     /* Seitenverhältnis bleibt erhalten */
+    object-fit: contain;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.socials a img:hover {
+    transform: scale(1.2);
 }
 
 /* ====== RESPONSIVE ====== */
@@ -207,11 +301,41 @@ img {
     }
 
     .hero__image {
-        order: 1;
+        order: 0;
     }
 
     .footer__grid {
         flex-direction: column;
         text-align: center;
+    }
+
+    .nav ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem;
+        border: 1px solid #e5e5e5;
+        display: none; /* initially hidden */
+    }
+
+    .nav-toggle:checked + .hamburger + .nav ul {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .lang-switch.desktop-lang {
+        display: none;
+    }
+
+    .mobile-lang-switch {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
     }
 }
