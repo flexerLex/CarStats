@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarStats</title>
+    <link rel="stylesheet" href="landingpage.css">
+    <script src="login_register_script.js" defer></script>
 </head>
 <body>
+<!-- Header -->
+<header class="header">
+    <div class="container header__content">
+        <div class="logo">
+            <img src="../assets/images/logo_green_no_bg_clean.png" alt="CarStats Logo">
+        </div>
 
+        <!-- Hamburger-Checkbox -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="../src/index.html" class="active">Startseite</a></li>
+                <li><a href="../src/kosteneingabe.html">Kosteneingabe</a></li>
+                <li><a href="../src/statistiken.html">Statistiken</a></li>
+                <li><a href="../src/erinnerungen.html">Erinnerungen</a></li>
+                <li><a href="../src/garage.html">Garage</a></li>
+            </ul>
+        </nav>
+
+        <div class="lang-switch">
+            <button>DE</button>
+            <button>EN</button>
+        </div>
+    </div>
+</header>
+<body>
+<main class="auth">
+    <section class="auth__card">
+        <h1>Willkommen bei CarStats</h1>
+        <p>Bitte melde dich an oder registriere dich, um fortzufahren.</p>
+
+        <!-- Navigation zwischen Login / Registrierung -->
+        <nav class="auth__tabs" aria-label="Formularauswahl">
+            <button id="login_btn" class="tab active" data-target="login">Anmelden</button>
+            <button id="register_btn" class="tab" data-target="register">Registrieren</button>
+        </nav>
+
+        <!-- === LOGIN === -->
+        <form id="login_mask" class="form active" method="post" action="#">
+            <fieldset>
+                <legend>Anmeldung</legend>
+                <label>
+                    Benutzername:
+                    <input id="username" type="text" pattern="[A-Za-z][0-9]{0,5}" required placeholder="Dein Benutzername">
+                </label>
+                <label>
+                    Passwort:
+                    <input id="password" type="password" required placeholder="••••••••">
+                </label>
+                <button id="login_submit" type="submit">Anmelden</button>
+            </fieldset>
+        </form>
+
+        <!-- === REGISTRIERUNG === -->
+        <form id="register_mask" class="form" method="post" action="#">
+            <fieldset>
+                <legend>Registrierung</legend>
+                <div class="grid">
+                    <label>
+                        Vorname:
+                        <input id="first_name_input" type="text" pattern="[A-Za-z]" required placeholder="Max">
+                    </label>
+                    <label>
+                        Nachname:
+                        <input id="name_input" type="text" pattern="[A-Za-z]" required placeholder="Mustermann">
+                    </label>
+                </div>
+                <label>
+                    E-Mail:
+                    <input id="email_input" type="email" required placeholder="max@beispiel.de">
+                </label>
+                <label>
+                    Benutzername (Groß-und Kleinbuchstaben, Zahlen von 0 bis 9999):
+                    <input id="username_input" type="text" pattern="[A-Za-z][0-9]{0,5}" required placeholder="Dein Benutzername">
+                </label>
+                <label>
+                    Passwort:
+                    <input id="password_input" type="password" minlength="6" required placeholder="••••••••">
+                </label>
+                <button id="register_submit" type="submit">Registrieren</button>
+            </fieldset>
+        </form>
+    </section>
+</main>
+</body>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container footer__grid">
+        <p>&copy; 2025 CarStats – Teamprojekt</p>
+        <nav class="footer__nav">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Kontakt</a>
+        </nav>
+        <div class="socials">
+            <a href="https://www.instagram.com"><img src="/../assets/images/instagram.png"></a>
+            <a href="<https://www.x.com"><img src="/../assets/images/twitter.png"></a>
+            <a href="https://www.youtube.com"><img src="/../assets/images/youtube.png"></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
