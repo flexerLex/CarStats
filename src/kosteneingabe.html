@@ -1,10 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarStats – Kostenübersicht</title>
+    <link rel="stylesheet" href="landingpage.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="grid-container">
+    <header class="main-header" aria-label="Hauptnavigation">
+        <div class="header-left">
+            <img src="logo.svg" alt="CarStats Logo" class="logo">
+            <span class="brand">CarStats</span>
+        </div>
+        <nav class="header-nav" aria-label="Seitenmenü">
+            <a href="index.html" class="nav-link active">Startseite</a>
+            <a href="kosten.html" class="nav-link">Kosteneingabe</a>
+            <a href="statistiken.html" class="nav-link">Statistiken</a>
+            <a href="erinnerungen.html" class="nav-link">Erinnerungen</a>
+            <a href="infos.html" class="nav-link">Infos</a>
+        </nav>
+        <div class="header-right">
+            <button class="lang-switch" aria-label="Sprache wechseln">DE/EN</button>
+            <a href="profil.html" class="profile-btn" aria-label="Profil">
+                <svg width="28" height="28" fill="gray" viewBox="0 0 20 20">
+                    <circle cx="10" cy="7" r="4"/>
+                    <ellipse cx="10" cy="16" rx="7" ry="4"/>
+                </svg>
+            </a>
+        </div>
+    </header>
 
+    <div class="sidebar">
+        <!-- Sidebar-Inhalt kann hier ergänzt werden -->
+    </div>
+
+    <main class="center">
+        <form class="kosteneingabe-form" id="cost-form">
+            <div class="kosteneingabe-form__category-group">
+                <label class="kosteneingabe-form__category-label">
+                    <input type="radio" class="kosteneingabe-form__category-radio" name="category" value="tanken"
+                           checked>
+                    Tanken
+                </label>
+                <label class="kosteneingabe-form__category-label">
+                    <input type="radio" class="kosteneingabe-form__category-radio" name="category" value="wartung">
+                    Wartung / Reparatur
+                </label>
+                <label class="kosteneingabe-form__category-label">
+                    <input type="radio" class="kosteneingabe-form__category-radio" name="category" value="versicherung">
+                    Versicherung
+                </label>
+                <label class="kosteneingabe-form__category-label">
+                    <input type="radio" class="kosteneingabe-form__category-radio" name="category" value="sonstiges">
+                    Sonstiges
+                </label>
+            </div>
+
+            <!-- Section for Tanken -->
+            <div class="kosteneingabe-form__section kosteneingabe-form__section--active" id="section-tanken">
+                <label class="kosteneingabe-form__label" for="fuel-amount">Betrag (€):</label>
+                <input class="kosteneingabe-form__input" type="number" id="fuel-amount" name="fuel-amount" min="0"
+                       step="0.01" required>
+                <label class="kosteneingabe-form__label" for="fuel-liter">Liter:</label>
+                <input class="kosteneingabe-form__input" type="number" id="fuel-liter" name="fuel-liter" min="0"
+                       step="0.01">
+                <label class="kosteneingabe-form__label" for="fuel-date">Datum:</label>
+                <input class="kosteneingabe-form__input" type="date" id="fuel-date" name="fuel-date" required>
+            </div>
+
+            <!-- Section for Wartung / Reparatur -->
+            <div class="kosteneingabe-form__section" id="section-wartung">
+                <label class="kosteneingabe-form__label" for="service-type">Art der Wartung:</label>
+                <input class="kosteneingabe-form__input" type="text" id="service-type" name="service-type"
+                       placeholder="z.B. Ölwechsel, Bremsen">
+                <label class="kosteneingabe-form__label" for="service-amount">Betrag (€):</label>
+                <input class="kosteneingabe-form__input" type="number" id="service-amount" name="service-amount" min="0"
+                       step="0.01" required>
+                <label class="kosteneingabe-form__label" for="service-date">Datum:</label>
+                <input class="kosteneingabe-form__input" type="date" id="service-date" name="service-date" required>
+            </div>
+
+            <!-- Section for Versicherung -->
+            <div class="kosteneingabe-form__section" id="section-versicherung">
+                <label class="kosteneingabe-form__label" for="insurance-type">Versicherungsart:</label>
+                <input class="kosteneingabe-form__input" type="text" id="insurance-type" name="insurance-type"
+                       placeholder="z.B. Haftpflicht, Vollkasko">
+                <label class="kosteneingabe-form__label" for="insurance-amount">Betrag (€):</label>
+                <input class="kosteneingabe-form__input" type="number" id="insurance-amount" name="insurance-amount"
+                       min="0" step="0.01" required>
+                <label class="kosteneingabe-form__label" for="insurance-date">Datum:</label>
+                <input class="kosteneingabe-form__input" type="date" id="insurance-date" name="insurance-date" required>
+            </div>
+
+            <!-- Section for Sonstiges -->
+            <div class="kosteneingabe-form__section" id="section-sonstiges">
+                <label class="kosteneingabe-form__label" for="other-description">Beschreibung:</label>
+                <input class="kosteneingabe-form__input" type="text" id="other-description" name="other-description"
+                       placeholder="z.B. Parkgebühr">
+                <label class="kosteneingabe-form__label" for="other-amount">Betrag (€):</label>
+                <input class="kosteneingabe-form__input" type="number" id="other-amount" name="other-amount" min="0"
+                       step="0.01" required>
+                <label class="kosteneingabe-form__label" for="other-date">Datum:</label>
+                <input class="kosteneingabe-form__input" type="date" id="other-date" name="other-date" required>
+            </div>
+
+            <button class="kosteneingabe-form__submit" type="submit">Speichern</button>
+        </form>
+    </main>
+
+    <aside class="rightbar">
+        <h3>Schnellüberblick</h3>
+        <!-- Übersichtliche Infos...-->
+    </aside>
+
+    <footer>
+        &copy; 2025 CarStats – Teamprojekt
+    </footer>
+</div>
+<script>
+    // JS dynamic for switching form sections
+    const radios = document.querySelectorAll('input[name="category"]');
+    const sections = {
+        tanken: document.getElementById('section-tanken'),
+        wartung: document.getElementById('section-wartung'),
+        versicherung: document.getElementById('section-versicherung'),
+        sonstiges: document.getElementById('section-sonstiges')
+    };
+
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            Object.keys(sections).forEach(key => {
+                sections[key].classList.remove('kosteneingabe-form__section--active');
+            });
+            sections[radio.value].classList.add('kosteneingabe-form__section--active');
+        });
+    });
+</script>
 </body>
 </html>
