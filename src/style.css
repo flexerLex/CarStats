@@ -122,14 +122,14 @@ body {
 }
 .nav-link.active,
 .nav-link:focus {
-	background: var(--accent);
+	background: var(--yellow-accent);
 	color: #fff;
 	font-weight: bold;
 	box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
 }
 .nav-link:hover {
 	background: #eaf6fb;
-	color: var(--accent);
+	color: var(--yellow-accent);
 }
 .header-right {
 	display: flex;
@@ -148,7 +148,7 @@ body {
 	transition: background 0.2s;
 }
 .lang-switch:hover {
-	background: var(--accent);
+	background: var(--yellow-accent);
 	color: #fff;
 }
 .profile-btn {
@@ -160,7 +160,7 @@ body {
 	transition: background 0.2s;
 }
 .profile-btn:hover {
-	background: var(--accent);
+	background: var(--yellow-accent);
 }
 
 .sidebar {
@@ -370,7 +370,7 @@ form#cost-form button {
 	font-size: 1rem;
 }
 form#cost-form button {
-	background: var(--accent);
+	background: var(--yellow-accent);
 	color: #fff;
 	border: none;
 	cursor: pointer;
