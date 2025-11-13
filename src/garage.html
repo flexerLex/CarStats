@@ -1,10 +1,193 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarStats | Meine Fahrzeuge</title>
+    <link rel="stylesheet" href="garagestyle.css" />
 </head>
 <body>
+<!-- Header -->
+<header class="header">
+    <div class="container header__content">
+        <div class="logo">
+            <img src="../assets/images/logo_green_no_bg_clean.png" alt="CarStats Logo">
+        </div>
 
+        <!-- Hamburger-Checkbox -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="../src/index.html" class="active">Startseite</a></li>
+                <li><a href="../src/kosteneingabe.html">Kosteneingabe</a></li>
+                <li><a href="../src/statistiken.html">Statistiken</a></li>
+                <li><a href="../src/erinnerungen.html">Erinnerungen</a></li>
+                <li><a href="../src/garage.html">Garage</a></li>
+            </ul>
+        </nav>
+
+        <div class="lang-switch">
+            <button>DE</button>
+            <button>EN</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="fahrzeuge">
+        <header>
+            <h2>Meine Fahrzeuge</h2>
+            <p>Hier verwaltest du deine eingetragenen Autos.</p>
+        </header>
+
+        <section class="fahrzeug-tabelle">
+            <h3>Fahrzeugübersicht</h3>
+            <table>
+                <caption>Liste deiner Fahrzeuge</caption>
+                <thead>
+                <tr>
+                    <th>Marke</th>
+                    <th>Modell</th>
+                    <th>Baujahr</th>
+                    <th>Kennzeichen</th>
+                    <th>Kilometerstand</th>
+                    <th>Kraftstoff/Antriebsart</th>
+                    <th>Letzter TÜV</th>
+                    <th>Letzter Ölwechsel</th>
+                    <th>Letzter großer Service</th>
+                    <th>Aktionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Volkswagen</td>
+                    <td>Golf 7 2.0 TDI</td>
+                    <td>2018</td>
+                    <td>B-AB 1234</td>
+                    <td>Diesel</td>
+                    <td>75342</td>
+                    <td>06/24</td>
+                    <td>05/24</td>
+                    <td>03/22</td>
+                    <td>
+                        <a href="#">Bearbeiten</a> |
+                        <a href="#">Löschen</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>BMW</td>
+                    <td>330i xDrive</td>
+                    <td>2021</td>
+                    <td>M-XY 2021</td>
+                    <td>35092</td>
+                    <td>Super E5</td>
+                    <td>12/23</td>
+                    <td>12/23</td>
+                    <td>10/22</td>
+                    <td>
+                        <a href="#">Bearbeiten</a> |
+                        <a href="#">Löschen</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="fahrzeug-hinzufuegen">
+            <h3>Neues Fahrzeug hinzufügen</h3>
+            <form>
+                <fieldset>
+                    <legend>Fahrzeugdaten</legend>
+                    <div class="grid">
+                        <label>
+                            Marke:
+                            <input type="text" name="marke" placeholder="z. B. Audi" required>
+                        </label>
+                        <label>
+                            Modell:
+                            <input type="text" name="modell" placeholder="z. B. A4 Avant" required>
+                        </label>
+                        <label>
+                            Baujahr:
+                            <input type="number" name="baujahr" min="1900" max="2099" required>
+                        </label>
+                        <label>
+                            Kennzeichen:
+                            <input type="text" name="kennzeichen" placeholder="z. B. HH-AB 1234">
+                        </label>
+                        <label>
+                            Kraftstoff / Antriebsart:
+                            <select name="antriebsart" required>
+                                <option value="">Bitte auswählen</option>
+                                <option value="benzin">Benzin</option>
+                                <option value="diesel">Diesel</option>
+                                <option value="elektro">Elektro</option>
+                                <option value="gas">Gas (LPG/CNG)</option>
+                                <option value="sonstige">Sonstige</option>
+                            </select>
+                        </label>
+                        <label>
+                            Kilometerstand:
+                            <input type="number" name="kmstand" min="0" max="1000000" required>
+                        </label>
+                        <label>
+                            Letzter TÜV:
+                            <input type="date" name="tuev" placeholder="z. B. 06/24" required>
+                        </label>
+                        <label>
+                            Letzter Ölwechsel:
+                            <input type="date" name="oelwechsel" placeholder="z. B. 05/24" required>
+                        </label>
+                        <label>
+                            Letzter großer Service:
+                            <input type="date" name="großerservice" placeholder="z. B. 10/22" required>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Zusatzinformationen</legend>
+                    <label>
+                        Notizen:
+                        <textarea name="notizen" rows="3" placeholder="z. B. letzter TÜV, Reparaturen …"></textarea>
+                    </label>
+                </fieldset>
+
+                <div class="actions">
+                    <button type="submit">Fahrzeug speichern</button>
+                    <button type="reset">Eingaben löschen</button>
+                </div>
+            </form>
+        </section>
+    </section>
+
+    <aside>
+        <h3>Hinweis</h3>
+        <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben sind lokal und werden nicht gespeichert.</p>
+    </aside>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container footer__grid">
+        <p>© 2025 CarStats – Teamprojekt</p>
+        <nav class="footer__nav">
+            <a href="#">Impressum</a>
+            <a href="#">Datenschutz</a>
+            <a href="#">Kontakt</a>
+        </nav>
+        <div class="socials">
+            <a href="https://www.instagram.com"><img src="/../assets/images/instagram.png"></a>
+            <a href="<https://www.x.com"><img src="/../assets/images/twitter.png"></a>
+            <a href="https://www.youtube.com"><img src="/../assets/images/youtube.png"></a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
