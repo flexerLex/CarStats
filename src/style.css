@@ -189,87 +189,87 @@ body {
 
 /* 1. Container for the entire cost entry form */
 .kosteneingabe-form {
-    max-width: 400px;
-    margin: 0 auto;
-    background: var(--white);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(65, 91, 43, 0.07);
-    padding: 32px 28px;
+	max-width: 400px;
+	margin: 0 auto;
+	background: var(--white);
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(65, 91, 43, 0.07);
+	padding: 32px 28px;
 }
 
 /* 2. Radio button group for category selection */
 .kosteneingabe-form__category-group {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    margin-bottom: 28px;
+	display: flex;
+	justify-content: space-between;
+	gap: 18px;
+	margin-bottom: 28px;
 }
 
 .kosteneingabe-form__category-label {
-    cursor: pointer;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+	cursor: pointer;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 6px;
 }
 
 .kosteneingabe-form__category-radio {
-    accent-color: var(--green-accent);
-    width: 18px;
-    height: 18px;
+	accent-color: var(--green-accent);
+	width: 18px;
+	height: 18px;
 }
 
 /* 3. Section for each dynamic form (only one visible at a time) */
 .kosteneingabe-form__section {
-    display: none;
-    flex-direction: column;
-    gap: 14px;
+	display: none;
+	flex-direction: column;
+	gap: 14px;
 }
 .kosteneingabe-form__section--active {
-    display: flex;
+	display: flex;
 }
 
 /* 4. Labels and inputs for form fields */
 .kosteneingabe-form__label {
-    font-weight: 500;
-    margin-bottom: 4px;
+	font-weight: 500;
+	margin-bottom: 4px;
 }
 .kosteneingabe-form__input,
 .kosteneingabe-form__select {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--gray-border);
-    font-size: 1rem;
-    background: var(--white);
-    color: var(--text-main);
+	padding: 8px 12px;
+	border-radius: 6px;
+	border: 1px solid var(--gray-border);
+	font-size: 1rem;
+	background: var(--white);
+	color: var(--text-main);
 }
 
 /* 5. Submit button */
 .kosteneingabe-form__submit {
-    background: var(--green-accent);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    padding: 10px 0;
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 18px;
-    cursor: pointer;
-    transition: background 0.2s;
+	background: var(--green-accent);
+	color: var(--white);
+	border: none;
+	border-radius: 6px;
+	padding: 10px 0;
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin-top: 18px;
+	cursor: pointer;
+	transition: background 0.2s;
 }
 .kosteneingabe-form__submit:hover {
-    background: var(--green-main);
+	background: var(--green-main);
 }
 
 /* 6. Responsive: make form full width on small screens */
 @media (max-width: 600px) {
-    .kosteneingabe-form {
-        padding: 18px 8px;
-    }
-    .kosteneingabe-form__category-group {
-        flex-direction: column;
-        gap: 10px;
-    }
+	.kosteneingabe-form {
+		padding: 18px 8px;
+	}
+	.kosteneingabe-form__category-group {
+		flex-direction: column;
+		gap: 10px;
+	}
 }
 /* ------------------------------------------------------ */
 
