@@ -12,11 +12,11 @@ body {
     background-color: #fff;
 }
 
-img {
-    max-width: 20%;
-    height: auto;
-    display: block;
-}
+/*img {*/
+/*    max-width: 20%;*/
+/*    height: auto;*/
+/*    display: block;*/
+/*}*/
 
 .container {
     width: 90%;
