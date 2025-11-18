@@ -36,12 +36,8 @@ body {
 	padding-left: var(--gap-spacing);
 	padding-right: var(--gap-spacing);
 }
-.car-model {
-	color: var(--color-text-light);
-	margin-bottom: 40px;
-}
 
-/* ------------------- card Grundstil -------------------------------------- */
+/* ------------------- card Grundstil ----------------------------------- */
 .card {
 	background-color: var(--color-card-bg);
 	border-radius: var(--border-radius);
