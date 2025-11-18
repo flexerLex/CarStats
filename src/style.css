@@ -73,7 +73,7 @@
 
 .nav-link.active,
 .nav-link:focus {
-    background: var(--yellow-accent);
+    background: var(--accent);
     color: #fff;
     font-weight: bold;
     box-shadow: 0 2px 8px rgba(44, 62, 80, 0.07);
@@ -81,7 +81,7 @@
 
 .nav-link:hover {
     background: #eaf6fb;
-    color: var(--yellow-accent);
+    color: var(--accent);
 }
 
 .header-right {
@@ -103,7 +103,7 @@
 }
 
 .lang-switch:hover {
-    background: var(--yellow-accent);
+    background: var(--accent);
     color: #fff;
 }
 
@@ -164,7 +164,7 @@ form#cost-form button {
 }
 
 form#cost-form button {
-    background: var(--yellow-accent);
+    background: var(--accent);
     color: #fff;
     border: none;
     cursor: pointer;
