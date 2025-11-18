@@ -1,0 +1,18 @@
+root {
+    --green-main: #415b2b;
+    --green-accent: #628243;
+    --mint-bg: #595959;
+    --white: #ffffff;
+    --text-main: #000000;
+    --yellow-accent: #e5eae3;
+    --gray-border: #e5eae3;
+    --header-height: 72px;
+    --accent: #b85c38;      /* Warm terracotta */
+    --accent-alt: #d97742;  /* Orange-copper */
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fa;
+    color: #284e41;
+}
