@@ -36,7 +36,7 @@ body {
 	padding-left: var(--gap-spacing);
 	padding-right: var(--gap-spacing);
 }
-.auto-model {
+.car-model {
 	color: var(--color-text-light);
 	margin-bottom: 40px;
 }
@@ -74,19 +74,19 @@ body {
 	padding-right: var(--gap-spacing);
 }
 
-.durchschnittsverbrauch {
+.average-consumption {
 	grid-column: 1 / span 4;
 	grid-row: 1;
 }
-.kraftstoffkosten {
+.fuel-costs {
 	grid-column: 5 / span 4;
 	grid-row: 1;
 }
-.monatliche-gesamtkosten {
+.monthly-total-costs {
 	grid-column: 9 / span 4;
 	grid-row: 1;
 }
-.kilometerstand {
+.mileage {
 	grid-column: 1 / span 4;
 	grid-row: 2;
 }
@@ -94,11 +94,11 @@ body {
 	grid-column: 5 / span 4;
 	grid-row: 2;
 }
-.jährliche-gesamtkosten {
+.annual-total-costs {
 	grid-column: 9 / span 4;
 	grid-row: 2;
 }
-.verbrauch {
+.consumption {
 	grid-column: 1 / span 8;
 	grid-row: 3 / span 3;
 }
@@ -156,7 +156,7 @@ body {
 	flex-direction: column;
 	align-items: flex-start;
 }
-.kpi__einheit {
+.kpi__unit {
 	font-weight: 600;
 	padding: 2px;
 	border-radius: 4px;
