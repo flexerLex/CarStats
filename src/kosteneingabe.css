@@ -1,0 +1,275 @@
+.kosteneingabe-gridcontainer {
+    display: grid;
+    grid-template-columns: 260px 1fr 320px;
+    grid-template-areas: "sidebar center rightbar";
+    min-height: 100vh;
+    background: var(--mint-bg);
+    gap: 0;
+}
+
+/* Sidebar */
+.kosteneingabe-sidebar {
+    grid-area: sidebar;
+    background: #f2f5f3;
+    box-shadow: 0 1px 8px rgba(44, 62, 80, 0.04);
+    padding: 32px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100vh;
+    max-width: 260px;
+}
+
+.kosteneingabe-carselect {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(65, 91, 43, 0.08);
+    padding: 18px 16px;
+    margin-bottom: 32px;
+    width: 100%;
+    max-width: 220px;
+}
+
+.kosteneingabe-carselect__label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--green-main);
+    margin-bottom: 8px;
+}
+
+.kosteneingabe-carselect__select {
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    background: #f8faf7;
+    color: var(--text-main);
+    width: 100%;
+    transition: border-color 0.2s;
+}
+.kosteneingabe-carselect__select:focus {
+    border-color: var(--green-main);
+    outline: none;
+}
+
+/* Center */
+.kosteneingabe-center {
+    grid-area: center;
+    padding: 40px 48px;
+    background: #f8faf7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Expense Filter */
+.kosteneingabe-expense-filter {
+    width: 100%;
+    margin: 0 auto 32px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.kosteneingabe-expense-filter__label {
+    font-weight: 600;
+    color: var(--green-main);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+.kosteneingabe-expense-filter__slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    background: #f8faf7;
+    border-radius: 16px;
+    padding: 10px 0;
+    box-shadow: 0 2px 12px rgba(184, 92, 56, 0.07);
+    transition: background 0.2s;
+}
+.kosteneingabe-expense-filter__slider:hover {
+     background: var(--yellow-accent);
+     box-shadow: 0 4px 24px rgba(184, 92, 56, 0.13);
+ }
+.kosteneingabe-expense-filter__btn {
+    background: #fff;
+    scroll-snap-align: center;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 22px;
+    padding: 14px 28px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+            background 0.2s,
+            color 0.2s,
+            border-color 0.2s,
+            box-shadow 0.2s,
+            transform 0.15s;
+    box-shadow: 0 2px 8px rgba(184, 92, 56, 0.12);
+    outline: none;
+    margin: 4px 0;
+}
+.kosteneingabe-expense-filter__btn.active,
+.kosteneingabe-expense-filter__btn:focus,
+.kosteneingabe-expense-filter__btn:hover {
+    background: linear-gradient(90deg, var(--accent-alt) 0%, var(--accent) 100%);
+    color: #fff;
+    border-color: var(--accent-alt);
+    box-shadow: 0 6px 24px rgba(184, 92, 56, 0.22);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.kosteneingabe-expense-filter__btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(184, 92, 56, 0.18);
+}
+
+/* Form */
+.kosteneingabe-form {
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(65, 91, 43, 0.10);
+    padding: 36px 32px 28px 32px;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 32px;
+}
+.kosteneingabe-form__title {
+    color: var(--green-main);
+    margin-bottom: 18px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.kosteneingabe-form__input-row {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+.kosteneingabe-form__label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--green-main);
+    font-size: 1.05rem;
+}
+.kosteneingabe-form__input,
+.kosteneingabe-form__select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-border);
+    font-size: 1.05rem;
+    background: #f8faf7;
+    color: var(--text-main);
+    margin-top: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.kosteneingabe-form__input.amount {
+    background: #f8faf7 url('data:image/svg+xml;utf8,<svg ...>€</svg>') no-repeat right 12px center;
+    background-size: 18px;
+}
+
+.kosteneingabe-form__input:focus,
+.kosteneingabe-form__select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(184, 92, 56, 0.12);
+    outline: none;
+}
+.kosteneingabe-form__submit {
+    background: linear-gradient(90deg, var(--green-accent) 0%, var(--green-main) 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 16px 0;
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin-top: 22px;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+    box-shadow: 0 4px 16px rgba(184, 92, 56, 0.18);
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.07);
+    outline: none;
+    display: block;
+    width: 100%;
+}
+
+.kosteneingabe-form__submit:hover,
+.kosteneingabe-form__submit:focus {
+    background: linear-gradient(90deg, var(--accent-alt) 0%, var(--accent) 100%);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(184, 92, 56, 0.22);
+    outline: none;
+}
+
+/* Rightbar */
+.kosteneingabe-rightbar {
+    grid-area: rightbar;
+    background: #f9f6f2;
+    box-shadow: 0 1px 8px rgba(44, 62, 80, 0.04);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 100vh;
+    max-width: 320px;
+}
+
+.kosteneingabe-QuickOverview__title {
+    color: var(--green-main);
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.kosteneingabe-QuickOverview__stat-block {
+    background: #fffbe6;
+    color: #7a6c00;
+    border-radius: 10px;
+    padding: 18px 16px;
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+    box-shadow: 0 1px 6px rgba(65, 91, 43, 0.08);
+    width: 100%;
+    border-left: 4px solid var(--yellow-accent);
+}
+
+/* Анимация для смены категории */
+.kosteneingabe-form__fields-animate {
+    animation: fadeInFields 0.5s;
+}
+@keyframes fadeInFields {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .kosteneingabe-gridcontainer {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "sidebar"
+            "center"
+            "rightbar";
+    }
+    .kosteneingabe-sidebar,
+    .kosteneingabe-rightbar {
+        width: 100%;
+        box-shadow: none;
+        padding: 16px 8px;
+        min-height: auto;
+        max-width: none;
+    }
+    .kosteneingabe-center {
+        padding: 18px 8px;
+        min-height: auto;
+    }
+}

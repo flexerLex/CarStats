@@ -1,319 +1,172 @@
 <!DOCTYPE html>
 <html lang="de">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>CarStats – Kostenübersicht</title>
-		<link rel="stylesheet" href="landingpage.css" />
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="grid-container">
-			<header class="main-header" aria-label="Hauptnavigation">
-				<div class="header-left">
-					<img src="logo.svg" alt="CarStats Logo" class="logo" />
-					<span class="brand">CarStats</span>
-				</div>
-				<nav class="header-nav" aria-label="Seitenmenü">
-					<a href="index.html" class="nav-link active">Startseite</a>
-					<a href="kosten.html" class="nav-link">Kosteneingabe</a>
-					<a href="statistiken.html" class="nav-link">Statistiken</a>
-					<a href="erinnerungen.html" class="nav-link">Erinnerungen</a>
-					<a href="infos.html" class="nav-link">Infos</a>
-				</nav>
-				<div class="header-right">
-					<button class="lang-switch" aria-label="Sprache wechseln">DE/EN</button>
-					<a href="profil.html" class="profile-btn" aria-label="Profil">
-						<svg width="28" height="28" fill="gray" viewBox="0 0 20 20">
-							<circle cx="10" cy="7" r="4" />
-							<ellipse cx="10" cy="16" rx="7" ry="4" />
-						</svg>
-					</a>
-				</div>
-			</header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarStats – Kostenübersicht</title>
+    <link rel="stylesheet" href="Templates/variables.css">
+    <link rel="stylesheet" href="Templates/header.css">
+    <link rel="stylesheet" href="Templates/footer.css">
+    <link rel="stylesheet" href="kosteneingabe.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <!-- Font Awesome CDN für Social-Media-Icons im Footer. -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
+</head>
+<body>
 
-			<div class="sidebar">
-				<!-- Sidebar-Inhalt kann hier ergänzt werden -->
-			</div>
+<div id="header-placeholder"></div>
+<script src="../assets/header.js"></script>
 
-			<main class="center">
-				<form class="kosteneingabe-form" id="cost-form">
-					<div class="kosteneingabe-form__category-group">
-						<label class="kosteneingabe-form__category-label">
-							<input
-								type="radio"
-								class="kosteneingabe-form__category-radio"
-								name="category"
-								value="tanken"
-								checked
-							/>
-							Tanken
-						</label>
-						<label class="kosteneingabe-form__category-label">
-							<input
-								type="radio"
-								class="kosteneingabe-form__category-radio"
-								name="category"
-								value="wartung"
-							/>
-							Wartung / Reparatur
-						</label>
-						<label class="kosteneingabe-form__category-label">
-							<input
-								type="radio"
-								class="kosteneingabe-form__category-radio"
-								name="category"
-								value="versicherung"
-							/>
-							Versicherung
-						</label>
-						<label class="kosteneingabe-form__category-label">
-							<input
-								type="radio"
-								class="kosteneingabe-form__category-radio"
-								name="category"
-								value="sonstiges"
-							/>
-							Sonstiges
-						</label>
-					</div>
+<div class="kosteneingabe-gridcontainer">
 
-					<!-- Section for Tanken -->
-					<div
-						class="kosteneingabe-form__section kosteneingabe-form__section--active"
-						id="section-tanken"
-					>
-						<label class="kosteneingabe-form__label" for="fuel-amount"
-							>Betrag (€):</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="number"
-							id="fuel-amount"
-							name="fuel-amount"
-							min="0"
-							step="0.01"
-							required
-						/>
-						<label class="kosteneingabe-form__label" for="fuel-liter">Liter:</label>
-						<input
-							class="kosteneingabe-form__input"
-							type="number"
-							id="fuel-liter"
-							name="fuel-liter"
-							min="0"
-							step="0.01"
-						/>
-						<label class="kosteneingabe-form__label" for="fuel-date">Datum:</label>
-						<input
-							class="kosteneingabe-form__input"
-							type="date"
-							id="fuel-date"
-							name="fuel-date"
-							required
-						/>
-					</div>
+    <!-- Sidebar for car selection -->
+    <aside class="kosteneingabe-sidebar">
+        <div class="kosteneingabe-carselect">
+            <label for="car-select" class="kosteneingabe-carselect__label">Wählen Sie ein Auto:</label>
+            <select id="car-select" class="kosteneingabe-carselect__select">
+                <option value="vw-golf-7">VW Golf 7</option>
+                <option value="bmw-3er">BMW 3er</option>
+                <option value="tesla-model-3">Tesla Model 3</option>
+            </select>
+        </div>
+    </aside>
 
-					<!-- Section for Wartung / Reparatur -->
-					<div class="kosteneingabe-form__section" id="section-wartung">
-						<label class="kosteneingabe-form__label" for="service-type"
-							>Art der Wartung:</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="text"
-							id="service-type"
-							name="service-type"
-							placeholder="z.B. Ölwechsel, Bremsen"
-						/>
-						<label class="kosteneingabe-form__label" for="service-amount"
-							>Betrag (€):</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="number"
-							id="service-amount"
-							name="service-amount"
-							min="0"
-							step="0.01"
-							required
-						/>
-						<label class="kosteneingabe-form__label" for="service-date">Datum:</label>
-						<input
-							class="kosteneingabe-form__input"
-							type="date"
-							id="service-date"
-							name="service-date"
-							required
-						/>
-					</div>
+    <!-- Main content -->
+    <main class="kosteneingabe-center">
+        <div class="kosteneingabe-expense-filter">
+            <span class="kosteneingabe-expense-filter__label">Vergangene Ausgaben:</span>
+            <div class="kosteneingabe-expense-filter__slider">
+                <button class="kosteneingabe-expense-filter__btn active" data-filter="Sprit">Sprit</button>
+                <button class="kosteneingabe-expense-filter__btn" data-filter="Service">Service</button>
+                <button class="kosteneingabe-expense-filter__btn" data-filter="Reparatur">Reparatur</button>
+                <button class="kosteneingabe-expense-filter__btn" data-filter="Versicherung">Versicherung</button>
+                <button class="kosteneingabe-expense-filter__btn" data-filter="Anschaffung">Anschaffung</button>
+                <button class="kosteneingabe-expense-filter__btn" data-filter="Zubehör">Zubehör</button>
+            </div>
+        </div>
+        <form class="kosteneingabe-form animate__animated animate__fadeInUp" id="cost-form">
+            <h2 class="kosteneingabe-form__title">Neue Kosten eintragen</h2>
+            <div id="dynamic-fields-container"></div>
+            <div class="kosteneingabe-form__input-row">
+                <label for="date" class="kosteneingabe-form__label">Datum</label>
+                <input type="date" id="date" name="date" class="kosteneingabe-form__input">
+            </div>
+            <div class="kosteneingabe-form__input-row">
+                <label for="km" class="kosteneingabe-form__label">Kilometerstand</label>
+                <input type="number" id="km" name="km" min="0" step="1" class="kosteneingabe-form__input">
+            </div>
+            <div class="kosteneingabe-form__input-row">
+                <label for="amount" class="kosteneingabe-form__label">Betrag (€)</label>
+                <input type="number" id="amount" name="amount" min="0" step="0.01" class="kosteneingabe-form__input">
+            </div>
+            <div class="kosteneingabe-form__input-row">
+                <label for="note" class="kosteneingabe-form__label">Kommentar (optional)</label>
+                <textarea id="note" name="note" rows="2" class="kosteneingabe-form__input"></textarea>
+            </div>
+            <button class="kosteneingabe-form__submit" type="submit">Speichern</button>
+        </form>
+    </main>
 
-					<!-- Section for Versicherung -->
-					<div class="kosteneingabe-form__section" id="section-versicherung">
-						<label class="kosteneingabe-form__label" for="insurance-type"
-							>Versicherungsart:</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="text"
-							id="insurance-type"
-							name="insurance-type"
-							placeholder="z.B. Haftpflicht, Vollkasko"
-						/>
-						<label class="kosteneingabe-form__label" for="insurance-amount"
-							>Betrag (€):</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="number"
-							id="insurance-amount"
-							name="insurance-amount"
-							min="0"
-							step="0.01"
-							required
-						/>
-						<label class="kosteneingabe-form__label" for="insurance-date"
-							>Datum:</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="date"
-							id="insurance-date"
-							name="insurance-date"
-							required
-						/>
-					</div>
+    <!-- Rightbar for Quick Overview -->
+    <aside class="kosteneingabe-rightbar">
+        <div class="kosteneingabe-QuickOverview">
+            <h3 class="kosteneingabe-QuickOverview__title">Schnellüberblick</h3>
+            <div class="kosteneingabe-QuickOverview__stat-block">
+                <div>Monatliche Kosten: <strong>120 €</strong></div>
+                <div>Gesamtkosten: <strong>2.340 €</strong></div>
+                <div>Verbrauch: <strong>6,2 l/100km</strong></div>
+                <div>Jahresbudget: <strong>3.000 €</strong></div>
+                <div>46% des Jahresbudgets verbraucht</div>
+            </div>
+        </div>
+    </aside>
+</div>
 
-					<!-- Section for Sonstiges -->
-					<div class="kosteneingabe-form__section" id="section-sonstiges">
-						<label class="kosteneingabe-form__label" for="other-description"
-							>Beschreibung:</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="text"
-							id="other-description"
-							name="other-description"
-							placeholder="z.B. Parkgebühr"
-						/>
-						<label class="kosteneingabe-form__label" for="other-amount"
-							>Betrag (€):</label
-						>
-						<input
-							class="kosteneingabe-form__input"
-							type="number"
-							id="other-amount"
-							name="other-amount"
-							min="0"
-							step="0.01"
-							required
-						/>
-						<label class="kosteneingabe-form__label" for="other-date">Datum:</label>
-						<input
-							class="kosteneingabe-form__input"
-							type="date"
-							id="other-date"
-							name="other-date"
-							required
-						/>
-					</div>
+<div id="footer-placeholder"></div>
+<script src="../assets/script.js"></script>
 
-					<button class="kosteneingabe-form__submit" type="submit">Speichern</button>
-				</form>
-			</main>
+<script>
+    // Dynamic fields for category (switch/case)
+    const expenseBtns = document.querySelectorAll('.kosteneingabe-expense-filter__btn');
+    const dynamicFields = document.getElementById('dynamic-fields-container');
+    let currentCategory = 'Sprit';
 
-			<aside class="rightbar">
-				<h3>Schnellüberblick</h3>
-				<!-- Übersichtliche Infos...-->
-			</aside>
+    function updateDynamicFields(category) {
+        let html = '';
+        switch (category) {
+            case 'Sprit':
+                html = `
+                    <div class="kosteneingabe-form__input-row">
+                        <label class="kosteneingabe-form__label" for="fuel-type">Kraftstoffart</label>
+                        <select id="fuel-type" name="fuel-type" class="kosteneingabe-form__select">
+                            <option>Benzin</option>
+                            <option>Diesel</option>
+                            <option>LPG</option>
+                            <option>Strom</option>
+                        </select>
+                    </div>
+                    <div class="kosteneingabe-form__input-row">
+                        <label class="kosteneingabe-form__label" for="fuel-amount">Getankte Menge (Liter/kWh)</label>
+                        <input type="number" id="fuel-amount" name="fuel-amount" min="0" step="0.01" class="kosteneingabe-form__input">
+                    </div>
+                `;
+                break;
+            case 'Service':
+            case 'Reparatur':
+                html = `
+                    <div class="kosteneingabe-form__input-row">
+                        <label class="kosteneingabe-form__label" for="service-type">Art der Leistung</label>
+                        <input type="text" id="service-type" name="service-type" class="kosteneingabe-form__input" placeholder="z.B. Ölwechsel, Bremsen">
+                    </div>
+                `;
+                break;
+            case 'Versicherung':
+                html = `
+                    <div class="kosteneingabe-form__input-row">
+                        <label class="kosteneingabe-form__label" for="insurance-type">Versicherungsart</label>
+                        <input type="text" id="insurance-type" name="insurance-type" class="kosteneingabe-form__input" placeholder="z.B. Haftpflicht, Vollkasko">
+                    </div>
+                `;
+                break;
+            case 'Anschaffung':
+            case 'Zubehör':
+                html = `
+                    <div class="kosteneingabe-form__input-row">
+                        <label class="kosteneingabe-form__label" for="purchase-desc">Beschreibung</label>
+                        <input type="text" id="purchase-desc" name="purchase-desc" class="kosteneingabe-form__input" placeholder="z.B. Dachbox, Navi">
+                    </div>
+                `;
+                break;
+            default:
+                html = '';
+        }
+        // Анимация при смене категории
+        dynamicFields.innerHTML = html;
+        dynamicFields.classList.remove('kosteneingabe-form__fields-animate');
+        void dynamicFields.offsetWidth; // trigger reflow
+        dynamicFields.classList.add('kosteneingabe-form__fields-animate');
+    }
 
-			<footer>&copy; 2025 CarStats – Teamprojekt</footer>
-		</div>
-		<script>
-			// JS dynamic for switching form sections
-			const radios = document.querySelectorAll('input[name="category"]');
-			const sections = {
-				tanken: document.getElementById('section-tanken'),
-				wartung: document.getElementById('section-wartung'),
-				versicherung: document.getElementById('section-versicherung'),
-				sonstiges: document.getElementById('section-sonstiges'),
-			};
+    expenseBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            expenseBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.filter;
+            updateDynamicFields(currentCategory);
+        });
+    });
 
-			radios.forEach((radio) => {
-				radio.addEventListener('change', () => {
-					Object.keys(sections).forEach((key) => {
-						sections[key].classList.remove('kosteneingabe-form__section--active');
-					});
-					sections[radio.value].classList.add('kosteneingabe-form__section--active');
-				});
-			});
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+        updateDynamicFields(currentCategory);
+    });
+</script>
 
-			// =======================================================
-			// NEU: Daten Speichern Logik (Damit die Daten zur letzten Ausgabe der Statistiken-Seite passen)
-			// =======================================================
-
-			function saveCostEntry(event) {
-				event.preventDefault(); // Die standardmäßige Formularübermittlung und das Neuladen der Seite verhindern
-
-				const category = form.querySelector('input[name="category"]:checked').value;
-				const formData = new FormData(form);
-
-				let entry = {
-					id: Date.now(),
-					category: category,
-					// Betrag und Datum aus dem entsprechenden Abschnitt holen
-					amount: parseFloat(
-						formData.get(`${category}-amount`) || formData.get('fuel-amount')
-					),
-					date: formData.get(`${category}-date`) || formData.get('fuel-date'),
-					description: '',
-					// Icon-Informationen vereinheitlichen
-					iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
-					iconColor: '#607D8B',
-				};
-
-				// Beschreibung festlegen
-				switch (category) {
-					case 'tanken':
-						entry.description = `Tanken (${formData.get('fuel-liter') || '0'}L)`;
-						break;
-					case 'wartung':
-						entry.description = formData.get('service-type') || 'Wartung / Reparatur';
-						break;
-					case 'versicherung':
-						entry.description = formData.get('insurance-type') || 'Versicherung';
-						break;
-					case 'sonstiges':
-						entry.description = formData.get('other-description') || 'Sonstiges';
-						break;
-				}
-				// 1. Vorhandene Einträge aus dem localStorage auslesen
-				const existingEntries = JSON.parse(
-					localStorage.getItem('carStatsTransactions') || '[]'
-				);
-
-				// 2. Neuen Eintrag am Anfang des Arrays hinzufügen
-				existingEntries.unshift(entry);
-
-				// 3. Das aktualisierte Array zurück in den localStorage speichern
-				localStorage.setItem(
-					'carStatsTransactions',
-					JSON.stringify(existingEntries)
-				);
-
-				alert(
-					`Kosten von ${entry.amount.toFixed(2)}€ für ${
-						entry.description
-					} gespeichert!`
-				);
-
-				form.reset(); // Formular zurücksetzen
-				// Sicherstellen, dass der Tab 'Tanken' weiterhin aktiv ist
-				document
-					.getElementById('section-tanken')
-					.classList.add('kosteneingabe-form__section--active');
-				form.querySelector('input[value="tanken"]').checked = true;
-			}
-		</script>
-	</body>
+</body>
 </html>
