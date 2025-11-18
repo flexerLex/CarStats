@@ -3,7 +3,7 @@
     grid-template-columns: 260px 1fr 320px;
     grid-template-areas: "sidebar center rightbar";
     min-height: 100vh;
-    background: var(--mint-bg);
+    background: var(--grey-bg);
     gap: 0;
 }
 
