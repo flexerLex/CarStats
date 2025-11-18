@@ -105,7 +105,38 @@
 .site-header__nav-toggle:checked + .site-header__hamburger span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
 }
+.site-header__profile {
+    position: relative;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+}
 
+.site-header__container {
+    position: relative;
+}
+
+.profile-btn {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s;
+}
+
+.profile-btn:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+}
+
+.profile-img {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    transition: box-shadow 0.2s;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
     .site-header__nav-list {
