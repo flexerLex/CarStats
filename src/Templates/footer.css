@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'Mulish';
+
+	src: url('../assets/fonts/Mulish-Medium.ttf') format('truetype');
+
+	font-weight: 500;
+
+	font-style: normal;
+
+	font-display: swap;
+}
 /* 1. Stil für den gesamten Footer */
 .site-footer {
 	--font-family-sans: 'Mulish', sans-serif;
