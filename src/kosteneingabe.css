@@ -1,3 +1,7 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 .kosteneingabe-gridcontainer {
     display: grid;
     grid-template-columns: 260px 1fr 320px;
@@ -9,15 +13,17 @@
 
 /* Sidebar */
 .kosteneingabe-sidebar {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
     grid-area: sidebar;
-    background: #f2f5f3;
+    background: #f8faf7;
     box-shadow: 0 1px 8px rgba(44, 62, 80, 0.04);
     padding: 32px 18px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     min-height: 100vh;
-    max-width: 260px;
 }
 
 .kosteneingabe-carselect {
@@ -38,7 +44,7 @@
 }
 
 .kosteneingabe-carselect__select {
-    border: 1.5px solid var(--accent);
+    border: 1px solid var(--accent);
     border-radius: 8px;
     padding: 10px;
     font-size: 1rem;
@@ -55,12 +61,13 @@
 /* Center */
 .kosteneingabe-center {
     grid-area: center;
-    padding: 40px 48px;
+    padding: 40px 24px;
     background: #f8faf7;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
+    justify-content: flex-start;
 }
 
 /* Expense Filter */
@@ -242,7 +249,6 @@
     border-left: 4px solid var(--yellow-accent);
 }
 
-/* Анимация для смены категории */
 .kosteneingabe-form__fields-animate {
     animation: fadeInFields 0.5s;
 }
@@ -253,6 +259,27 @@
 
 /* Responsive */
 @media (max-width: 900px) {
+    .kosteneingabe-center {
+    padding: 12px 0;
+    align-items: center;
+    justify-content: center;
+}
+    .kosteneingabe-form {
+        max-width: 100%;
+        width: 100%;
+        min-width: 0;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .kosteneingabe-carselect {
+        max-width: none;
+        width: 100%;
+        margin-bottom: 24px;
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
     .kosteneingabe-gridcontainer {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -267,9 +294,5 @@
         padding: 16px 8px;
         min-height: auto;
         max-width: none;
-    }
-    .kosteneingabe-center {
-        padding: 18px 8px;
-        min-height: auto;
     }
 }
