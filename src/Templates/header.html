@@ -31,3 +31,21 @@
         </div>
     </div>
 </header>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navToggle = document.getElementById('site-header__nav-toggle');
+        const overlay = document.querySelector('.site-header__overlay');
+        const navLinks = document.querySelectorAll('.site-header__nav-link');
+
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                navToggle.checked = false;
+            });
+        }
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.checked = false;
+            });
+        });
+    });
+</script>
