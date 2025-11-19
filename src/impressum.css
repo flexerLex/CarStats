@@ -1,0 +1,170 @@
+/* ------------------------------------------------------------------
+ * 1. Grundstile (Body & Container)
+ * ------------------------------------------------------------------ */
+.page-impressum {
+	/* Farben (abgeleitet vom Footer-Thema) */
+	--color-primary-green: #4e7c4e;
+	--color-secondary-green: #c2ddc0; /* Helle Hintergrundfarbe (wie Footer) */
+	--color-text: #4e4d4d; /* Dunkles Grau für Haupttext */
+	--color-text-light: #7f847d; /* Hellgrau für Intro/Introtext */
+	--color-background: #ffffff;
+	--color-border: #e0e0e0; /* Leichter Rand für Sektionen */
+
+	/* Typografie und Spacing */
+	--font-family-sans: 'Mulish', sans-serif;
+	--font-size-base: 16px;
+	--layout-max-width: 1000px;
+	--spacing-md: 20px;
+	--spacing-lg: 32px;
+}
+
+body {
+	background-color: var(--color-background);
+	color: var(--color-text);
+	font-family: var(--font-family-sans);
+	line-height: 1.6;
+	margin: 0;
+	padding: 0;
+}
+
+/* Hauptinhaltsbereich zentrieren und begrenzen */
+.main-content {
+	padding: var(--spacing-lg) 0;
+}
+
+.container {
+	max-width: var(--layout-max-width);
+	margin: 0 auto;
+	padding: 0 var(--spacing-md);
+}
+
+/* ------------------------------------------------------------------
+ * 2. Überschriften & Einführung
+ * ------------------------------------------------------------------ */
+
+.page-impressum__title {
+	font-size: 2.5em;
+	font-weight: 700;
+	color: var(--color-primary-green);
+	margin-bottom: 0.5em;
+	padding-bottom: 10px;
+	border-bottom: 2px solid var(--color-secondary-green);
+}
+
+.page-impressum__intro {
+	font-size: 1.1em;
+	color: var(--color-text-light);
+	margin-bottom: var(--spacing-lg);
+	font-style: italic;
+}
+
+/* ------------------------------------------------------------------
+ * 3. Sektionen & Inhalt
+ * ------------------------------------------------------------------ */
+
+.info-section {
+	background-color: #f9f9f9; /* Sehr heller Hintergrund für Kontrast */
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	padding: var(--spacing-md) var(--spacing-lg);
+	margin-bottom: var(--spacing-lg);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Leichter Schatten */
+}
+
+/* Hauptuntertitel der Sektionen */
+.info-section h2 {
+	font-size: 1.5em;
+	color: var(--color-primary-green);
+	border-bottom: 2px solid var(--color-border);
+	padding-bottom: 5px;
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+
+/* Disclamer-Zwischenüberschriften */
+.disclaimer-subtitle {
+	font-size: 1.1em;
+	font-weight: 700;
+	color: var(--color-text);
+	margin-top: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.disclaimer-text,
+.info-section p {
+	margin-bottom: 1em;
+}
+
+/* ------------------------------------------------------------------
+ * 4. Listen (Team & Bibliotheken)
+ * ------------------------------------------------------------------ */
+
+.team-list,
+.library-list {
+	list-style: none; /* Standard-Listenpunkte entfernen */
+	padding-left: 0;
+	margin-top: 0.5em;
+}
+
+.team-list li,
+.library-list li {
+	padding-left: 1.5em;
+	position: relative;
+	margin-bottom: 8px;
+}
+
+/* Custom-Bullet (Grüner Punkt) */
+.team-list li::before,
+.library-list li::before {
+	content: '\2022'; /* Bullet-Zeichen */
+	color: var(--color-primary-green);
+	font-weight: 900;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+}
+
+/* ------------------------------------------------------------------
+ * 5. Links
+ * ------------------------------------------------------------------ */
+
+a {
+	color: var(--color-primary-green);
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
+
+a:hover {
+	color: #386138; /* Etwas dunklerer Grünton beim Hover */
+	text-decoration: underline;
+}
+
+.copyright-notice {
+	text-align: center;
+	font-size: 0.9em;
+	color: var(--color-text-light);
+	margin-top: var(--spacing-lg);
+	padding-top: var(--spacing-md);
+	border-top: 1px dashed var(--color-border);
+}
+
+/* ------------------------------------------------------------------
+ * 6. Responsiveness für mobile Geräte
+ * ------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+	:root {
+		--spacing-md: 15px;
+		--spacing-lg: 20px;
+	}
+
+	.page-impressum__title {
+		font-size: 2em;
+	}
+
+	.info-section {
+		padding: var(--spacing-md);
+		margin-bottom: var(--spacing-md);
+	}
+}
