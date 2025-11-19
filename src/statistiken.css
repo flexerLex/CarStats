@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 :root {
 	--color-background: #f0f0f0;
 	--color-card-bg: #ffffff;
@@ -342,7 +348,7 @@ body {
 .progress-fill {
 	background-color: var(--color-budget-used);
 	height: 100%;
-	width: 50%; /* **Wichtig: Dies muss hier dynamisch gestaltet werden und mit den Ausgaben verknüpft sein！！！！！！** */
+	width: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -357,4 +363,148 @@ body {
 	padding-left: var(--gap-spacing);
 	padding-right: var(--gap-spacing);
 	white-space: nowrap; /*  Sicherstellen, dass der Text nicht umgebrochen wird */
+}
+
+/* ----------------------------- Responsive Design---------------------------- */
+
+/*  Anpassungen für Smartphones (max-width 768px)  */
+
+@media (max-width: 768px) {
+	:root {
+		--gap-spacing: 12px;
+		--page-margin: 12px;
+		--kpi-padding: 12px;
+	}
+
+	/* ------------------- Container und Grid ------------------- */
+
+	.dashboard-container {
+		padding-left: var(--page-margin);
+		padding-right: var(--page-margin);
+		padding-top: var(--gap-spacing);
+		padding-bottom: var(--gap-spacing);
+
+		width: 100%;
+		max-width: none;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	/* Stellt sicher, dass alle inneren Container keine zusätzlichen horizontalen Abstände haben */
+	.dashboard-header,
+	.budget-section,
+	.dashboard-grid {
+		padding-left: 0;
+		padding-right: 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.dashboard-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--gap-spacing);
+		grid-template-rows: auto;
+	}
+
+	/* ------------------- KPI-Karten: Ausrichtung beibehalten ------------------- */
+	.average-consumption,
+	.fuel-costs,
+	.monthly-total-costs,
+	.mileage,
+	.reichweite,
+	.annual-total-costs {
+		grid-column: span 1;
+		grid-row: auto !important;
+	}
+
+	.card {
+		padding: var(--kpi-padding);
+	}
+
+	.kpi-card {
+		justify-content: space-between;
+	}
+
+	/* Titel auf einer Zeile halten und ausrichten */
+	.kpi__header {
+		min-height: 38px; /* Mindesthöhe für zweizeilige Titel */
+		margin-bottom: 5px;
+	}
+	.kpi__title {
+		font-size: 0.8em;
+		line-height: 1.2;
+		white-space: nowrap; /* Verhindert Zeilenumbruch */
+		overflow: hidden;
+		text-overflow: ellipsis; /* Fügt Auslassungspunkte hinzu */
+		flex-basis: 70%;
+	}
+	.kpi__icon {
+		width: 20px;
+		height: 20px;
+		padding: 3px;
+		margin-right: 5px;
+		flex-shrink: 0;
+	}
+
+	.kpi__value {
+		font-size: 1.5em;
+		margin-right: 5px;
+	}
+	.kpi__footer {
+		flex-basis: 18px; /* Feste Höhe für die Fußzeile */
+		margin-top: 5px;
+	}
+
+	/* ------------------- Große Karten Anpassungen (inkl. Letzte Ausgaben) ------------------- */
+	.consumption {
+		grid-column: 1 / -1; /* Nimmt die gesamte Breite ein */
+		grid-row: auto !important;
+	}
+	.transaction {
+		grid-column: 1 / -1;
+		grid-row: auto !important;
+	}
+
+	/* ** Mindesthöhe der Letzte Ausgaben Liste** */
+	.last-transactions-card {
+		min-height: 200px;
+		/* Stellt sicher, dass der Innenabstand die Mobile-Variable verwendet */
+		padding: var(--kpi-padding);
+	}
+
+	/* Diagramm- und Transaktionslistenkarten-Optimierung */
+	.chart-card h2,
+	.list-card h2,
+	.section-title {
+		font-size: 1em;
+	}
+	.chart__placeholder {
+		height: 180px;
+	}
+	.chart__timeswitcher {
+		margin-top: 0;
+	}
+	.chart__time__btn {
+		padding: 3px 6px;
+		font-size: 0.6em;
+	}
+
+	/* ------------------- Budgetbalken Fix ------------------- */
+	/* **Höhe des Budgetbalken-Containers** */
+	.progress-bar-container {
+		height: 40px;
+	}
+
+	/* Schriftgröße des Budgettextes */
+	.progress-text {
+		font-size: 0.65em;
+		white-space: normal;
+	}
+
+	/* ------------------- Footer Anpassung ------------------- */
+	.site-footer__container {
+		flex-direction: column;
+		text-align: center;
+		padding: 0 10px;
+	}
 }
