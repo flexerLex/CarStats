@@ -98,3 +98,62 @@ a.site-footer__nav-links:hover {
 	background-color: var(--color-icon-hover-bg);
 	transform: scale(1.2);
 }
+/* ========================================================================= */
+/* 3. Responsive Anpassungen für den Footer (max-width 768px)                */
+/* ========================================================================= */
+/* ========================================================================= */
+/* 3. Responsive Anpassungen für den Footer (max-width 768px)                */
+/* ========================================================================= */
+
+@media (max-width: 768px) {
+	/* ... (vorherige Anpassungen für Dashboard) ... */
+
+	/* ------------------- Footer Anpassungen ------------------- */
+
+	.site-footer {
+		padding: var(--spacing-md) 0; /* Behält den vertikalen Abstand bei */
+	}
+
+	.site-footer__container {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 0 var(--spacing-md);
+	}
+
+	/* Setzt Abstände zwischen den gestapelten Blöcken */
+	.site-footer__copyright {
+		margin-bottom: var(--spacing-xs);
+		margin-top: var(--spacing-xs);
+	}
+
+	.site-footer__nav {
+		display: flex;
+		flex-wrap: wrap; /* Erlaubt das Umbrechen der Links, falls zu lang */
+		justify-content: center; /* Zentriert die Links */
+		margin-bottom: var(--spacing-sm);
+		margin-top: var(--spacing-xs);
+		padding: 0 10px; /* Zusätzlicher Schutz für kleine Bildschirme */
+	}
+
+	.site-footer__nav a.site-footer__nav-links {
+		margin: var(--spacing-xs) var(--spacing-sm);
+		padding: var(--spacing-xs) var(--spacing-sm);
+		font-size: 0.9em;
+	}
+
+	.site-footer__social-icons {
+		margin-top: var(--spacing-xs);
+		margin-bottom: var(--spacing-xs);
+	}
+
+	.site-footer__social-icons a {
+		margin: 0 var(--spacing-xs);
+	}
+
+	.site-footer__social-icons i {
+		width: 28px;
+		height: 28px;
+		font-size: 14px;
+	}
+}
