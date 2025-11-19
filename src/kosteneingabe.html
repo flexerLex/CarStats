@@ -116,6 +116,25 @@
                         class="kosteneingabe-form__input"
                 ></textarea>
             </div>
+            <div class="kosteneingabe-form__input-row">
+                <label for="receipt-photo" class="kosteneingabe-form__label">
+                    Foto vom Beleg / Tankquittung
+                    <span class="tooltip-container">
+            <span class="tooltip-icon">?</span>
+            <span class="tooltip-text">
+                Optional: Lade ein Foto hoch oder mache ein Foto vom Beleg. Die Daten werden später automatisch erkannt und eingetragen.
+            </span>
+        </span>
+                </label>
+                <input
+                        type="file"
+                        id="receipt-photo"
+                        name="receipt-photo"
+                        accept="image/*"
+                        capture="environment"
+                        class="kosteneingabe-form__input-file"
+                />
+            </div>
             <button class="kosteneingabe-form__submit" type="submit">Speichern</button>
         </form>
     </main>
