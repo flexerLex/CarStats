@@ -67,8 +67,8 @@
                 </div>
 
                 <div class="vehicle-card-actions">
-                    <btn id="edit">Bearbeiten</btn>
-                    <btn id="delete">Löschen</btn>
+                    <button id="btn_edit0">Bearbeiten</button>
+                    <button id="btn_delete0" class="button-delete">Löschen</button>
                 </div>
             </article>
 
@@ -110,8 +110,8 @@
                 </div>
 
                 <div class="vehicle-card-actions">
-                    <btn id="edit">Bearbeiten</btn>
-                    <btn id="delete">Löschen</btn>
+                    <button id="btn_edit1">Bearbeiten</button>
+                    <button id="btn_delete1" class="button-delete">Löschen</button>
                 </div>
             </article>
         </section>
@@ -140,7 +140,7 @@
                         </label>
                         <label>
                             Kraftstoff / Antriebsart:
-                            <select id="antriebsart" required>
+                            <select id="type" required>
                                 <option value="">Bitte auswählen</option>
                                 <option value="petrol">Benzin</option>
                                 <option value="diesel">Diesel</option>
@@ -177,7 +177,7 @@
                 </fieldset>
 
                 <div class="actions">
-                    <button type="submit">Fahrzeug speichern</button>
+                    <button id="btn_new_vehicle_submit" type="submit">Fahrzeug speichern</button>
                     <button type="reset">Eingaben löschen</button>
                 </div>
             </form>
