@@ -18,7 +18,7 @@ body {
     margin: 0 auto;
 }
 
-.btn {
+.button {
     background-color: var(--color-background);
     color: #fff;
     padding: 0.8rem 1.5rem;
@@ -28,7 +28,7 @@ body {
     transition: background 0.3s;
 }
 
-.btn:hover {
+.button:hover {
     background-color: #00643f;
 }
 
@@ -133,7 +133,7 @@ main {
     border-top: 1px solid #e5e5e5;
 }
 
-.vehicle-card-actions btn {
+.vehicle-card-actions button {
     flex: 1;
     padding: 0.6rem 1rem;
     border: none;
@@ -144,21 +144,21 @@ main {
     font-size: 0.9rem;
 }
 
-.vehicle-card-actions btn#edit {
+.vehicle-card-actions button#edit {
     background: #007b4f;
     color: white;
 }
 
-.vehicle-card-actions btn#edit:hover {
+.vehicle-card-actions button#edit:hover {
     background: #00643f;
 }
 
-.vehicle-card-actions btn#delete {
+.vehicle-card-actions .button-delete {
     background: #dc3545;
     color: white;
 }
 
-.vehicle-card-actions btn#delete:hover {
+.vehicle-card-actions .button-delete:hover {
     background: #c82333;
 }
 
@@ -346,7 +346,7 @@ button:hover {
         gap: 0.5rem;
     }
 
-    .vehicle-card-actions btn {
+    .vehicle-card-actions button {
         width: 100%;
     }
 

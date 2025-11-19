@@ -5,6 +5,12 @@ login_btn.addEventListener('click', login_active);
 let register_btn = document.getElementById('register_btn');
 register_btn.addEventListener('click', register_active);
 
+let login_submit_btn = document.getElementById('login_submit');
+login_submit_btn.addEventListener('click', login_submitted);
+
+let login_register_btn = document.getElementById('register_submit');
+login_submit_btn.addEventListener('click', register_submitted);
+
 let login_mask = document.getElementById('login_mask');
 let register_mask = document.getElementById('register_mask');
 
@@ -20,6 +26,16 @@ function register_active() {
     login_btn.className="tab";
     register_mask.className="form active";
     login_mask.className="form";
+}
+
+function login_submitted() {
+    window.alert("Daten wurden abgesendet")
+    // Daten an Backend schicken
+}
+
+function register_submitted() {
+    window.alert("Daten wurden abgesendet")
+    // Daten an Backend schicken
 }
 
 // login mask auslesen
@@ -45,3 +61,4 @@ let name = name_input.value;
 let email = email_input.value;
 let username = username_input.value;
 let password = password_input.value;
+
