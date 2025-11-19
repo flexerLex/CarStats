@@ -52,7 +52,7 @@ body {
 }
 
 .appointments-box .btn:hover {
-    background-color: #00643f;
+    background-color: var(--green-accent);
 }
 
 .appointments-header {
@@ -331,9 +331,15 @@ main {
 }
 
 @media (max-width: 480px) {
+    .testimonial-grid {
+        flex-direction: column; /* untereinander statt nebeneinander */
+        overflow-x: visible; /* kein horizontales Scrollen mehr */
+    }
+
     .testimonial-card {
-        flex: 0 0 30%; /* Smartphones */
-        min-width: 40px;
+        flex: 1 1 auto; /* volle Breite */
+        width: 100%;
+        min-width: unset;
         padding: 1.5rem;
     }
 
@@ -345,135 +351,3 @@ main {
         font-size: 1.5rem;
     }
 }
-
-/* ===========================
-   LOGIN & REGISTRIERUNG
-=========================== */
-
-.auth {
-    width: 100%;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    background: #f9f9f9;
-}
-
-.auth__card {
-    background: #fff;
-    max-width: 420px;
-    width: 100%;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    text-align: center;
-}
-
-.auth__card h1 {
-    color: #007b4f;
-    margin-bottom: 0.25rem;
-}
-
-.auth__card p {
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-/* Tabs (Login / Registrieren) */
-.auth__tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    gap: 0.5rem;
-}
-
-.auth__tabs .tab {
-    background: none;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    color: #333;
-}
-
-.auth__tabs .tab.active {
-    background: #007b4f;
-    color: #fff;
-    border-color: #007b4f;
-}
-
-form {
-    display: none;
-    text-align: left;
-}
-
-form.active {
-    display: block;
-}
-
-fieldset {
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 1rem;
-}
-
-legend {
-    font-weight: 600;
-    color: #007b4f;
-    padding: 0 0.5rem;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-}
-
-label {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-}
-
-input {
-    padding: 0.5rem;
-    border-radius: 10px;
-    border: 1px solid #e5e5e5;
-    margin-top: 0.25rem;
-    font: inherit;
-}
-
-input:focus {
-    outline: 2px solid #007b4f;
-    border-color: #007b4f;
-}
-
-button {
-    width: 100%;
-    background: #007b4f;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem;
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background: #00643f;
-}
-
-/* Responsive Anpassung */
-@media (max-width: 480px) {
-    .auth__card {
-        padding: 1.5rem;
-    }
-}
-
