@@ -12,12 +12,6 @@ body {
     background-color: #fff;
 }
 
-/*img {*/
-/*    max-width: 20%;*/
-/*    height: auto;*/
-/*    display: block;*/
-/*}*/
-
 .container {
     width: 90%;
     max-width: 1200px;
@@ -76,7 +70,7 @@ body {
     font-weight: 600;
 }
 
-.appointment-desc {
+.appointment-type {
     font-size: 13px;
     color: #666;
 }
@@ -103,91 +97,6 @@ main {
     min-height: 80vh;             /* Box direkt sichtbar ohne Scrollen */
     flex-direction: column;
     gap: 2rem;                    /* Abstand zwischen Box und CTA */
-}
-
-/* Optional: CTA Button in Box */
-.appointments-box .btn {
-    display: inline-block;
-    margin-top: 1rem;
-    background-color: #007b4f;
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-
-
-
-/* ====== HEADER ====== */
-.header {
-    background: #fff;
-    border-bottom: 1px solid #e5e5e5;
-    padding: 1rem 0;
-}
-
-.header__content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.nav ul {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-}
-
-.nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.nav a:hover,
-.nav a.active {
-    color: #007b4f;
-}
-
-.lang-switch button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    color: #333;
-    transition: color 0.2s;
-}
-
-.lang-switch button:hover {
-    color: #007b4f;
-}
-
-.nav-toggle {
-    display: none;
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    transition: all 0.3s ease;
 }
 
 /* Hamburger Animation */
@@ -338,51 +247,6 @@ main {
 .stars {
     color: #ffb400;
     font-size: 1.2rem;
-}
-
-/* ====== FOOTER ====== */
-.footer {
-    background: #007b4f;
-    color: #fff;
-    padding: 1.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* horizontal zentrieren */
-}
-
-.footer__grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.footer__nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 0.5rem;
-}
-
-.footer__nav a:hover {
-    text-decoration: underline;
-}
-
-.socials {
-    display: flex;
-    gap: 5px;                   /* sehr kleiner Abstand zwischen den Icons */
-}
-
-.socials a img {
-    width: clamp(100px, 4vw, 120px);   /* min 30px, max 50px, skaliert mit der Viewport-Breite */
-    height: auto;                     /* Seitenverhältnis bleibt erhalten */
-    object-fit: contain;
-    display: block;
-    transition: transform 0.2s ease;
-}
-
-.socials a img:hover {
-    transform: scale(1.2);
 }
 
 /* ====== RESPONSIVE ====== */
