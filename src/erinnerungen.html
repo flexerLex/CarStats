@@ -2,20 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarStats | Erinnerungen</title>
+    <link rel="stylesheet" href="landingpage.css">
+    <link rel="stylesheet" href="erinnerungen.css">
     <link rel="stylesheet" href="Templates/variables.css">
     <link rel="stylesheet" href="Templates/header.css">
     <link rel="stylesheet" href="Templates/footer.css">
 </head>
 <body>
-    <div id="header-placeholder"></div>
-    <script src="../assets/header.js"></script>
+<!-- Header -->
+<div id="header-placeholder"></div>
+<script src="../assets/header.js"></script>
 
-    <p>Um diese Seite sollte sich Maximilian Theuerkauf kümmern, dieser ist bis dato allerdings noch nicht einmal dem Github Repo beigetreten</p>
-    <!-- TODO -->
+<main class="board">
+    <article class="column">
+        <h2 class="column__title">Letzte Ausgaben</h2>
+        <div class="column__content">
+            <div class="expense-item">
+                <span class="expense-item__label">Test</span>
+                <span class="expense-item__value">99,99 €</span>
+            </div>
+            <div class="expense-item">
+                <span class="expense-item__label">Test</span>
+                <span class="expense-item__value">9999,99 €</span>
+            </div>
+        </div>
+    </article>
 
-    <div id="footer-placeholder"></div>
-    <script src="../assets/script.js"></script>
+    <article class="column">
+        <h2 class="column__title">Anstehend</h2>
+
+    </article>
+
+    <article class="column">
+        <h2 class="column__title">In Aussicht</h2>
+    </article>
+
+</main>
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+<script src="../assets/script.js"></script>
 </body>
 </html>
