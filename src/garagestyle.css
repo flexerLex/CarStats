@@ -19,7 +19,7 @@ body {
 }
 
 .btn {
-    background-color: #007b4f;
+    background-color: var(--color-background);
     color: #fff;
     padding: 0.8rem 1.5rem;
     border-radius: 6px;
@@ -33,20 +33,136 @@ body {
 }
 
 
-/* ===========================
-   CARSTATS – FAHRZEUGE-SEITE
-=========================== */
-
+/* ===== Garage =====*/
 main {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-section.fahrzeuge {
+
+.vehicle-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.vehicle-card {
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 123, 79, 0.1);
+}
+
+.vehicle-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #007b4f;
+}
+
+.vehicle-card-title {
+    flex: 1;
+}
+
+.vehicle-card-title h3 {
+    color: #007b4f;
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.vehicle-card-title p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.vehicle-card-year {
+    background: #007b4f;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.vehicle-card-body {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.vehicle-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.vehicle-info-row:last-child {
+    border-bottom: none;
+}
+
+.vehicle-info-label {
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.vehicle-info-value {
+    color: #333;
+    font-weight: 600;
+    text-align: right;
+}
+
+.vehicle-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.vehicle-card-actions btn {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.vehicle-card-actions btn#edit {
+    background: #007b4f;
+    color: white;
+}
+
+.vehicle-card-actions btn#edit:hover {
+    background: #00643f;
+}
+
+.vehicle-card-actions btn#delete {
+    background: #dc3545;
+    color: white;
+}
+
+.vehicle-card-actions btn#delete:hover {
+    background: #c82333;
+}
+
+section.vehicle {
     background: #fff;
     padding: 1.5rem;
     border-radius: 10px;
@@ -54,9 +170,9 @@ section.fahrzeuge {
     grid-column: 1 / -1;
 }
 
-section.fahrzeuge header h2 {
+section.vehicle header h2 {
     margin-bottom: 0.5rem;
-    color: #007b4f;
+    color: var(--color-background);
 }
 
 table {
@@ -75,10 +191,6 @@ td {
 th {
     background: #f9f9f9;
     font-weight: 600;
-}
-
-tr:hover td {
-    background: #eef3fb;
 }
 
 fieldset {
@@ -115,6 +227,12 @@ button {
     border: 1px solid #e5e5e5;
 }
 
+input,
+textarea,
+select {
+    min-height: 44px;
+}
+
 button {
     background: #007b4f;
     color: white;
@@ -146,7 +264,137 @@ button:hover {
 /* Responsive Anpassung */
 @media (max-width: 900px) {
     main {
-        grid-template-columns: 1fr;
+        margin: 1.5rem auto;
+        padding: 0 0.75rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 }
 
+@media (max-width: 768px) {
+    main {
+        gap: 1.5rem;
+    }
+
+    .vehicle-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .vehicle-card {
+        padding: 1.25rem;
+    }
+
+    .disclaimer {
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    th,
+    td {
+        padding: 0.6rem 0.5rem;
+    }
+
+    fieldset {
+        padding: 0.75rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+        gap: 1rem;
+    }
+
+    .vehicle-cards {
+        gap: 0.75rem;
+    }
+
+    .vehicle-card {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+
+    .vehicle-card-header {
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .vehicle-card-title h3 {
+        font-size: 1.1rem;
+    }
+
+    .vehicle-info-row {
+        padding: 0.4rem 0;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .vehicle-info-value {
+        text-align: left;
+    }
+
+    .vehicle-card-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .vehicle-card-actions btn {
+        width: 100%;
+    }
+
+    .disclaimer {
+        padding: 0.75rem;
+        border-radius: 6px;
+        border-left-width: 3px;
+    }
+
+    table {
+        min-width: 700px;
+        font-size: 0.8rem;
+    }
+
+    th,
+    td {
+        padding: 0.5rem 0.4rem;
+    }
+
+    fieldset {
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+
+    input,
+    textarea,
+    select {
+        padding: 0.5rem;
+        border-radius: 8px;
+    }
+
+    button {
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .actions button {
+        width: 100%;
+        min-width: unset;
+    }
+
+    td a {
+        padding: 0.3rem 0.5rem;
+        display: inline-block;
+    }
+}
