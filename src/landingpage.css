@@ -16,6 +16,20 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+.container__hero__grid {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .appointments-box {
@@ -28,6 +42,13 @@ body {
     padding: 14px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.04);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+@media (max-width: 480px) {
+    .appointments-box {
+        width: 95%;
+        padding: 12px;
+    }
 }
 
 .appointments-box .btn:hover {
@@ -88,37 +109,32 @@ body {
     text-align: center;
 }
 
-
-/* ====== Termine Box Zentrierung ====== */
 main {
     display: flex;
     justify-content: center;      /* horizontal zentrieren */
     align-items: center;          /* vertikal zentrieren */
-    min-height: 80vh;             /* Box direkt sichtbar ohne Scrollen */
+    min-height: auto;             /* Box direkt sichtbar ohne Scrollen */
     flex-direction: column;
     gap: 2rem;                    /* Abstand zwischen Box und CTA */
+    padding: 2rem 0;
 }
 
-/* Hamburger Animation */
-.nav-toggle:checked + .hamburger span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-.nav-toggle:checked + .hamburger span:nth-child(2) {
-    opacity: 0;
-}
-.nav-toggle:checked + .hamburger span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+@media (max-width: 768px) {
+    main {
+        gap: 1.5rem;
+        padding: 1rem 0;
+    }
 }
 
 .hero {
     background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
     url('../assets/images/Hero.png');
     background-size: cover;
-    background-position: 50% 35%;
+    background-position: center;
     background-repeat: no-repeat;
     min-height: 70vh;
+    padding: 2rem 0;
 }
-
 
 .hero__grid {
     display: grid;
@@ -154,6 +170,49 @@ main {
 
 .btn:hover {
     background-color: #00643f;
+}
+
+
+/* ====== RESPONSIVE hero ====== */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 50vh;
+        background-position: center; /* Nur auf Mobile zentrieren */
+    }
+
+    .hero__text h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero__grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero__text p {
+        font-size: 1rem;
+    }
+
+    .hero__text {
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Zentriert den Inhalt */
+    }
+
+    .hero__image {
+        order: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 40vh;
+    }
+
+    .hero__text h1 {
+        font-size: 1.5rem;
+    }
 }
 
 /* ====== TESTIMONIALS ====== */
@@ -249,54 +308,41 @@ main {
     font-size: 1.2rem;
 }
 
-/* ====== RESPONSIVE ====== */
+/* ==== Testimonials responsive ==== */
+
 @media (max-width: 768px) {
-    .hero__grid {
-        grid-template-columns: 1fr;
-        text-align: center;
+    .hero .container {
+        width: 95%;
     }
 
-    .hero__text {
-        order: 2;
+    .testimonials .container {
+        width: 100%; /* Volle Breite für das Scrollen */
+        padding: 0; /* Kein extra Padding */
     }
 
-    .hero__image {
-        order: 0;
+    .testimonial-grid {
+        padding: 2rem 2rem 2rem 2rem; /* Padding nur im Grid */
     }
 
-    .footer__grid {
-        flex-direction: column;
-        text-align: center;
+    .testimonial-card {
+        flex: 0 0 85%; /* Tablets */
+        min-width: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-card {
+        flex: 0 0 30%; /* Smartphones */
+        min-width: 40px;
+        padding: 1.5rem;
     }
 
-    .nav ul {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: #fff;
-        flex-direction: column;
-        width: 200px;
-        padding: 1rem;
-        border: 1px solid #e5e5e5;
-        display: none; /* initially hidden */
+    .testimonials {
+        padding: 2rem 0;
     }
 
-    .nav-toggle:checked + .hamburger + .nav ul {
-        display: flex;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .lang-switch.desktop-lang {
-        display: none;
-    }
-
-    .mobile-lang-switch {
-        display: flex;
-        gap: 0.5rem;
-        margin-top: 1rem;
+    .testimonials h2 {
+        font-size: 1.5rem;
     }
 }
 
@@ -359,7 +405,6 @@ main {
     border-color: #007b4f;
 }
 
-/* Formular */
 form {
     display: none;
     text-align: left;
