@@ -1,6 +1,17 @@
 /* ------------------------------------------------------------------
  * 1. Grundstile (Body & Container)
  * ------------------------------------------------------------------ */
+@font-face {
+	font-family: 'Mulish';
+
+	src: url('../assets/fonts/Mulish-Medium.ttf') format('truetype');
+
+	font-weight: 500;
+
+	font-style: normal;
+
+	font-display: swap;
+}
 .page-impressum {
 	/* Farben (abgeleitet vom Footer-Thema) */
 	--color-primary-green: #4e7c4e;
