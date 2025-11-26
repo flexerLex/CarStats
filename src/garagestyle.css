@@ -1,9 +1,17 @@
 /* ====== GLOBAL ====== */
+/*
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 
 body {
     font-family: 'Inter', sans-serif;
@@ -217,15 +225,16 @@ label {
     font-size: 0.9rem;
 }
 
-input,
-textarea,
-select,
-button {
+.vehicle input,
+.vehicle textarea,
+.vehicle select,
+.vehicle button {
     font: inherit;
     padding: 0.5rem;
     border-radius: 10px;
     border: 1px solid #e5e5e5;
 }
+
 
 input,
 textarea,
