@@ -1,110 +1,137 @@
-// ===========================================
-// I. Globale Variablen und Hilfsfunktionen (Global Variables and Utilities)
-// ===========================================
+//--------------- I. Globale Variablen und Hilfsfunktionen ---------------------
 
 let consumptionChartInstance = null;
 const PLACEHOLDER_TEXT = '---';
 
 function formatNumber(num, minDecimals) {
-	// Prüft, ob die Eingabe eine gültige Zahl ist
-	if (!Number.isFinite(num)) {
+	// Funktion: Formatiert eine Zahl im deutschen Format (Komma als Dezimaltrennzeichen).
+	if (typeof num !== 'number') {
 		return PLACEHOLDER_TEXT;
 	}
-	// [Hilfsfunktion] Formatiert eine Zahl im deutschen Format (mit Komma als Dezimaltrennzeichen).
-	// Verwendet das integrierte Intl-Objekt für die internationale Formatierung
-	return new Intl.NumberFormat('de-DE', {
-		minimumFractionDigits: minDecimals,
-		maximumFractionDigits: 2, // Behält maximal zwei Dezimalstellen bei
-	}).format(num);
+	let formattedString = num.toFixed(minDecimals);
+	return formattedString.replace('.', ',');
 }
 
-// ===========================================
-// II. Framework zur Ansichtsaktualisierung (View Update Framework)
-// ===========================================
-// [Ansichtsfunktion] Aktualisiert die Werte aller KPI-Karten basierend auf den übergebenen Daten.
+function generateLabels(count) {
+	let labels = [];
+	for (let i = 1; i <= count; i++) {
+		labels.push('Punkt ' + i);
+	}
+	return labels;
+}
+
+// ------------II. Hauptinitialisierungsfunktion ------------------------
+
+// Diese Funktion wird gestartet, sobald die Seite geladen ist
+function initDashboard() {
+	console.log('Dashboard Frontend Initialisierung gestartet...');
+
+	// 1: Initialisiert das Diagramm
+	initializeConsumptionChart();
+
+	// 2: Richtet die Benutzerinteraktion ein
+	setupTimeSwitcherListeners();
+
+	// 3: Ruft alle Ansichtsaktualisierungsfunktionen auf und initialisiert sie mit Platzhaltern
+	updateKpis({});
+	updateBudget({});
+	renderTransactions([]);
+	updateConsumptionChart([]);
+
+	// ! ------------------- noch nicht fertig --------------------- ! **Hier muss zukünftig der Code für den anfänglichen Backend-Datenabruf hinzugefügt werden**
+	console.log('Warte auf Bereitschaft der Backend-Datenschnittstelle...');
+}
+
+// ------------ III. Funktionen zur Ansichtsaktualisierung ------------------------
 function updateKpis(kpis) {
-	// Prüft, ob Daten übergeben wurden
+	// Aktualisiert die Werte aller KPI-Karten
 	if (!kpis) {
 		kpis = {};
 	}
-	// 1. Aktualisiert das Automodell
-	const carModelElement = document.querySelector('.car-model');
-	if (kpis.carModel) {
-		carModelElement.textContent = kpis.carModel;
-	} else {
-	}
-	// 2. Aktualisiert die KPI-Werte – findet das Element mit einem Selektor und setzt dessen Inhalt
+
+	document.querySelector('.car-model').textContent =
+		kpis.carModel || PLACEHOLDER_TEXT;
+
 	document.querySelector('.average-consumption .kpi__value').textContent =
 		formatNumber(kpis.averageConsumption, 2);
+
 	document.querySelector('.fuel-costs .kpi__value').textContent = formatNumber(
 		kpis.fuelCostsPerKm,
 		2
 	);
+
 	document.querySelector('.mileage .kpi__value').textContent = formatNumber(
 		kpis.mileage,
 		0
 	);
+
 	document.querySelector('.reichweite .kpi__value').textContent = formatNumber(
 		kpis.range,
 		0
 	);
+
 	document.querySelector('.monthly-total-costs .kpi__value').textContent =
 		formatNumber(kpis.monthlyTotalCosts, 2);
+
 	document.querySelector('.annual-total-costs .kpi__value').textContent =
 		formatNumber(kpis.annualTotalCosts, 2);
 }
 
-// [Ansichtsfunktion] Füllt oder leert die Fortschrittsleiste für das Jahresbudget.
-function updateBudget(budget) {
-	const progressFill = document.querySelector('.progress-fill');
-	const progressText = document.querySelector('.progress-text');
+function updateBudget(budgetData) {
+	//  Füllt oder leert die Fortschrittsleiste für das Jahresbudget.
+	const fillElement = document.querySelector('.progress-fill');
+	const textElement = document.querySelector('.progress-text');
 
-	if (budget && typeof budget.usedPercentage === 'number') {
-		progressFill.style.width = budget.usedPercentage + '%';
-		if (budget.usedText) {
-			progressText.textContent = budget.usedText;
+	if (budgetData && typeof budgetData.usedPercentage === 'number') {
+		let percent = budgetData.usedPercentage;
+		fillElement.style.width = percent + '%';
+
+		// Setzt einen Standardtext, wenn kein spezieller Text übergeben wird
+		if (budgetData.usedText) {
+			textElement.textContent = budgetData.usedText;
 		} else {
-			progressText.textContent = budget.usedPercentage + '% Jahrbudget gebraucht';
+			textElement.textContent = percent + '% Jahrbudget gebraucht';
 		}
 	} else {
-		// Standardstatus, wenn keine Daten vorhanden sind
-		progressFill.style.width = '50%';
-		progressText.textContent = 'Budgetdaten werden geladen...';
+		fillElement.style.width = '50%';
+		textElement.textContent = 'Budgetdaten werden geladen...';
 	}
 }
-// [Ansichtsfunktion] Rendert oder leert die Liste der letzten Transaktionen.
+
 function renderTransactions(transactions) {
+	// Rendert oder leert die Liste der letzten Transaktionen.
 	const transactionCard = document.querySelector('.last-transactions-card');
+	console.log('Transaktionsliste wird noch nicht gerendert.');
 	// ! ------------------ noch nicht fertig ------------------------ !
 }
 
-// ===========================================
-// III. Diagramm- und Interaktionslogik (Interaction and Chart Setup)
-// ===========================================
+// -------------------------III. Diagramm- und Interaktionslogik ---------------------
 
-// [Diagrammfunktion] Initialisiert das Chart.js-Diagramm.
 function initializeConsumptionChart() {
+	// Initialisiert das Chart.js-Diagramm
 	const ctx = document.getElementById('consumption-chart');
-	// Sicherheitsprüfung, um sicherzustellen, dass der Platzhalter existiert und die Chart.js-Bibliothek geladen ist
-	if (!ctx || typeof Chart === 'undefined') {
-		console.error(
-			'Fehler: Chart.js-Bibliothek nicht geladen oder Diagramm-Platzhalter existiert nicht!'
-		);
+
+	if (!ctx) {
+		console.error('Fehler: Diagramm-Platzhalter fehlt!');
 		return;
 	}
 
-	// Erstellt eine neue Chart.js-Instanz und speichert sie in der globalen Variable
+	if (typeof Chart === 'undefined') {
+		console.error('Chart.js Bibliothek wurde nicht geladen.');
+		return;
+	}
+
 	consumptionChartInstance = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: [], // Die anfänglichen Beschriftungen sind leer
+			labels: [],
 			datasets: [
 				{
 					label: 'Kraftstoffverbrauch (L/100km)',
-					data: [], // Die anfänglichen Daten sind leer
-					borderColor: 'rgba(75, 192, 192, 1)',
-					backgroundColor: 'rgba(75, 192, 192, 0.2)',
-					tension: 0.1, // Lässt die Linie glatter erscheinen
+					data: [],
+					borderColor: 'teal',
+					backgroundColor: 'rgba(0, 128, 128, 0.2)',
+					tension: 0.1,
 				},
 			],
 		},
@@ -114,26 +141,32 @@ function initializeConsumptionChart() {
 		},
 	});
 }
-// ! -------------------- noch nicht fertig ------------------------- !
 
-// [Interaktionsfunktion] Legt die Klick-Events für die Zeitschaltflächen fest.
+function updateConsumptionChart(newData) {
+	// Aktualisiert die Daten und Labels des Diagramms
+	if (!consumptionChartInstance) return;
+
+	consumptionChartInstance.data.datasets[0].data = newData;
+	consumptionChartInstance.data.labels = generateLabels(newData.length);
+
+	consumptionChartInstance.update();
+}
+
 function setupTimeSwitcherListeners() {
-	// Findet alle Schaltflächen zum Umschalten
-	const buttons = document.querySelectorAll('.chart__time__btn');
+	// Legt die Klick-Events für die Zeitschaltflächen fest.
+	const allButtons = document.querySelectorAll('.chart__time__btn');
 
-	// Durchläuft jede Schaltfläche und fügt einen Event-Listener hinzu
-	for (let i = 0; i < buttons.length; i++) {
-		const button = buttons[i];
+	for (let i = 0; i < allButtons.length; i++) {
+		let button = allButtons[i];
 
 		button.addEventListener('click', function (event) {
-			const timeframe = event.currentTarget.textContent.trim();
+			const timeframe = event.target.textContent.trim();
 
-			// 1. Entfernt den 'active'-Stil von allen Schaltflächen
-			for (let j = 0; j < buttons.length; j++) {
-				buttons[j].classList.remove('active');
+			for (let j = 0; j < allButtons.length; j++) {
+				allButtons[j].classList.remove('active');
 			}
-			// 2. Fügt der aktuell angeklickten Schaltfläche den 'active'-Stil hinzu
-			event.currentTarget.classList.add('active');
+
+			event.target.classList.add('active');
 
 			console.log(
 				'Benutzerinteraktion: Umschalten auf ' +
@@ -142,38 +175,12 @@ function setupTimeSwitcherListeners() {
 			);
 
 			// ! ------------------- noch nicht fertig --------------------- !
-			// **Hier muss zukünftig der Code für den Aufruf der Backend-API hinzugefügt werden**
-			// Vorübergehend werden leere Daten verwendet, um das Diagramm zu leeren und den Ladezustand anzuzeigen
+			// Placeholder für den Backend-Datenabruf
+
 			updateConsumptionChart([]);
 		});
 	}
 }
 
-// ===========================================
-// IV. Hauptinitialisierungsfunktion (Main Initialization)
-// ===========================================
-
-// Nach dem Laden der Seite wird diese Funktion ausgeführt, um das Dashboard zu starten.
-function initDashboard() {
-	console.log('Dashboard Frontend Initialisierung gestartet...');
-
-	// Schritt 1: Initialisiert das Diagramm (Muss vor allen anderen Diagramm-Aktualisierungen ausgeführt werden)
-	initializeConsumptionChart();
-
-	// Schritt 2: Richtet die Benutzerinteraktion ein
-	setupTimeSwitcherListeners();
-
-	// Schritt 3: Ruft alle Ansichtsaktualisierungsfunktionen auf und initialisiert sie mit leeren Werten oder Platzhaltern
-	// Übergabe leerer Objekte/Arrays zur Initialisierung:
-	updateKpis({});
-	updateBudget({});
-	renderTransactions([]);
-	updateConsumptionChart([]);
-
-	// ! ------------------- noch nicht fertig --------------------- !
-	// **Hier muss zukünftig der Code für den anfänglichen Backend-Datenabruf hinzugefügt werden**
-	console.log('Warte auf Bereitschaft der Backend-Datenschnittstelle...');
-}
-
-// Stellt sicher, dass die Funktion 'initDashboard' erst ausgeführt wird, nachdem die HTML-Seite vollständig geladen und analysiert wurde
+// ---------------V. Start des Skripts -------------------------
 document.addEventListener('DOMContentLoaded', initDashboard);
