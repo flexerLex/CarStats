@@ -41,7 +41,7 @@ body {
 .appointments-box {
 	box-sizing: border-box;
 	width: 100%;
-	max-width: 420px;
+	max-width: none;
 	background: #ffffff;
 	border: 1px solid #e0e0e0;
 	border-radius: 10px;
@@ -52,6 +52,10 @@ body {
 }
 
 @media (max-width: 480px) {
+    .appointments-list {
+        grid-template-columns: 1fr;
+    }
+
 	.appointments-box {
 		width: 95%;
 		padding: 12px;
@@ -80,7 +84,8 @@ body {
 	padding: 0;
 	margin: 0;
 	display: grid;
-	gap: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 12px;
 }
 
 .appointment-item {
@@ -117,13 +122,18 @@ body {
 }
 
 main {
+    display: block;
+    padding: 0;
+
+    /*
 	display: flex;
-	justify-content: center; /* horizontal zentrieren */
-	align-items: center; /* vertikal zentrieren */
-	min-height: auto; /* Box direkt sichtbar ohne Scrollen */
+	justify-content: center; //horizontal zentrieren
+	align-items: center; // vertikal zentrieren
+	min-height: auto; // Box direkt sichtbar ohne Scrollen
 	flex-direction: column;
-	gap: 2rem; /* Abstand zwischen Box und CTA */
+	gap: 2rem; // Abstand zwischen Box und CTA
 	padding: 2rem 0;
+    */
 }
 
 @media (max-width: 768px) {
@@ -224,6 +234,13 @@ main {
 	}
 }
 
+/* ====== REMINDERS ====== */
+
+.reminders-section {
+    padding: 4rem 0;
+    background: #fff;
+}
+
 /* ====== TESTIMONIALS ====== */
 .testimonials {
 	padding: 4rem 0;
@@ -238,17 +255,17 @@ main {
 
 /* Container für horizontales Scrollen */
 .testimonial-grid {
-	display: flex; /* nebeneinander anordnen */
-	gap: 20px; /* Abstand zwischen den Items */
-	overflow-x: auto; /* horizontal scrollen */
-	scroll-behavior: smooth; /* sanftes Scrollen */
+	display: flex;
+	gap: 20px;
+	overflow-x: auto;
+	scroll-behavior: smooth;
 	padding: 1rem;
-	-webkit-overflow-scrolling: touch; /* für Mobile */
+	-webkit-overflow-scrolling: touch;
 }
 
 .testimonial-card {
-	flex: 0 0 30%; /* jede Karte nimmt 30% der Breite ein */
-	min-width: 280px; /* Mindestbreite für kleinere Bildschirme */
+	flex: 0 0 30%;
+	min-width: 280px;
 	padding: 2rem;
 	border-radius: 12px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);

@@ -7,8 +7,8 @@
     --yellow-accent: #e5eae3;
     --gray-border: #e5eae3;
     --header-height: 72px;
-    --accent: #b85c38;      /* Warm terracotta */
-    --accent-alt: #d97742;  /* Orange-copper */
+    --accent: #007b4f;      /* Warm terracotta */
+    --accent-alt: #007b4f;  /* Orange-copper */
 }
 body {
     margin: 0;
