@@ -9,7 +9,7 @@ let login_submit_btn = document.getElementById('login_submit');
 login_submit_btn.addEventListener('click', login_submitted);
 
 let login_register_btn = document.getElementById('register_submit');
-login_submit_btn.addEventListener('click', register_submitted);
+login_register_btn.addEventListener('click', register_submitted);
 
 let login_mask = document.getElementById('login_mask');
 let register_mask = document.getElementById('register_mask');
