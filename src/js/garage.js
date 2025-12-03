@@ -46,3 +46,9 @@ function collectdata(){
     //Daten als JSON ins Backend schicken
     window.alert("Daten wurden abgesendet");
 }
+
+const response = await fetch('../../php/save_vehicle.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(vehicleData)
+});
