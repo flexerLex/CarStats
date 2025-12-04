@@ -1,0 +1,178 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # wichtig für lokale Tests mit fetch()
+import sqlite3
+from datetime import datetime, date as aktuellesdate
+
+
+app = Flask(__name__)
+CORS(app)  # erlaubt CORS-Anfragen von HTML/JS-Seite
+
+
+def plausibel(km, liter, date):
+    return True
+
+def getInfoList(datalist):              #datalist: date, km, liter, price
+    tankprice = datalist[2] * datalist[3]
+    InfoList = []
+    InfoList.append(tankprice)
+    print("InfoList", InfoList)         #InfoList: tankprice
+    return InfoList
+
+def getlongtermStats(kmsmallest, kmgreatest, literoverall, firstliter, priceoverall):
+    kmoverall = kmgreatest - kmsmallest
+    avgConsumption = (literoverall-firstliter) / kmoverall * 100
+    priceperKM = priceoverall / kmoverall
+    return [kmoverall, avgConsumption, priceperKM]
+
+def init_db():
+    conn = sqlite3.connect('daten.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS tankdata (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            datum TEXT,
+            km INTEGER,
+            liter REAL,
+            preis REAL,
+            kategorie TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+@app.route("/api/eintrag", methods=["POST"])
+def eintrag():
+    data = request.get_json()
+    print("Empfangene Daten:", data)
+
+    date = str(data['date'])
+    km = int(data['km'])
+    liter = float(data['liter'])
+    price = float(data['price'])
+    category = data['category']
+    addendum = data['addendum']
+
+    conn = sqlite3.connect('daten.db')
+    cursor = conn.cursor()
+
+    #plausibel = auswertung.plausibel(km, liter, date)
+    # genauer machen: Nachbarn bestimmen und genauere Berechnungen durchführen
+    cursor.execute("SELECT MAX(km) FROM tankdata")
+    highestkm = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT MAX(datum) FROM tankdata")
+    highestdate = cursor.fetchone()[0] or 0
+    newdate = datetime.strptime(date, "%Y-%m-%d").date()
+    futuredate = newdate > aktuellesdate.today()
+
+    plausibel = not futuredate and ((highestkm < km and highestdate < date) or addendum)            # seit hier probleme mit neuen einträgen
+
+    if not plausibel:
+        print("unplausibel")
+        return jsonify({
+            "success": False,
+            "message": "Daten unplausibel, Eingabe überprüfen und erneut versuchen"
+        }), 400
+
+
+    cursor.execute("INSERT INTO tankdata (datum, km, liter, preis, kategorie) VALUES (?, ?, ?, ?, ?)", (date, km, liter, price, category))
+
+
+    cursor.execute("SELECT preis * liter FROM tankdata WHERE kategorie='sprit' ORDER BY km DESC LIMIT 1")
+    tankprice = cursor.fetchone()[0] or 0
+
+    cursor.execute("SELECT SUM(liter) FROM tankdata WHERE kategorie='sprit'")
+    sumLiter = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT MIN(km) FROM tankdata WHERE kategorie='sprit'")
+    kmsmallest = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT MAX(km) FROM tankdata WHERE kategorie='sprit'")
+    kmgreatest = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT SUM(preis * liter) FROM tankdata WHERE kategorie='sprit'")
+    priceoverall = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT liter FROM tankdata WHERE kategorie='sprit' ORDER BY km LIMIT 1")
+    firstliter = cursor.fetchone()[0] or 0 #erste Liter muss abgezogen, sonst avg verbrauch ungenau
+
+    conn.commit()
+    conn.close()
+
+    longtermstats = auswertung.getlongtermStats(kmsmallest, kmgreatest, sumLiter, firstliter, priceoverall)
+
+    return jsonify({
+        "success": True,
+        "message": "Daten empfangen",
+        "data": data,
+        "tankprice": tankprice,
+        "sumLiter": sumLiter,
+        "kmoverall": longtermstats[0],
+        "avgConsumption": longtermstats[1],
+        "priceperKM": longtermstats[2],
+        "priceoverall": priceoverall
+        }), 200
+
+@app.route("/api/auswertungen", methods=["GET"])
+def auswertungen():
+    conn = sqlite3.connect('daten.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT preis * liter FROM tankdata WHERE kategorie='sprit' ORDER BY km DESC LIMIT 1")
+    tankprice = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT SUM(liter) FROM tankdata WHERE kategorie='sprit'")
+    sumLiter = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT MIN(km) FROM tankdata WHERE kategorie='sprit'")
+    kmsmallest = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT MAX(km) FROM tankdata WHERE kategorie='sprit'")
+    kmgreatest = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT SUM(preis * liter) FROM tankdata WHERE kategorie='sprit'")
+    priceoverall = cursor.fetchone()[0] or 0
+    cursor.execute("SELECT liter FROM tankdata WHERE kategorie='sprit' ORDER BY km LIMIT 1")
+    firstliter = cursor.fetchone()[0] or 0 #erste Liter muss abgezogen, sonst avg verbrauch ungenau
+
+    conn.close()
+
+    longtermstats = auswertung.getlongtermStats(kmsmallest, kmgreatest, sumLiter, firstliter, priceoverall)
+
+    return jsonify({
+        "message": "Readout erfolgreich",
+        "tankprice": tankprice,
+        "sumLiter": sumLiter,
+        "kmoverall": longtermstats[0],
+        "avgConsumption": longtermstats[1],
+        "priceperKM": longtermstats[2],
+        "priceoverall": priceoverall
+        }), 200
+
+@app.route('/api/alle', methods=['GET'])
+def alle():
+    conn = sqlite3.connect('daten.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tankdata WHERE kategorie='sprit'")
+    rows = cursor.fetchall()
+    conn.close()
+
+    # Daten in JSON umwandeln
+    tankdata = [
+        {"id": row[0], "datum": row[1], "km": row[2], "liter": row[3], "preis": row[4], "kategorie": row[5]}
+        for row in rows
+    ]
+
+    print("check tankdata: ", tankdata)
+    return jsonify(tankdata)
+
+'''
+def check_db_backend():
+    conn = sqlite3.connect('daten.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM tankdata")
+    rows = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+
+    for row in rows:
+        print(row)
+'''
+
+if __name__ == "__main__":
+    init_db()
+    app.run(debug=True)
+
