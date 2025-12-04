@@ -9,7 +9,7 @@ function edit_vehicle0(){
 }
 
 let button_delete0 = document.getElementById('btn_delete0');
-button_edit0.addEventListener('click', delete_vehicle0);
+button_edit0.addEventListener('click', e);
 
 function delete_vehicle0(){
     // Ans Backend senden und in Datenbank anpassen mit vorgefertigter SQL
