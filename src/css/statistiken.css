@@ -315,55 +315,8 @@ body {
 	flex-shrink: 0; /* Verhindert das Schrumpfen des Betrags */
 }
 
-/* ----------------------------- Budget Sektion style---------------------------- */
 
-.budget-section {
-	grid-column: 1 / -1; /* Fortschrittsbalken die gesamte Rasterbreite einnehmen lassen */
-	margin-top: var(--page-margin);
-	margin-bottom: var(--page-margin);
-	padding-left: var(--gap-spacing);
-	padding-right: var(--gap-spacing);
-}
 
-.budget-title {
-	text-align: center;
-	font-size: 1.2em;
-	font-weight: 600;
-	color: #333;
-	margin-bottom: 15px;
-}
-
-.progress-bar-container {
-	height: 50px;
-	background-color: var(
-		--color-budget-bg
-	); /* Unbenutzter Budgetanteil (dunkle Farbe) */
-	border-radius: 10px;
-	overflow: hidden; /*  Sicherstellen, dass der gefüllte Teil den Container nicht überschreitet */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	margin-bottom: 20px;
-}
-
-/* Gefüllter Teil des Fortschrittsbalkens (verwendetes Budget) */
-.progress-fill {
-	background-color: var(--color-budget-used);
-	height: 100%;
-	width: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: width 0.5s ease-in-out;
-	border-radius: 10px 0 0 10px;
-}
-
-.progress-text {
-	color: #2c3e50;
-	font-weight: bold;
-	font-size: 1em;
-	padding-left: var(--gap-spacing);
-	padding-right: var(--gap-spacing);
-	white-space: nowrap; /*  Sicherstellen, dass der Text nicht umgebrochen wird */
-}
 
 /* ----------------------------- Responsive Design---------------------------- */
 
@@ -489,17 +442,7 @@ body {
 		font-size: 0.6em;
 	}
 
-	/* ------------------- Budgetbalken Fix ------------------- */
-	/* **Höhe des Budgetbalken-Containers** */
-	.progress-bar-container {
-		height: 40px;
-	}
-
-	/* Schriftgröße des Budgettextes */
-	.progress-text {
-		font-size: 0.65em;
-		white-space: normal;
-	}
+	
 
 	/* ------------------- Footer Anpassung ------------------- */
 	.site-footer__container {

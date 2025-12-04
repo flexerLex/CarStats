@@ -77,26 +77,7 @@ function updateKpis(kpis) {
 		formatNumber(kpis.annualTotalCosts, 2);
 }
 
-function updateBudget(budgetData) {
-	//  Füllt oder leert die Fortschrittsleiste für das Jahresbudget.
-	const fillElement = document.querySelector('.progress-fill');
-	const textElement = document.querySelector('.progress-text');
 
-	if (budgetData && typeof budgetData.usedPercentage === 'number') {
-		let percent = budgetData.usedPercentage;
-		fillElement.style.width = percent + '%';
-
-		// Setzt einen Standardtext, wenn kein spezieller Text übergeben wird
-		if (budgetData.usedText) {
-			textElement.textContent = budgetData.usedText;
-		} else {
-			textElement.textContent = percent + '% Jahrbudget gebraucht';
-		}
-	} else {
-		fillElement.style.width = '50%';
-		textElement.textContent = 'Budgetdaten werden geladen...';
-	}
-}
 
 function renderTransactions(transactions) {
 	// Rendert oder leert die Liste der letzten Transaktionen.
