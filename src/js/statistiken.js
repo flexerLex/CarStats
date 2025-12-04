@@ -36,7 +36,10 @@ function initDashboard() {
 	updateKpis({});
 	updateBudget({});
 	renderTransactions([]);
-	updateConsumptionChart([]);
+
+	// 🔴 这就是您的静态数据源（硬编码数据）
+  const initialChartData = [9.5, 10.1, 9.8, 11.0, 10.5, 9.9];
+	updateConsumptionChart(initialChartData);
 
 	// ! ------------------- noch nicht fertig --------------------- ! **Hier muss zukünftig der Code für den anfänglichen Backend-Datenabruf hinzugefügt werden**
 	console.log('Warte auf Bereitschaft der Backend-Datenschnittstelle...');
