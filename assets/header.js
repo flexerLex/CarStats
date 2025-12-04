@@ -1,4 +1,4 @@
-fetch('Templates/header.html')
+fetch('../Templates/header.html')
     .then((response) => response.text())
     .then((html) => {
         document.getElementById('header-placeholder').innerHTML = html;
