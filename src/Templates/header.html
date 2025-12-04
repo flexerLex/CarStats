@@ -6,20 +6,26 @@
             </a>
         </div>
         <!-- Hamburger Menu -->
-        <input type="checkbox" id="site-header__nav-toggle" class="site-header__nav-toggle">
-        <label for="site-header__nav-toggle" class="site-header__hamburger">
+        <input type="checkbox" id="site-header__nav-toggle" class="site-header__nav-toggle" aria-label="Menü öffnen" aria-controls="main-navigation" aria-expanded="false">
+        <label for="site-header__nav-toggle" class="site-header__hamburger" tabindex="0" role="button" aria-label="Menü öffnen">
             <span></span>
             <span></span>
             <span></span>
         </label>
-        <nav class="site-header__nav">
+        <nav class="site-header__nav" id="main-navigation" role="navigation">
             <ul class="site-header__nav-list">
+                <li class="mobile-only">
+                    <a href="../html/login.html" class="site-header__nav-link">
+                        Login
+                    </a>
+                </li>
                 <li><a href="../html/kosteneingabe.html" class="site-header__nav-link">Kosteneingabe</a></li>
                 <li><a href="../html/statistiken.html" class="site-header__nav-link">Statistiken</a></li>
                 <li><a href="../html/erinnerungen.html" class="site-header__nav-link">Erinnerungen</a></li>
                 <li><a href="../html/garage.html" class="site-header__nav-link">Garage</a></li>
             </ul>
         </nav>
+        <div class="site-header__overlay"></div>
         <div class="site-header__profile">
             <a href="../html/login.html" class="profile-btn" title="Zum Profil">
                 <img src="../../assets/images/profile_avatar.png" alt="Profil" class="profile-img">
@@ -32,16 +38,37 @@
         const navToggle = document.getElementById('site-header__nav-toggle');
         const overlay = document.querySelector('.site-header__overlay');
         const navLinks = document.querySelectorAll('.site-header__nav-link');
+        const body = document.body;
+
+        function closeMenu() {
+            navToggle.checked = false;
+            body.style.overflow = '';
+        }
+
+        function openMenu() {
+            body.style.overflow = 'hidden';
+        }
+
+        navToggle.addEventListener('change', function() {
+            if (navToggle.checked) {
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        });
 
         if (overlay) {
-            overlay.addEventListener('click', () => {
-                navToggle.checked = false;
-            });
+            overlay.addEventListener('click', closeMenu);
         }
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.checked = false;
-            });
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Escape close
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navToggle.checked) {
+                closeMenu();
+            }
         });
     });
 </script>
