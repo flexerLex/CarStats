@@ -134,9 +134,9 @@
 				<div class="chart__header">
 					<h2 class="section-title">Trend des Kraftstoffverbrauchs</h2>
 					<div class="chart__timeswitcher">
-						<button class="chart__time__btn active">Täglich</button>
-						<button class="chart__time__btn">Monatlich</button>
-						<button class="chart__time__btn">Jährlich</button>
+						<button class="chart__time__btn active" data-unit="day">Täglich</button>
+						<button class="chart__time__btn" data-unit="month">Monatlich</button>
+						<button class="chart__time__btn" data-unit="year">Jährlich</button>
 					</div>
 				</div>
 				<div class="chart__placeholder">
@@ -158,6 +158,9 @@
 	<script src="../../assets/script.js"></script>
 	<script src="../js/statistiken.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/date-fns/locale/de/index.js"></script>
 </body>
 
 </html>
