@@ -3,7 +3,7 @@
 let consumptionChartInstance = null;
 const PLACEHOLDER_TEXT = '---';
 
-const PRIMARY_COLOR_SOLID = '#1F8505'; // 或 'rgb(0, 128, 128)'
+const PRIMARY_COLOR_SOLID = '#155A03'; // 或 'rgb(0, 128, 128)'
 const COLOR_CHART_FILL = 'rgba(218, 237, 213, 0.5)';
 
 function formatNumber(num, minDecimals) {
@@ -15,13 +15,7 @@ function formatNumber(num, minDecimals) {
 	return formattedString.replace('.', ',');
 }
 
-// function generateLabels(count) {
-// 	let labels = [];
-// 	for (let i = 1; i <= count; i++) {
-// 		labels.push('Punkt ' + i);
-// 	}
-// 	return labels;
-// }
+
 
 //############################################################################
 
@@ -168,17 +162,19 @@ function initializeConsumptionChart() {
 					title: {
 						display: true,
 						text: 'Datum',
-						align: 'end'
+						align: 'end',
+						color:'#3B3D3B'
 					},
 					grid: {
             display: false 
-          }
+					},
 				},
 				y: {
 					title: {
 						display: true,
 						text: 'Verbrauch (L/100km)',
-						align: 'end'
+						align: 'end',
+						color:'#3B3D3B'
 					},grid: {
             display: true, 
           }
