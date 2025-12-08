@@ -24,6 +24,14 @@ body {
    LOGIN & REGISTRIERUNG
 =========================== */
 
+.error {
+    color: white;
+    background-color: var(--grey-bg);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
 .auth {
     width: 100%;
     padding: 2rem;
@@ -91,6 +99,12 @@ fieldset {
     border: 1px solid #e5e5e5;
     border-radius: 10px;
     padding: 1rem;
+}
+
+.stayloggedin {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 legend {

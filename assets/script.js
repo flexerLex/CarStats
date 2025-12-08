@@ -1,5 +1,5 @@
 // Footer dynamisch laden
-fetch('../templates/footer.html')
+fetch('../../Templates/footer.html')
 	.then((response) => response.text())
 	.then((data) => {
 		document.getElementById('footer-placeholder').innerHTML = data;
