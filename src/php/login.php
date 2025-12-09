@@ -13,7 +13,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 }
 
 // Datenbankverbindung
-require_once 'connect_userDB.php';
+require_once 'connect_DB.php';
 
 /*
     CREATE TABLE IF NOT EXISTS user (
