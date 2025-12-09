@@ -148,7 +148,7 @@ main {
 			rgba(255, 255, 255, 0.75),
 			rgba(255, 255, 255, 0.75)
 		),
-		url('../assets/images/hero-klein-hell-verschieben.jpg');
+		url('../../assets/images/hero-klein-hell-verschieben.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
