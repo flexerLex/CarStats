@@ -12,9 +12,20 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
     exit;
 }
 
-// CREATE TABLE IF NOT EXISTS evtl sinnvoll einzubauen?
 // Datenbankverbindung
 require_once 'connect_userDB.php';
+
+/*
+    CREATE TABLE IF NOT EXISTS user (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        firstname TEXT NOT NULL,
+        name TEXT NOT NULL,
+        mail VARCHAR(100) NOT NULL,
+        password VARCHAR(100) NOT NULL,
+        username VARCHAR(30) NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+*/
 
 $error = '';
 $success = '';
@@ -38,7 +49,6 @@ if (isset($_COOKIE['remember_user']) && !empty($_COOKIE['remember_user'])) {
             $_SESSION['username'] = $user['username'];
 
             header('Location: ../html/index.html');
-            window.alert("Du bist bereits angemeldet!");
             exit;
         } else {
             // User existiert nicht mehr, Cookie löschen
@@ -78,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
 
-                    // neue Session-ID
+                    // neue Session-ID Security und so
                     session_regenerate_id(true);
 
                     // Cookie remember me zum eingeloggt bleiben
@@ -100,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             } catch(PDOException $e) {
                 $error = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
-                echo $e->getMessage();                          // rausnehmen wenn fertig
             }
         }
     }
@@ -159,13 +168,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // $_SESSION['loggedIn'] = true;
                     // $_SESSION['user_id'] = $conn->lastInsertId();
                     // $_SESSION['username'] = $username;
-                    // header('Location: dashboard.php');
+                    // header('Location: ../html/index.html');
                     // exit;
                 }
 
             } catch(PDOException $e) {
                 $error = 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
-                echo $e->getMessage();                      //rausnehmen wenn fertig
             }
         }
     }

@@ -1,6 +1,9 @@
 <?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Falls nötig
+
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === false) {
+
+    exit;
+}
 
 try {
     // Daten empfangen
@@ -20,9 +23,26 @@ try {
         ]
     );
 
+    /*
+    CREATE TABLE IF NOT EXISTS garage (
+        id INT(11) NOT NULL AUTO_INCREMENT,
+        brand VARCHAR(255) NOT NULL,
+        model VARCHAR(255) NOT NULL,
+        year YEAR(4) NOT NULL,
+        licenseplate VARCHAR(255) NOT NULL,
+        type VARCHAR(255) NOT NULL,
+        mileage INT(11) NOT NULL,
+        lasttuev DATE,
+        lastoilchange DATE,
+        lastgreatservice DATE,
+        notes TEXT,
+        PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+     */
+
     // SQL mit Prepared Statement
     $stmt = $pdo->prepare("
-        INSERT INTO vehicles (
+        INSERT INTO garage (
             brand, model, year, identification, type,
             mileage, lasttuev, lastoilchange, lastgreatservice, additiveinfo
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
