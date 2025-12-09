@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
 $conn->close();
 */
 
-
+/*
 // Verbindung erstellen
 $conn = new PDO("mysql:host=localhost;dbname=carstats", "root", "");
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -216,3 +216,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 </body>
 </html>
+*/
+
+
+require_once 'connect_userDB.php';
+
+try {
+    $conn = getDBConnection();
+    $stmt = $conn->query("SHOW TABLES");
+    $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    echo "<h3>Tabellen in der Datenbank:</h3>";
+    echo "<pre>";
+    print_r($tables);
+    echo "</pre>";
+
+    echo "<h3>Test: SELECT aus 'user' Tabelle:</h3>";
+    $stmt = $conn->query("SELECT * FROM user LIMIT 1");
+    echo "Erfolgreich!";
+
+} catch (PDOException $e) {
+    echo "Fehler: " . $e->getMessage();
+}

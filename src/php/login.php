@@ -8,10 +8,11 @@ if (isset($_GET['registered'])) {
 
 // Landingpage wenn bereits eingeloggt
 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
-    header('Location: index.html');
+    header('Location: ../html/index.html');
     exit;
 }
 
+// CREATE TABLE IF NOT EXISTS evtl sinnvoll einzubauen?
 // Datenbankverbindung
 require_once 'connect_userDB.php';
 
@@ -26,7 +27,7 @@ if (isset($_COOKIE['remember_user']) && !empty($_COOKIE['remember_user'])) {
         $conn = getDBConnection();
 
         // Prüfen ob Benutzer wirklich existiert
-        $stmt = $conn->prepare("SELECT id, username FROM users WHERE username = :username");
+        $stmt = $conn->prepare("SELECT id, username FROM user WHERE username = :username");
         $stmt->execute(['username' => $username]);
         $user = $stmt->fetch();
 
@@ -36,7 +37,8 @@ if (isset($_COOKIE['remember_user']) && !empty($_COOKIE['remember_user'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
 
-            header('Location: dashboard.php');
+            header('Location: ../html/index.html');
+            window.alert("Du bist bereits angemeldet!");
             exit;
         } else {
             // User existiert nicht mehr, Cookie löschen
@@ -65,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $conn = getDBConnection();
 
                 // Benutzer aus Datenbank holen
-                $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = :username");
+                $stmt = $conn->prepare("SELECT id, username, password FROM user WHERE username = :username");
                 $stmt->execute(['username' => $username]);
                 $user = $stmt->fetch();
 
@@ -90,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ]);
                     }
 
-                    header('Location: dashboard.php');
+                    header('Location: ../html/index.html');
                     exit;
                 } else {
                     $error = 'Ungültiger Benutzername oder Passwort!';
@@ -125,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $conn = getDBConnection();
 
                 // Prüfen ob Username oder Email bereits existiert
-                $stmt = $conn->prepare("SELECT id FROM users WHERE username = :username OR mail = :mail");
+                $stmt = $conn->prepare("SELECT id FROM user WHERE username = :username OR mail = :mail");
                 $stmt->execute([
                         'username' => $username,
                         'mail' => $mail
@@ -138,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
                     $stmt = $conn->prepare(
-                            "INSERT INTO users (firstname, name, username, mail, password) 
+                            "INSERT INTO user (firstname, name, username, mail, password) 
                      VALUES (:firstname, :name, :username, :mail, :password)"
                     );
 
@@ -211,6 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="login_mask" class="form active" method="post" action="#">
             <fieldset>
                 <legend>Anmeldung</legend>
+                <input type="hidden" name="action" value="login">
                 <label>
                     Benutzername:
                     <input
@@ -245,6 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <fieldset>
                 <legend>Registrierung</legend>
                 <div class="grid">
+                    <input type="hidden" name="action" value="register">
                     <label>
                         Vorname:
                         <input id="first_name_input" name="firstname" type="text" pattern="[A-Za-z]+" required placeholder="Max">
