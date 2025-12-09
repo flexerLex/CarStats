@@ -1,6 +1,6 @@
 /* ====== SITE HEADER STYLES ====== */
 .site-header {
-    background: #A3CF93;
+    background: var(--green-250);
     border-bottom: 1px solid var(--gray-border);
     box-shadow: 0 2px 8px rgba(40, 78, 65, 0.07);
     padding: 1rem 0;
@@ -18,12 +18,24 @@
     padding: 0 1rem;
 }
 
-.site-header__logo img {
+/* .site-header__logo img {
     max-height: 50px;
     transition: transform 0.3s ease;
 }
 
 .site-header__logo img:hover {
+    transform: scale(1.1);
+} */
+
+.site-header__logo {
+    max-height: 50px;
+    transition: transform 0.3s ease;
+    color:var(--green-700);
+    width: 70px;
+    height: 70px;
+}
+
+.site-header__logo:hover {
     transform: scale(1.1);
 }
 
@@ -41,8 +53,9 @@
 
 .site-header__nav-link {
     text-decoration: none;
-    color: var(--green-main);
-    font-weight: 500;
+    color: var(--text-main);
+    font-size: 22px;
+    font-weight: 580;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     transition: background-color 0.3s, color 0.3s;
@@ -50,7 +63,7 @@
 
 .site-header__nav-link.active,
 .site-header__nav-link:hover {
-    background: var(--green-accent);
+    background: var(--green-600);
     color: var(--white);
 }
 
@@ -61,17 +74,17 @@
 
 .site-header__lang-btn {
     background: none;
-    border: 1px solid var(--green-main);
+    border: 1px solid var(--green-600);
     border-radius: 6px;
     padding: 0.5rem 1rem;
     font-weight: 600;
-    color: var(--green-main);
+    color: var(--white);
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .site-header__lang-btn:hover {
-    background: var(--green-accent);
+    background: var(--green-600);
     color: var(--white);
 }
 
@@ -97,7 +110,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: var(--green-main);
+    background: var(--green-600);
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(.4, 2, .6, 1);
     display: block;
@@ -154,7 +167,7 @@
 }
 
 .profile-btn:hover {
-    border-color: var(--green-main);
+    border-color: var(--green-600);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
 }
 

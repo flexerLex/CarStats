@@ -3,7 +3,7 @@
 let consumptionChartInstance = null;
 const PLACEHOLDER_TEXT = '---';
 
-const PRIMARY_COLOR_SOLID = '#155A03'; // 或 'rgb(0, 128, 128)'
+const PRIMARY_COLOR_SOLID = '#155A03'; 
 const COLOR_CHART_FILL = 'rgba(218, 237, 213, 0.5)';
 
 function formatNumber(num, minDecimals) {

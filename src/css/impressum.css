@@ -1,28 +1,19 @@
 /* ------------------------------------------------------------------
  * 1. Grundstile (Body & Container)
  * ------------------------------------------------------------------ */
-@font-face {
-	font-family: 'Mulish';
 
-	src: url('../assets/fonts/Mulish-Medium.ttf') format('truetype');
 
-	font-weight: 500;
-
-	font-style: normal;
-
-	font-display: swap;
-}
 .page-impressum {
-	/* Farben (abgeleitet vom Footer-Thema) */
-	--color-primary-green: #4e7c4e;
-	--color-secondary-green: #c2ddc0; /* Helle Hintergrundfarbe (wie Footer) */
-	--color-text: #4e4d4d; /* Dunkles Grau für Haupttext */
-	--color-text-light: #7f847d; /* Hellgrau für Intro/Introtext */
+	
+	--color-h1-h2: #155A03;
+	--color-border: #BCDBB4; 
+	--color-text: #3B3D3B; 
+	--color-text-light: #6E726E; 
 	--color-background: #ffffff;
-	--color-border: #e0e0e0; /* Leichter Rand für Sektionen */
+	--color-border: #e0e0e0; 
 
 	/* Typografie und Spacing */
-	--font-family-sans: 'Mulish', sans-serif;
+	--font-family-sans: Inter, 'Segoe UI', sans-serif;
 	--font-size-base: 16px;
 	--layout-max-width: 1000px;
 	--spacing-md: 20px;
@@ -56,10 +47,10 @@ body {
 .page-impressum__title {
 	font-size: 2.5em;
 	font-weight: 700;
-	color: var(--color-primary-green);
+	color: var(--color-h1-h2);
 	margin-bottom: 0.5em;
 	padding-bottom: 10px;
-	border-bottom: 2px solid var(--color-secondary-green);
+	border-bottom: 2px solid var(--color-border);
 }
 
 .page-impressum__intro {
@@ -85,7 +76,7 @@ body {
 /* Hauptuntertitel der Sektionen */
 .info-section h2 {
 	font-size: 1.5em;
-	color: var(--color-primary-green);
+	color: var(--color-h1-h2);
 	border-bottom: 2px solid var(--color-border);
 	padding-bottom: 5px;
 	margin-top: 0;
@@ -128,7 +119,7 @@ body {
 .team-list li::before,
 .library-list li::before {
 	content: '\2022'; /* Bullet-Zeichen */
-	color: var(--color-primary-green);
+	color: var(--color-h1-h2);
 	font-weight: 900;
 	display: inline-block;
 	width: 1em;
@@ -140,7 +131,7 @@ body {
  * ------------------------------------------------------------------ */
 
 a {
-	color: var(--color-primary-green);
+	color: var(--color-h1-h2);
 	text-decoration: none;
 	font-weight: 500;
 	transition: color 0.3s ease;

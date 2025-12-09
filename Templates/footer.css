@@ -1,27 +1,24 @@
 @font-face {
-	font-family: 'Mulish';
-
-	src: url('../assets/fonts/Mulish-Medium.ttf') format('truetype');
-
-	font-weight: 500;
-
-	font-style: normal;
-
-	font-display: swap;
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
 }
+
 /* 1. Stil für den gesamten Footer */
 .site-footer {
-	--font-family-sans: 'Mulish', sans-serif;
+	font-family: Inter, 'Segoe UI', sans-serif;
 	--font-size-base: 14px;
 	--transition-duration-normal: 0.3s;
 	--layout-max-width: 1200px;
 
-	--color-footer-background: #DAEDD5;
-	--color-footer-text: #104502;
+	--color-footer-background: rgb(163,207,147,0.4);
+	--color-footer-text: #000000;
 	--color-link-hover-text: #fff;
 	--color-link-hover-bg: #155A03;
 	--color-icon: #fff;
-	--color-icon-bg: #155A03;
+	--color-icon-bg: #104502;
 
 
 	--spacing-xs: 4px;
@@ -50,6 +47,8 @@
 /* 2. Der Flex-Container */
 .site-footer__copyright {
 	color: var(--color-footer-text);
+	font-weight: 400;
+	font-size: 15px;
 }
 
 /* 3. Stil für Links und Navigation */
@@ -59,6 +58,8 @@
 	margin: 0 var(--spacing-sm);
 	padding: var(--spacing-xs) 0;
 	transition: color var(--transition-duration-normal);
+	font-weight: 580;
+	font-size: 15px;
 }
 
 /* 4. Stil für footer-btn */
@@ -67,7 +68,7 @@
 	display: inline-block;
 	padding: var(--spacing-sm);
 	border-radius: 10px;
-	font-weight: 500;
+	
 }
 a.site-footer__nav-links:hover {
 	background-color: var(--color-link-hover-bg);
@@ -100,9 +101,7 @@ a.site-footer__nav-links:hover {
 /* ========================================================================= */
 /* 3. Responsive Anpassungen für den Footer (max-width 768px)                */
 /* ========================================================================= */
-/* ========================================================================= */
-/* 3. Responsive Anpassungen für den Footer (max-width 768px)                */
-/* ========================================================================= */
+
 
 @media (max-width: 768px) {
 	/* ... (vorherige Anpassungen für Dashboard) ... */

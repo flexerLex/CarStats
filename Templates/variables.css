@@ -1,9 +1,25 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
 :root {
-    --green-main: #141514;
-    --green-accent: #155A03;
-    --grey-bg: #595959;
-    --white: #ffffff;
+    --green-50:#F8FAF7;
+    --green-100:#DAEDD5;
+    --green-200:#B8D6B0;
+    --green-250:#A3CF93;
+    --green-300:#BCDBB4;
+    --green-600:#155A03;
+    --green-700:#104502;
+
     --text-main: #000000;
+    --white: #ffffff;
+    
+    --green-main: #415b2b;
+    --green-accent: #628243;
+    --grey-bg: #595959;
     --yellow-accent: #e5eae3;
     --gray-border: #e5eae3;
     --header-height: 72px;
@@ -12,7 +28,7 @@
 }
 body {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: Inter, 'Segoe UI', sans-serif;
     background: #f7f9fa;
     color: #284e41;
 }

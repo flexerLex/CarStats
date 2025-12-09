@@ -5,7 +5,7 @@
 }
 
 :root {
-	--color-background: #f0f0f0;
+	--color-background: #F8FAF7;
 	--color-card-bg: #ffffff;
 	--color-text-dark: #141514;
 	--color-text-middle:#6E726E;
@@ -13,8 +13,6 @@
 	--color-kpiicon-bg: #DAEDD5;
 	--color-kpiicon-text: #155A03;
 	--color-chartbtn-bg: #155A03;
-	--color-budget-bg: #4c6c5a;
-	--color-budget-used: #b8d4c4;
 
 	--shadow-subtle: 0 4px 6px -1px rgba(42, 34, 34, 0.05),
 		0 2px 4px -2px rgba(0, 0, 0, 0.05);
