@@ -5,19 +5,18 @@
 }
 
 :root {
-	--color-background: #f0f0f0;
+	--color-background: #F8FAF7;
 	--color-card-bg: #ffffff;
-	--color-text-dark: #333333;
-	--color-text-light: #999999;
-	--color-kpiicon-bg: #e8eeea;
-	--color-kpiicon-text: #7b9285;
-	--color-chartbtn-bg: #566b67;
-	--color-budget-bg: #4c6c5a;
-	--color-budget-used: #b8d4c4;
+	--color-text-dark: #141514;
+	--color-text-middle:#6E726E;
+	--color-text-light: #AAAAAA;
+	--color-kpiicon-bg: #DAEDD5;
+	--color-kpiicon-text: #155A03;
+	--color-chartbtn-bg: #155A03;
 
 	--shadow-subtle: 0 4px 6px -1px rgba(42, 34, 34, 0.05),
 		0 2px 4px -2px rgba(0, 0, 0, 0.05);
-	--border-radius: 12px;
+	--border-radius: 16px;
 	--gap-spacing: 20px;
 	--page-margin: 50px;
 }
@@ -128,7 +127,6 @@ body {
 	padding: 6px;
 	border-radius: 8px;
 	fill: currentColor;
-	background-color: #e8f5e9;
 	margin-right: 10px;
 }
 .icon__property {
@@ -138,8 +136,8 @@ body {
 
 .kpi__title {
 	font-size: 1em;
-	font-weight: 500;
-	color: #888;
+	font-weight: 400;
+	color: var(--color-text-middle);
 	flex-grow: 1;
 	margin: 0;
 }
@@ -150,16 +148,18 @@ body {
 .kpi__value {
 	font-size: 2.5em;
 	font-weight: 700;
-	color: #333;
+	letter-spacing: 0.04em;
+	color: var(--color-text-dark);
 	margin-right: 15px;
 }
 .kpi__footer {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	color: var(--color-text-light);
 }
 .kpi__unit {
-	font-weight: 600;
+	font-weight: 400;
 	padding: 2px;
 	border-radius: 4px;
 	font-size: 0.85em;
@@ -178,6 +178,8 @@ body {
 }
 .section-title {
 	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--color-text-dark);
 	margin: 0;
 }
 .chart__timeswitcher {
@@ -185,16 +187,16 @@ body {
 	border: 1px solid #eee;
 	border-radius: 6px;
 	overflow: hidden;
+	color:#3B3D3B;
 	margin-top: -18px;
 }
 
 .chart__time__btn {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	border: none;
 	background-color: white;
 	font-size: 0.7em;
 	cursor: pointer;
-	color: #666;
 	transition: background-color 0.2s;
 }
 
@@ -221,8 +223,8 @@ body {
 /* --- 1. Hauptcontainer und Header --- */
 .last-transactions-card {
 	background-color: #ffffff;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Leichter Schatten */
+	border-radius: 16px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); /* Leichter Schatten */
 	padding: var(--gap-spacing);
 }
 
@@ -237,7 +239,8 @@ body {
 
 .transaction-header .section-title {
 	font-size: 1.25rem;
-	color: #333;
+	font-weight: 700;
+	color: var(--color-text-dark);
 	margin: 0;
 }
 
@@ -315,55 +318,8 @@ body {
 	flex-shrink: 0; /* Verhindert das Schrumpfen des Betrags */
 }
 
-/* ----------------------------- Budget Sektion style---------------------------- */
 
-.budget-section {
-	grid-column: 1 / -1; /* Fortschrittsbalken die gesamte Rasterbreite einnehmen lassen */
-	margin-top: var(--page-margin);
-	margin-bottom: var(--page-margin);
-	padding-left: var(--gap-spacing);
-	padding-right: var(--gap-spacing);
-}
 
-.budget-title {
-	text-align: center;
-	font-size: 1.2em;
-	font-weight: 600;
-	color: #333;
-	margin-bottom: 15px;
-}
-
-.progress-bar-container {
-	height: 50px;
-	background-color: var(
-		--color-budget-bg
-	); /* Unbenutzter Budgetanteil (dunkle Farbe) */
-	border-radius: 10px;
-	overflow: hidden; /*  Sicherstellen, dass der gefüllte Teil den Container nicht überschreitet */
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	margin-bottom: 20px;
-}
-
-/* Gefüllter Teil des Fortschrittsbalkens (verwendetes Budget) */
-.progress-fill {
-	background-color: var(--color-budget-used);
-	height: 100%;
-	width: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: width 0.5s ease-in-out;
-	border-radius: 10px 0 0 10px;
-}
-
-.progress-text {
-	color: #2c3e50;
-	font-weight: bold;
-	font-size: 1em;
-	padding-left: var(--gap-spacing);
-	padding-right: var(--gap-spacing);
-	white-space: nowrap; /*  Sicherstellen, dass der Text nicht umgebrochen wird */
-}
 
 /* ----------------------------- Responsive Design---------------------------- */
 
@@ -371,9 +327,9 @@ body {
 
 @media (max-width: 768px) {
 	:root {
-		--gap-spacing: 12px;
-		--page-margin: 12px;
-		--kpi-padding: 12px;
+		--gap-spacing: 16px;
+		--page-margin: 16px;
+		--kpi-padding: 16px;
 	}
 
 	/* ------------------- Container und Grid ------------------- */
@@ -489,17 +445,7 @@ body {
 		font-size: 0.6em;
 	}
 
-	/* ------------------- Budgetbalken Fix ------------------- */
-	/* **Höhe des Budgetbalken-Containers** */
-	.progress-bar-container {
-		height: 40px;
-	}
-
-	/* Schriftgröße des Budgettextes */
-	.progress-text {
-		font-size: 0.65em;
-		white-space: normal;
-	}
+	
 
 	/* ------------------- Footer Anpassung ------------------- */
 	.site-footer__container {
