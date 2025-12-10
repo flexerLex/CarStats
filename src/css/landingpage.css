@@ -24,7 +24,7 @@ body {
 	width: 90%;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 1rem;
+	padding: 5rem 1rem;
 }
 
 @media (max-width: 768px) {
@@ -65,7 +65,7 @@ body {
 }
 
 .appointments-box .btn:hover {
-	background-color: var(--green-accent);
+	background-color: var(--green-600);
 }
 
 .appointments-header {
