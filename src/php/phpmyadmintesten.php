@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 */
 
 
-require_once 'connect_userDB.php';
+require_once 'connect_DB.php';
 
 try {
     $conn = getDBConnection();

@@ -25,6 +25,7 @@
     --header-height: 72px;
     --accent: #007b4f;      /* Warm terracotta */
     --accent-alt: #007b4f;  /* Orange-copper */
+    --green-button-hover: #00643f;
 }
 body {
     margin: 0;
