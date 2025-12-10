@@ -278,7 +278,7 @@ button:hover {
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-left: 4px solid var(--accent);
     grid-column: 1 / -1;
 }

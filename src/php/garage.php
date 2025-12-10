@@ -1,31 +1,29 @@
 <?php
+// Warnungen im Browser verstecken
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+
 session_start();
 
+$user_id = -1; // Probleme vermeiden
+$notLoggedInMessage = '';
+
+$isLoggedIn = (isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn'] === true);
+if ($isLoggedIn) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $notLoggedInMessage = 'Du bist nicht eingeloggt';
+}
+
+/*
 // Prüfen ob Benutzer eingeloggt ist
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header('Location: login.php');
     exit;
 }
+*/
 
 require_once 'connect_DB.php';
-
-/* in tableinit.sql
-    CREATE TABLE IF NOT EXISTS garage (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        user_id INT(11) NOT NULL,
-        brand VARCHAR(255) NOT NULL,
-        model VARCHAR(255) NOT NULL,
-        year YEAR(4) NOT NULL,
-        licenseplate VARCHAR(255) NOT NULL,
-        type VARCHAR(255) NOT NULL,
-        mileage INT(11) NOT NULL,
-        lasttuev DATE,
-        lastoilchange DATE,
-        lastgreatservice DATE,
-        notes TEXT,
-        PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-     */
 
 $conn = getDBConnection();
 $error = '';
@@ -69,12 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 // ===== Fahrzeug löschen=====
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
-    $licenseplate = $_POST['licenseplate'] ?? 0;
+    $id = $_POST['id'] ?? 0;
 
     try {
         // Nur eigene Fahrzeuge löschen!
-        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND licenseplate = ?");
-        $stmt->execute([$_SESSION['user_id'], $licenseplate]);
+        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND id = ?");
+        $stmt->execute([$_SESSION['user_id'], $id]);
 
         if ($stmt->rowCount() > 0) {
             $success = 'Fahrzeug gelöscht!';
@@ -86,19 +84,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// =====Alle Fahrzeuge=====
-try {
-    $stmt = $conn->prepare("
+// =====Alle Fahrzeuge holen=====
+if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === true) {
+    try {
+        $stmt = $conn->prepare("
         SELECT garage.*, user.username 
         FROM garage 
         JOIN user ON garage.user_id = user.id 
         WHERE garage.user_id = ?
         ORDER BY garage.year DESC
     ");
-    $stmt->execute([$_SESSION['user_id']]);
-    $garage = $stmt->fetchAll();
-} catch(PDOException $e) {
-    $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
+        $stmt->execute([$_SESSION['user_id']]);
+        $garage = $stmt->fetchAll();
+    } catch(PDOException $e) {
+        $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
+        $garage = [];
+    }
+} else {
     $garage = [];
 }
 ?>
@@ -124,7 +126,11 @@ try {
 <main>
     <section class="disclaimer">
         <h3>Hinweis</h3>
+        <?php if ($notLoggedInMessage): ?>
+            <p><?php echo htmlspecialchars($notLoggedInMessage); ?></p>
+        <?php else: ?>
         <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur Weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
+        <?php endif; ?>
     </section>
 
     <?php if ($error): ?>
@@ -196,7 +202,7 @@ try {
                         <button class="button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</button>
                         <?php if ($vehicle['user_id'] == $_SESSION['user_id']): ?>
                             <form method="POST" action="" onsubmit="return confirm('Fahrzeug wirklich löschen?');">
-                                <input type="hidden" name="licenseplate" value="<?php echo $vehicle['id']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $vehicle['id']; ?>">
                                 <button class="button-delete" type="submit" name="action" value="delete">Löschen</button>
                             </form>
                         <?php else: ?>
