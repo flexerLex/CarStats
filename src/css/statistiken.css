@@ -21,11 +21,12 @@
 	--page-margin: 50px;
 }
 
+/* body bereits über variables.css für alle einheitlich
 body {
 	background-color: var(--color-background);
 	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
-}
+}*/
 
 .dashboard-container {
 	max-width: 1400px;
