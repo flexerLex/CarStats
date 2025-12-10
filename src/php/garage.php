@@ -1,37 +1,35 @@
 <?php
+// Warnungen im Browser verstecken
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+
 session_start();
 
+$user_id = -1; // Probleme vermeiden
+$notLoggedInMessage = '';
+
+$isLoggedIn = (isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn'] === true);
+if ($isLoggedIn) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $notLoggedInMessage = 'Du bist nicht eingeloggt';
+}
+
+/*
 // Prüfen ob Benutzer eingeloggt ist
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header('Location: login.php');
     exit;
 }
+*/
 
 require_once 'connect_DB.php';
-
-/* in tableinit.sql
-    CREATE TABLE IF NOT EXISTS garage (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        user_id INT(11) NOT NULL,
-        brand VARCHAR(255) NOT NULL,
-        model VARCHAR(255) NOT NULL,
-        year YEAR(4) NOT NULL,
-        licenseplate VARCHAR(255) NOT NULL,
-        type VARCHAR(255) NOT NULL,
-        mileage INT(11) NOT NULL,
-        lasttuev DATE,
-        lastoilchange DATE,
-        lastgreatservice DATE,
-        notes TEXT,
-        PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-     */
 
 $conn = getDBConnection();
 $error = '';
 $success = '';
 
-// ===== Fahrzeug hinzufügen=====
+// Fahrzeug hinzufügen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add') {
     $brand = trim($_POST['brand'] ?? '');
     $model = trim($_POST['model'] ?? '');
@@ -67,14 +65,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// ===== Fahrzeug löschen=====
+// Fahrzeug bearbeiten
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update') {
+    $id = $_POST['id'] ?? 0;
+    $brand = trim($_POST['brand'] ?? '');
+    $model = trim($_POST['model'] ?? '');
+    $year = $_POST['year'] ?? '';
+    $licenseplate = trim($_POST['licenseplate'] ?? '');
+    $type = trim($_POST['type'] ?? '');
+    $mileage = $_POST['mileage'] ?? '';
+    $lasttuev = $_POST['lasttuev'] ?? '';
+    $lastoilchange = $_POST['lastoilchange'] ?? '';
+    $lastgreatservice = $_POST['lastgreatservice'] ?? '';
+    $notes = trim($_POST['notes'] ?? '');
+
+    if (
+            empty($brand) || empty($model) || empty($year) || empty($licenseplate) || empty($type) || empty($mileage) || empty($lasttuev) || empty($lastoilchange) || empty($lastgreatservice)
+    ) {
+        $error = 'Bitte alle Felder ausfüllen';
+    } else {
+        try { //nur eigene
+            $stmt = $conn->prepare("UPDATE garage SET brand = ?, model = ?, year = ?, licenseplate = ?, type = ?, mileage = ?, lasttuev = ?, lastoilchange = ?, lastgreatservice = ?, notes = ? WHERE user_id = ? AND id = ?");
+            $stmt->execute([$brand, $model, $year, $licenseplate, $type, $mileage, $lasttuev, $lastoilchange, $lastgreatservice, $notes, $_SESSION['user_id'], $id]);
+
+            if ($stmt->rowCount() > 0) {
+                $success = 'Fahrzeug erfolgreich aktualisiert!';
+                header('Location: ' . $_SERVER['PHP_SELF'] . '?success=update');
+                exit;
+            } else {
+                $error = 'Fahrzeug nicht gefunden oder keine Änderungen vorgenommen.';
+            }
+
+        } catch(PDOException $e) {
+            $error = 'Fehler beim Speichern der Änderungen: ' . $e->getMessage();
+        }
+    }
+}
+
+// Fzg löschen
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
-    $licenseplate = $_POST['licenseplate'] ?? 0;
+    $id = $_POST['id'] ?? 0;
 
     try {
-        // Nur eigene Fahrzeuge löschen!
-        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND licenseplate = ?");
-        $stmt->execute([$_SESSION['user_id'], $licenseplate]);
+        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND id = ?");
+        $stmt->execute([$_SESSION['user_id'], $id]);
 
         if ($stmt->rowCount() > 0) {
             $success = 'Fahrzeug gelöscht!';
@@ -86,20 +120,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// =====Alle Fahrzeuge=====
-try {
-    $stmt = $conn->prepare("
+// alle Fzge vom User holen
+if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === true) {
+    try {
+        $stmt = $conn->prepare("
         SELECT garage.*, user.username 
         FROM garage 
         JOIN user ON garage.user_id = user.id 
         WHERE garage.user_id = ?
         ORDER BY garage.year DESC
     ");
-    $stmt->execute([$_SESSION['user_id']]);
-    $garage = $stmt->fetchAll();
-} catch(PDOException $e) {
-    $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
+        $stmt->execute([$_SESSION['user_id']]);
+        $garage = $stmt->fetchAll();
+    } catch(PDOException $e) {
+        $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
+        $garage = [];
+    }
+} else {
     $garage = [];
+}
+
+// Fzge vom Users bearbeiten lassen
+$vehicleToEdit = null;
+$edit_id = $_GET['edit_id'] ?? null;
+$heading_text = 'Neues Fahrzeug hinzufügen';
+$action_value = 'add';
+$submit_button_text = 'Fahrzeug speichern';
+
+if ($edit_id !== null && isset($_SESSION['user_id'])) {
+    try {
+        $stmt_edit = $conn->prepare("SELECT * FROM garage WHERE user_id = ? AND id = ?");
+        $stmt_edit->execute([$_SESSION['user_id'], $edit_id]);
+        $vehicleToEdit = $stmt_edit->fetch(PDO::FETCH_ASSOC);
+
+        if ($vehicleToEdit) {
+            $heading_text = 'Fahrzeug bearbeiten';
+            $action_value = 'update';
+            $submit_button_text = 'Änderungen speichern';
+        } else {
+            $error = 'Fahrzeug zum Bearbeiten nicht gefunden oder keine Berechtigung!';
+            $edit_id = null; // Zurücksetzen, um das Formular nicht im "Bearbeiten"-Modus anzuzeigen
+        }
+    } catch(PDOException $e) {
+        $error = 'Fehler beim Laden der Fahrzeugdaten zum Bearbeiten: ' . $e->getMessage();
+        $edit_id = null;
+    }
 }
 ?>
 
@@ -124,7 +189,11 @@ try {
 <main>
     <section class="disclaimer">
         <h3>Hinweis</h3>
+        <?php if ($notLoggedInMessage): ?>
+            <p><?php echo htmlspecialchars($notLoggedInMessage); ?></p>
+        <?php else: ?>
         <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur Weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
+        <?php endif; ?>
     </section>
 
     <?php if ($error): ?>
@@ -193,10 +262,11 @@ try {
                     </div>
 
                     <div class="vehicle-card-actions">
-                        <button class="button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</button>
+                        <!-- <button class="button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</button> -->
+                        <a href="?edit_id=<?php echo $vehicle['id']; $showeditform = true?>#vehiclemask" class="buttoneditvehicle button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</a>
                         <?php if ($vehicle['user_id'] == $_SESSION['user_id']): ?>
                             <form method="POST" action="" onsubmit="return confirm('Fahrzeug wirklich löschen?');">
-                                <input type="hidden" name="licenseplate" value="<?php echo $vehicle['id']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $vehicle['id']; ?>">
                                 <button class="button-delete" type="submit" name="action" value="delete">Löschen</button>
                             </form>
                         <?php else: ?>
@@ -306,55 +376,57 @@ try {
         <?php endif; ?>
     </div>
 
-    <section class="vehicle">
-        <h3>Neues Fahrzeug hinzufügen</h3>
+    <section id="vehiclemask" class="vehicle">
+        <h3 style="text-align: center"><?php echo $heading_text; ?></h3>
         <form method="post" action="">
-            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="action" value="<?php echo $action_value; ?>">
+            <?php if ($edit_id !== null): ?>
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars($edit_id); ?>">
+            <?php endif; ?>
             <fieldset>
                 <legend>Fahrzeugdaten</legend>
                 <div class="grid">
                     <label>
                         Marke:
-                        <input type="text" name="brand" placeholder="z. B. Audi" required>
+                        <input type="text" name="brand" placeholder="z. B. Audi" required value="<?php echo htmlspecialchars($vehicleToEdit['brand'] ?? ''); ?>">
                     </label>
                     <label>
                         Modell:
-                        <input type="text" name="model" placeholder="z. B. A4 Avant" required>
+                        <input type="text" name="model" placeholder="z. B. A4 Avant" required value="<?php echo htmlspecialchars($vehicleToEdit['model'] ?? ''); ?>">
                     </label>
                     <label>
                         Baujahr:
-                        <input type="number" name="year" min="1900" max="2099" required>
+                        <input type="number" name="year" min="1900" max="2099" required value="<?php echo htmlspecialchars($vehicleToEdit['year'] ?? ''); ?>">
                     </label>
                     <label>
                         Kennzeichen:
-                        <input type="text" name="licenseplate" placeholder="z. B. HH-AB 1234">
+                        <input type="text" name="licenseplate" placeholder="z. B. HH-AB 1234" value="<?php echo htmlspecialchars($vehicleToEdit['licenseplate'] ?? ''); ?>">
                     </label>
                     <label>
                         Kraftstoff / Antriebsart:
                         <select name="type" required>
-                            <option value="">Bitte auswählen</option>
-                            <option value="petrol">Benzin</option>
-                            <option value="diesel">Diesel</option>
-                            <option value="electric">Elektro</option>
-                            <option value="gas">Gas (LPG/CNG)</option>
-                            <option value="other">Sonstige</option>
+                            <option value="petrol" <?php echo (($vehicleToEdit['type'] ?? '') === 'petrol') ? 'selected' : ''; ?>>Benzin</option>
+                            <option value="diesel" <?php echo (($vehicleToEdit['type'] ?? '') === 'diesel') ? 'selected' : ''; ?>>Diesel</option>
+                            <option value="electric" <?php echo (($vehicleToEdit['type'] ?? '') === 'electric') ? 'selected' : ''; ?>>Elektro</option>
+                            <option value="gas" <?php echo (($vehicleToEdit['type'] ?? '') === 'gas') ? 'selected' : ''; ?>>Gas (LPG/CNG)</option>
+                            <option value="other" <?php echo (($vehicleToEdit['type'] ?? '') === 'other') ? 'selected' : ''; ?>>Sonstige</option>
                         </select>
                     </label>
                     <label>
                         Kilometerstand:
-                        <input type="number" name="mileage" min="0" max="3000000" required>
+                        <input type="number" name="mileage" min="0" max="3000000" required value="<?php echo htmlspecialchars($vehicleToEdit['mileage'] ?? ''); ?>">
                     </label>
                     <label>
                         Letzter TÜV:
-                        <input type="date" name="lasttuev" placeholder="z. B. 06/24" required>
+                        <input type="date" name="lasttuev" placeholder="z. B. 06/24" required value="<?php echo htmlspecialchars($vehicleToEdit['lasttuev'] ?? ''); ?>">
                     </label>
                     <label>
                         Letzter Ölwechsel:
-                        <input type="date" name="lastoilchange" placeholder="z. B. 05/24" required>
+                        <input type="date" name="lastoilchange" placeholder="z. B. 05/24" required value="<?php echo htmlspecialchars($vehicleToEdit['lastoilchange'] ?? ''); ?>">
                     </label>
                     <label>
                         Letzter großer Service:
-                        <input type="date" name="lastgreatservice" placeholder="z. B. 10/22" required>
+                        <input type="date" name="lastgreatservice" placeholder="z. B. 10/22" required value="<?php echo htmlspecialchars($vehicleToEdit['lastgreatservice'] ?? ''); ?>">
                     </label>
                 </div>
             </fieldset>
@@ -363,12 +435,12 @@ try {
                 <legend>Zusatzinformationen</legend>
                 <label>
                     Notizen:
-                    <textarea name="notes" rows="3" placeholder="z. B. Keilriemen, neuer Turbo, Steuerkette …"></textarea>
+                    <textarea name="notes" rows="3" placeholder="z. B. Keilriemen, neuer Turbo, Steuerkette …"><?php echo htmlspecialchars($vehicleToEdit['notes'] ?? ''); ?></textarea>
                 </label>
             </fieldset>
 
             <div class="actions">
-                <button type="submit">Fahrzeug speichern</button>
+                <button type="submit"><?php echo $submit_button_text; ?></button>
                 <button type="reset">Eingaben löschen</button>
             </div>
         </form>
