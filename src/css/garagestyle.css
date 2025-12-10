@@ -29,7 +29,7 @@ body {
 
 .button {
     background-color: var(--color-background);
-    color: #fff;
+    color: var(--white);
     padding: 0.8rem 1.5rem;
     border-radius: 6px;
     text-decoration: none;
@@ -38,7 +38,7 @@ body {
 }
 
 .button:hover {
-    background-color: #00643f;
+    background-color: var(--green-600);
 }
 
 
@@ -61,8 +61,8 @@ main {
 }
 
 .vehicle-card {
-    background: #f9f9f9;
-    border: 1px solid #e5e5e5;
+    background: var(--green-50);
+    border: 1px solid var(--gray-border);
     border-radius: 12px;
     padding: 1.5rem;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -79,7 +79,7 @@ main {
     align-items: start;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #007b4f;
+    border-bottom: 2px solid var(--accent);
 }
 
 .vehicle-card-title {
@@ -87,19 +87,19 @@ main {
 }
 
 .vehicle-card-title h3 {
-    color: #007b4f;
+    color: var(--accent);
     font-size: 1.3rem;
     margin-bottom: 0.2rem;
 }
 
 .vehicle-card-title p {
-    color: #666;
+    color: var(--grey-bg);
     font-size: 0.9rem;
 }
 
 .vehicle-card-year {
-    background: #007b4f;
-    color: white;
+    background: var(--accent);
+    color: var(--white);
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-weight: 600;
@@ -115,7 +115,7 @@ main {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--gray-border);
 }
 
 .vehicle-info-row:last-child {
@@ -123,13 +123,13 @@ main {
 }
 
 .vehicle-info-label {
-    color: #666;
+    color: var(--grey-bg);
     font-size: 0.85rem;
     font-weight: 500;
 }
 
 .vehicle-info-value {
-    color: #333;
+    color: var(--text-main);
     font-weight: 600;
     text-align: right;
 }
@@ -139,7 +139,7 @@ main {
     gap: 0.5rem;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid var(--gray-border);
 }
 
 .vehicle-card-actions button {
@@ -154,23 +154,23 @@ main {
 }
 
 .vehicle-card-actions .button-edit {
-    background: #007b4f;
+    background: var(--accent);
     width: 100%;
-    color: white;
+    color: var(--white);
 }
 
 .vehicle-card-actions .button-edit:hover {
-    background: #00643f;
+    background: var(--green-button-hover);
 }
 
 .vehicle-card-actions .button-delete {
-    background: #dc3545;
+    background: #dc3545; /* rot, nur hier deshalb keine variable*/
     width: 100%;
-    color: white;
+    color: var(--white);
 }
 
 .vehicle-card-actions .button-delete:hover {
-    background: #c82333;
+    background: #c82333; /* hover rot, nur hier deshalb keine variable*/
 }
 
 .vehicle-card-actions form {
@@ -178,8 +178,13 @@ main {
     display: flex;
 }
 
+.vehicle-cards .vehicle-card:only-child {
+    grid-column: 1 / -1; /* ganze breite wenn nur eine Karte*/
+}
+
+
 section.vehicle {
-    background: #fff;
+    background: var(--white);
     padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -188,7 +193,7 @@ section.vehicle {
 
 section.vehicle header h2 {
     margin-bottom: 0.5rem;
-    color: var(--color-background);
+    color: var(--grey-bg);
 }
 
 table {
@@ -199,18 +204,18 @@ table {
 
 th,
 td {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--gray-border);
     padding: 0.5rem 0.75rem;
     text-align: left;
 }
 
 th {
-    background: #f9f9f9;
+    background: var(--green-50);
     font-weight: 600;
 }
 
 fieldset {
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--gray-border);
     border-radius: 10px;
     margin-bottom: 1rem;
     padding: 1rem;
@@ -218,7 +223,7 @@ fieldset {
 
 legend {
     font-weight: 600;
-    color: #007b4f;
+    color: var(--accent);
 }
 
 .grid {
@@ -240,7 +245,7 @@ label {
     font: inherit;
     padding: 0.5rem;
     border-radius: 10px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--gray-border);
 }
 
 
@@ -251,15 +256,15 @@ select {
 }
 
 button {
-    background: #007b4f;
-    color: white;
+    background: var(--accent);
+    color: var(--white);
     border: none;
     cursor: pointer;
     font-weight: 600;
 }
 
 button:hover {
-    background: #00643f;
+    background: var(--green-button-hover);
 }
 
 .actions {
@@ -274,7 +279,7 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
-    border-left: 4px solid #007b4f;
+    border-left: 4px solid var(--accent);
     grid-column: 1 / -1;
 }
 
