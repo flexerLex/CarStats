@@ -84,7 +84,7 @@ try {
 
     <!-- Main content -->
         <main class="kosteneingabe-center">
-            <!-- Сообщения об успехе или ошибке -->
+            <!-- Success or error messages -->
             <?php if (!empty($successMessage)): ?>
                 <div class="alert alert-success animate__animated animate__fadeInDown" id="success-message">
                     <?php echo htmlspecialchars($successMessage); ?>
@@ -168,7 +168,7 @@ try {
         const carSelect = document.getElementById('car-select');
         const dynamicFieldsContainer = document.getElementById('dynamic-fields-container');
         const mileageField = document.getElementById('km');
-        const fuelTypeSelect = document.createElement('select'); // Создаем выпадающий список
+        const fuelTypeSelect = document.createElement('select');
         fuelTypeSelect.id = 'fuel-type';
         fuelTypeSelect.name = 'fuel_type';
         fuelTypeSelect.classList.add('kosteneingabe-form__input');
@@ -179,19 +179,17 @@ try {
         const successMessage = document.getElementById('success-message');
         const errorMessage = document.getElementById('error-message');
 
-        // Проверка наличия элементов
         if (!carSelect || !dynamicFieldsContainer) {
             console.error('Required elements not found in DOM');
             return;
         }
 
-        // Обработчик смены автомобиля
         carSelect.addEventListener('change', function () {
             const carId = carSelect.value;
             const carIdField = document.getElementById('car_id');
 
             if (carIdField) {
-                carIdField.value = carId; // Установка значения car_id
+                carIdField.value = carId
             }
 
             if (carId) {
@@ -203,14 +201,12 @@ try {
                             return;
                         }
 
-                        // Обновление полей формы
                         updateFormFields(data);
                     })
                     .catch(error => console.error('Error fetching car data:', error));
             }
         });
 
-        // Обработчик смены категории расходов
         const expenseBtns = document.querySelectorAll('.kosteneingabe-expense-filter__btn');
         expenseBtns.forEach((btn) => {
             btn.addEventListener('click', function () {
@@ -220,14 +216,13 @@ try {
 
                 const categoryField = document.getElementById('category');
                 if (categoryField) {
-                    categoryField.value = currentCategory; // Установка значения категории
+                    categoryField.value = currentCategory;
                 }
 
                 updateDynamicFields(currentCategory);
             });
         });
 
-        // Инициализация динамических полей
         const currentCategory = 'Sprit';
         updateDynamicFields(currentCategory);
 
@@ -247,7 +242,6 @@ try {
             `;
                     dynamicFieldsContainer.innerHTML = html;
 
-                    // Загружаем тип топлива и обновляем текст
                     fetch('../php/get_car_data.php?car_id=' + carSelect.value)
                         .then(response => response.json())
                         .then(data => {
@@ -295,7 +289,6 @@ try {
                     dynamicFieldsContainer.innerHTML = '';
             }
 
-            // Установка текущей даты
             if (dateField) {
                 const today = new Date().toISOString().split('T')[0];
                 dateField.value = today;
