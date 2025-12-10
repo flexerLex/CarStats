@@ -1,31 +1,29 @@
 <?php
+// Warnungen im Browser verstecken
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+
 session_start();
 
+$user_id = -1; // Probleme vermeiden
+$notLoggedInMessage = '';
+
+$isLoggedIn = (isset($_SESSION['loggedIn'])) && ($_SESSION['loggedIn'] === true);
+if ($isLoggedIn) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $notLoggedInMessage = 'Du bist nicht eingeloggt';
+}
+
+/*
 // Prüfen ob Benutzer eingeloggt ist
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     header('Location: login.php');
     exit;
 }
+*/
 
 require_once 'connect_DB.php';
-
-/* in tableinit.sql
-    CREATE TABLE IF NOT EXISTS garage (
-        id INT(11) NOT NULL AUTO_INCREMENT,
-        user_id INT(11) NOT NULL,
-        brand VARCHAR(255) NOT NULL,
-        model VARCHAR(255) NOT NULL,
-        year YEAR(4) NOT NULL,
-        licenseplate VARCHAR(255) NOT NULL,
-        type VARCHAR(255) NOT NULL,
-        mileage INT(11) NOT NULL,
-        lasttuev DATE,
-        lastoilchange DATE,
-        lastgreatservice DATE,
-        notes TEXT,
-        PRIMARY KEY (id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-     */
 
 $conn = getDBConnection();
 $error = '';
@@ -87,18 +85,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 }
 
 // =====Alle Fahrzeuge=====
-try {
-    $stmt = $conn->prepare("
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+    try {
+        $stmt = $conn->prepare("
         SELECT garage.*, user.username 
         FROM garage 
         JOIN user ON garage.user_id = user.id 
         WHERE garage.user_id = ?
         ORDER BY garage.year DESC
     ");
-    $stmt->execute([$_SESSION['user_id']]);
-    $garage = $stmt->fetchAll();
-} catch(PDOException $e) {
-    $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
+        $stmt->execute([$_SESSION['user_id']]);
+        $garage = $stmt->fetchAll();
+    } catch(PDOException $e) {
+        $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
+        $garage = [];
+    }
+} else {
     $garage = [];
 }
 ?>
@@ -124,7 +126,11 @@ try {
 <main>
     <section class="disclaimer">
         <h3>Hinweis</h3>
+        <?php if ($notLoggedInMessage): ?>
+            <p><?php echo htmlspecialchars($notLoggedInMessage); ?></p>
+        <?php else: ?>
         <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur Weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
+        <?php endif; ?>
     </section>
 
     <?php if ($error): ?>

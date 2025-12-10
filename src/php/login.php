@@ -8,7 +8,7 @@ if (isset($_GET['registered'])) {
 
 // Landingpage wenn bereits eingeloggt
 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
-    header('Location: ../html/index.html');
+    header('Location: logout.php');
     exit;
 }
 
@@ -48,7 +48,7 @@ if (isset($_COOKIE['remember_user']) && !empty($_COOKIE['remember_user'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
 
-            header('Location: ../html/index.html');
+            header('Location: logout.php');
             exit;
         } else {
             // User existiert nicht mehr, Cookie löschen
@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ]);
                     }
 
-                    header('Location: ../html/index.html');
+                    header('Location: logout.php');
                     exit;
                 } else {
                     $error = 'Ungültiger Benutzername oder Passwort!';
