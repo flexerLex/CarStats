@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarStats</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo_green_no_text.png">
 
     <link rel="stylesheet" href="../../Templates/variables.css">
     <link rel="stylesheet" href="../../Templates/header.css">
@@ -12,72 +14,76 @@
     <link rel="stylesheet" href="../css/login.css">
     <script src="../js/login_register_script.js" defer></script>
 </head>
+
 <body>
-<!-- Header -->
-<div id="header-placeholder"></div>
-<script src="../../assets/header.js"></script>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+    <script src="../../assets/header.js"></script>
 
-<main class="auth">
-    <section class="auth__card">
-        <h1>Willkommen bei CarStats</h1>
-        <p>Bitte melde dich an oder registriere dich, um fortzufahren.</p>
+    <main class="auth">
+        <section class="auth__card">
+            <h1>Willkommen bei CarStats</h1>
+            <p>Bitte melde dich an oder registriere dich, um fortzufahren.</p>
 
-        <!-- Navigation zwischen Login / Registrierung -->
-        <nav class="auth__tabs" aria-label="Formularauswahl">
-            <button id="login_btn" class="tab active" data-target="login">Anmelden</button>
-            <button id="register_btn" class="tab" data-target="register">Registrieren</button>
-        </nav>
+            <!-- Navigation zwischen Login / Registrierung -->
+            <nav class="auth__tabs" aria-label="Formularauswahl">
+                <button id="login_btn" class="tab active" data-target="login">Anmelden</button>
+                <button id="register_btn" class="tab" data-target="register">Registrieren</button>
+            </nav>
 
-        <!-- === LOGIN === -->
-        <form id="login_mask" class="form active" method="post" action="#">
-            <fieldset>
-                <legend>Anmeldung</legend>
-                <label>
-                    Benutzername:
-                    <input id="username" type="text" pattern="[A-Za-z][0-9]{0,5}" required placeholder="Dein Benutzername">
-                </label>
-                <label>
-                    Passwort:
-                    <input id="password" type="password" required placeholder="••••••••">
-                </label>
-                <button id="login_submit" type="submit">Anmelden</button>
-            </fieldset>
-        </form>
-
-        <!-- === REGISTRIERUNG === -->
-        <form id="register_mask" class="form" method="post" action="#">
-            <fieldset>
-                <legend>Registrierung</legend>
-                <div class="grid">
+            <!-- === LOGIN === -->
+            <form id="login_mask" class="form active" method="post" action="#">
+                <fieldset>
+                    <legend>Anmeldung</legend>
                     <label>
-                        Vorname:
-                        <input id="first_name_input" type="text" pattern="[A-Za-z]+" required placeholder="Max">
+                        Benutzername:
+                        <input id="username" type="text" pattern="[A-Za-z][0-9]{0,5}" required
+                            placeholder="Dein Benutzername">
                     </label>
                     <label>
-                        Nachname:
-                        <input id="name_input" type="text" pattern="[A-Za-z]+" required placeholder="Mustermann">
+                        Passwort:
+                        <input id="password" type="password" required placeholder="••••••••">
                     </label>
-                </div>
-                <label>
-                    E-Mail:
-                    <input id="email_input" type="email" required placeholder="max@beispiel.de">
-                </label>
-                <label>
-                    Benutzername (Groß-und Kleinbuchstaben, Zahlen von 0 bis 9999):
-                    <input id="username_input" type="text" pattern="[A-Za-z][0-9]{0,5}" required placeholder="Dein Benutzername">
-                </label>
-                <label>
-                    Passwort:
-                    <input id="password_input" type="password" minlength="6" required placeholder="••••••••">
-                </label>
-                <button id="register_submit" type="submit">Registrieren</button>
-            </fieldset>
-        </form>
-    </section>
-</main>
+                    <button id="login_submit" type="submit">Anmelden</button>
+                </fieldset>
+            </form>
 
-<!-- Footer -->
-<div id="footer-placeholder"></div>
-<script src="../../assets/script.js"></script>
+            <!-- === REGISTRIERUNG === -->
+            <form id="register_mask" class="form" method="post" action="#">
+                <fieldset>
+                    <legend>Registrierung</legend>
+                    <div class="grid">
+                        <label>
+                            Vorname:
+                            <input id="first_name_input" type="text" pattern="[A-Za-z]+" required placeholder="Max">
+                        </label>
+                        <label>
+                            Nachname:
+                            <input id="name_input" type="text" pattern="[A-Za-z]+" required placeholder="Mustermann">
+                        </label>
+                    </div>
+                    <label>
+                        E-Mail:
+                        <input id="email_input" type="email" required placeholder="max@beispiel.de">
+                    </label>
+                    <label>
+                        Benutzername (Groß-und Kleinbuchstaben, Zahlen von 0 bis 9999):
+                        <input id="username_input" type="text" pattern="[A-Za-z][0-9]{0,5}" required
+                            placeholder="Dein Benutzername">
+                    </label>
+                    <label>
+                        Passwort:
+                        <input id="password_input" type="password" minlength="6" required placeholder="••••••••">
+                    </label>
+                    <button id="register_submit" type="submit">Registrieren</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="../../assets/script.js"></script>
 </body>
+
 </html>

@@ -143,23 +143,6 @@ function renderTransactions(transactions) {
     });
 }
 
-/**
- * 辅助函数: 根据类别返回 CSS 徽章类。
- */
-function getCategoryBadge(category) {
-    switch (category) {
-        case 'Kraftstoff':
-            return 'bg-success'; // 例如：绿色
-        case 'Service':
-        case 'Reparatur':
-            return 'bg-warning'; // 例如：黄色
-        case 'Versicherung':
-        case 'Steuer':
-            return 'bg-info'; // 例如：蓝色
-        default:
-            return 'bg-secondary'; // 例如：灰色
-    }
-}
 // -------------------------III. Diagramm- und Interaktionslogik ---------------------
 
 function initializeConsumptionChart() {
