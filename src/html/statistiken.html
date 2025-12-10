@@ -15,14 +15,17 @@
 	<!-- Header -->
 	<div id="header-placeholder"></div>
 	<script src="../../assets/header.js"></script>
+
 	<div class="dashboard-container">
+
 		<header class="dashboard-header">
+			<!-- <h3 class="car-model">Fahrzeug wird geladen...</h3> -->
 			<div class="statistik-carselect">
 				<label for="car-select" class="statistik-carselect__label">Wählen Sie ein Auto:</label>
 				<select id="car-select" class="statistik-carselect__select">
-					<option value="vw-golf-7">VW Golf 7</option>
-					<option value="bmw-3er">BMW 3er</option>
-					<option value="tesla-model-3">Tesla Model 3</option>
+					<option value="1" class="car-model">Golf 7</option>
+					<option value="2">BMW 3er</option>
+					<option value="3">Tesla Model 3</option>
 				</select>
 			</div>
 		</header>
@@ -69,7 +72,7 @@
 					<span class="kpi__title">Kilometerstand</span>
 				</div>
 				<div class="kpi__value__row">
-					<div class="kpi__value">8400,00</div>
+					<div class="kpi__value">---</div>
 					<div class="kpi__footer">
 						<span class="kpi__unit">(km)</span>
 					</div>
@@ -134,9 +137,9 @@
 				<div class="chart__header">
 					<h2 class="section-title">Trend des Kraftstoffverbrauchs</h2>
 					<div class="chart__timeswitcher">
-						<button class="chart__time__btn active" data-unit="day">Täglich</button>
-						<button class="chart__time__btn" data-unit="month">Monatlich</button>
-						<button class="chart__time__btn" data-unit="year">Jährlich</button>
+						<button class="chart__time__btn " data-unit="day">Tag</button>
+						<button class="chart__time__btn active" data-unit="month">Monat</button>
+						<button class="chart__time__btn" data-unit="year">Jahr</button>
 					</div>
 				</div>
 				<div class="chart__placeholder">
