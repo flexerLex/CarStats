@@ -19,58 +19,28 @@
     box-shadow: var(--shadow-subtle);
     width: 100%;
 }
-
 .kosteneingabe-carselect {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
+     display: flex;
+     gap: 0.6rem;
+     background: transparent;
+     padding: 0.1rem 0;
+     margin-top: 0;
+     margin-bottom: 0.5rem;
+ }
+
+.kosteneingabe-carselect__label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+.kosteneingabe-carselect__select {
+    padding: 0.25rem 0.55rem;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid #c5c8cf;
+    font-size: 0.9rem;
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(65, 91, 43, 0.08);
-    margin-bottom: 12px;
-    margin-top: 12px;
-}
-
-.kosteneingabe-carselect__label {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--color-text-dark);
-    margin-bottom: 0;
-    margin-right: 12px;
-}
-
-.kosteneingabe-carselect__select {
-    border: 1px solid var(--color-text-middle);
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 1rem;
-    background: var(--color-card-bg);
-    color: var(--color-text-dark);
-    width:auto;
-    transition: border-color 0.2s;
-}
-
-.kosteneingabe-carselect__label {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--green-600);
-    margin-bottom: 8px;
-    margin-right: 12px;
-}
-
-.kosteneingabe-carselect__select {
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 1rem;
-    background: #f8faf7;
-    color: var(--text-main);
-    width: 100%;
-    transition: border-color 0.2s;
 }
 .kosteneingabe-carselect__select:focus {
     border-color: var(--green-main);
@@ -295,18 +265,90 @@
     pointer-events: auto;
 }
 
-@keyframes fadeInFields {
-    from { opacity: 0; transform: translateY(20px);}
-    to { opacity: 1; transform: translateY(0);}
+/* Alert styles */
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-/* Responsive */
+.alert-success {
+    background-color: var(--green-100);
+    color: #fff;
+}
+
+.alert-error {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.alert.show {
+    opacity: 1;
+    visibility: visible;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInFields {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kosteneingabe-form__fields-animate {
+    animation: fadeInFields 0.5s ease-out;
+}
+
+/* Responsive styles */
 @media (max-width: 900px) {
+    .alert {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    .kosteneingabe-form__input {
+        font-size: 0.9rem;
+    }
+
+    .kosteneingabe-form__title {
+        font-size: 1.2rem;
+    }
+
+    .kosteneingabe-expense-filter__btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
     .kosteneingabe-center {
     padding: 12px 0;
     align-items: center;
     justify-content: center;
-}
+    }
     .kosteneingabe-form {
         max-width: 100%;
         width: 100%;
@@ -321,5 +363,14 @@
         min-height: 100vh;
         background: var(--grey-bg);
         gap: 0;
+    }
+    .kosteneingabe-carselect {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .kosteneingabe-carselect__select {
+        width: 100%;
+        max-width: 260px;
     }
 }
