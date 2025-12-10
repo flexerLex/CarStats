@@ -42,11 +42,10 @@ if (isset($_GET['car_id'])) {
         $stmt->execute([$car_id]);
         $lastFuel = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Fetch last mileage entry
-        $stmt = $conn->prepare("SELECT mileage FROM expenses WHERE car_id = ? ORDER BY date DESC LIMIT 1");
+// Fetch last MAX mileage entry
+        $stmt = $conn->prepare("SELECT MAX(mileage) FROM expenses WHERE car_id = ?");
         $stmt->execute([$car_id]);
         $lastMileage = $stmt->fetchColumn();
-
         // Build response
         $response = [
             'car' => $car,
