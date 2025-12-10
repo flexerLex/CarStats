@@ -38,9 +38,16 @@ body {
 }
 /* --------------------------- header --------------------------------- */
 .dashboard-header {
+	display: flex;
+	align-items: baseline;
 	margin-bottom: var(--gap-spacing);
 	padding-left: var(--gap-spacing);
 	padding-right: var(--gap-spacing);
+}
+
+.car-model {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* ------------------- card Grundstil ----------------------------------- */
