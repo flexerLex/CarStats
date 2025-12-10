@@ -1,38 +1,34 @@
-<!-- in tableinit.sql
- CREATE TABLE expenses (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    car_id INT(11) NOT NULL,
-    date DATE NOT NULL,
-    category VARCHAR(50) NOT NULL, -- Kraftstoff, Service, Reparatur, usw.
-    amount DECIMAL(10, 2) NOT NULL,
-    mileage INT(11),
-    notes TEXT,
-    
-    fuel_type VARCHAR(20),  -- Benzin, Diesel, Elektro
-    quantity DECIMAL(8, 3), -- Getankte/Geladene Menge (Liter/kWh)
-    full_tank BOOLEAN,      -- Volltank / Vollgeladen
-    
-    PRIMARY KEY (id),
-    
-    FOREIGN KEY (car_id) REFERENCES garage(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; -->
-
 <?php
 session_start();
-// 设置响应头，确保前端JS知道返回的是JSON格式数据
 header('Content-Type: application/json');
 
-// --- 0. 身份验证和初始化 ---
+// if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+//     http_response_code(401); 
+//     echo json_encode(['error' => 'Nicht angemeldet.']);
+//     exit;
+// }
+$user_id = 1; // 必须匹配你刚才插入的 user 表 ID
 
-// 检查用户是否登录
-if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
-    http_response_code(401); // 401 Unauthorized
-    echo json_encode(['error' => 'Nicht angemeldet.']);
-    exit;
-}
+require_once 'connect_DB.php'; 
 
-// 引入数据库连接文件
-require_once 'connect_DB.php'; // 假设这是你的数据库连接文件
+//  in tableinit.sql
+//  CREATE TABLE expenses (
+//     id INT(11) NOT NULL AUTO_INCREMENT,
+//     car_id INT(11) NOT NULL,
+//     date DATE NOT NULL,
+//     category VARCHAR(50) NOT NULL, -- Kraftstoff, Service, Reparatur, usw.
+//     amount DECIMAL(10, 2) NOT NULL,
+//     mileage INT(11),
+//     notes TEXT,
+    
+//     fuel_type VARCHAR(20),  -- Benzin, Diesel, Elektro
+//     quantity DECIMAL(8, 3), -- Getankte/Geladene Menge (Liter/kWh)
+//     full_tank BOOLEAN,      -- Volltank / Vollgeladen
+    
+//     PRIMARY KEY (id),
+    
+//     FOREIGN KEY (car_id) REFERENCES garage(id) ON DELETE CASCADE
+// ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
 
 $conn = getDBConnection();
 $user_id = $_SESSION['user_id'];
