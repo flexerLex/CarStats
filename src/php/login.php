@@ -15,7 +15,7 @@ if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
 // Datenbankverbindung
 require_once 'connect_DB.php';
 
-/*
+/*  in tableinit.sql
     CREATE TABLE IF NOT EXISTS user (
         id INT(11) NOT NULL AUTO_INCREMENT,
         firstname TEXT NOT NULL,

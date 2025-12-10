@@ -9,9 +9,10 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
 
 require_once 'connect_DB.php';
 
-/*
+/* in tableinit.sql
     CREATE TABLE IF NOT EXISTS garage (
         id INT(11) NOT NULL AUTO_INCREMENT,
+        user_id INT(11) NOT NULL,
         brand VARCHAR(255) NOT NULL,
         model VARCHAR(255) NOT NULL,
         year YEAR(4) NOT NULL,
@@ -68,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 // ===== Fahrzeug löschen=====
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
-    $vehicle_id = $_POST['vehicle_id'] ?? 0;
+    $licenseplate = $_POST['licenseplate'] ?? 0;
 
     try {
         // Nur eigene Fahrzeuge löschen!
-        $stmt = $conn->prepare("DELETE FROM garage WHERE id = ? AND user_id = ?");
-        $stmt->execute([$vehicle_id, $_SESSION['user_id']]);
+        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND licenseplate = ?");
+        $stmt->execute([$_SESSION['user_id'], $licenseplate]);
 
         if ($stmt->rowCount() > 0) {
             $success = 'Fahrzeug gelöscht!';
@@ -87,13 +88,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 // =====Alle Fahrzeuge=====
 try {
-    $stmt = $conn->query("
+    $stmt = $conn->prepare("
         SELECT garage.*, user.username 
         FROM garage 
         JOIN user ON garage.user_id = user.id 
         WHERE garage.user_id = ?
-        ORDER BY garage.created_at DESC
+        ORDER BY garage.year DESC
     ");
+    $stmt->execute([$_SESSION['user_id']]);
     $garage = $stmt->fetchAll();
 } catch(PDOException $e) {
     $error = 'Fehler beim Laden der Fahrzeuge: ' . $e->getMessage();
@@ -122,8 +124,21 @@ try {
 <main>
     <section class="disclaimer">
         <h3>Hinweis</h3>
-        <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
+        <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur Weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
     </section>
+
+    <?php if ($error): ?>
+        <section class="disclaimer">
+            <div class="alert alert-error"><?php echo htmlspecialchars($error); ?></div>
+        </section>
+    <?php endif; ?>
+
+    <?php if ($success): ?>
+        <section class="disclaimer">
+        <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
+        </section>
+    <?php endif; ?>
+
 
     <div class="vehicle">
         <header>
@@ -171,15 +186,18 @@ try {
                             <span class="vehicle-info-label">Letzter großer Service</span>
                             <span class="vehicle-info-value"><?php echo htmlspecialchars($vehicle['lastgreatservice']); ?></span>
                         </div>
+                        <div class="vehicle-info-row">
+                            <span class="vehicle-info-label">Zusatzinformationen</span>
+                            <span class="vehicle-info-value"><?php echo htmlspecialchars($vehicle['notes']); ?></span>
+                        </div>
                     </div>
 
                     <div class="vehicle-card-actions">
-                        <button id="btn_edit<?php echo $index; ?>">Bearbeiten</button>
+                        <button class="button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</button>
                         <?php if ($vehicle['user_id'] == $_SESSION['user_id']): ?>
-                            <form method="POST" action="" style="display: inline;"
-                                  onsubmit="return confirm('Fahrzeug wirklich löschen?');">
-                                <input type="hidden" name="vehicle_id" value="<?php echo $vehicle['id']; ?>">
-                                <button class="button-delete" type="submit" name="action" value="delete_vehicle">Löschen</button>
+                            <form method="POST" action="" onsubmit="return confirm('Fahrzeug wirklich löschen?');">
+                                <input type="hidden" name="licenseplate" value="<?php echo $vehicle['id']; ?>">
+                                <button class="button-delete" type="submit" name="action" value="delete">Löschen</button>
                             </form>
                         <?php else: ?>
                             <span style="color: #999;">—</span>
@@ -226,11 +244,15 @@ try {
                                 <span class="vehicle-info-label">Letzter großer Service</span>
                                 <span class="vehicle-info-value">03/22</span>
                             </div>
+                            <div class="vehicle-info-row">
+                                <span class="vehicle-info-label">Zusatzinformationen</span>
+                                <span class="vehicle-info-value">Neue Windschutzscheibe bei 25.700KM</span>
+                            </div>
                         </div>
 
                         <div class="vehicle-card-actions">
-                            <button id="btn_edit0">Bearbeiten</button>
-                            <button id="btn_delete0" class="button-delete">Löschen</button>
+                            <button id="edit">Bearbeiten</button>
+                            <button class="button-delete">Löschen</button>
                         </div>
                     </article>
 
@@ -269,83 +291,88 @@ try {
                                 <span class="vehicle-info-label">Letzter großer Service</span>
                                 <span class="vehicle-info-value">10/22</span>
                             </div>
+                            <div class="vehicle-info-row">
+                                <span class="vehicle-info-label">Zusatzinformationen</span>
+                                <span class="vehicle-info-value">Steuerkettenwechsel bei 5.000KM</span>
+                            </div>
                         </div>
 
                         <div class="vehicle-card-actions">
-                            <button id="btn_edit1">Bearbeiten</button>
-                            <button id="btn_delete1" class="button-delete">Löschen</button>
+                            <button id="edit">Bearbeiten</button>
+                            <button class="button-delete">Löschen</button>
                         </div>
                     </article>
                 </section>
         <?php endif; ?>
-
-        <section>
-            <h3>Neues Fahrzeug hinzufügen</h3>
-            <form>
-                <fieldset>
-                    <legend>Fahrzeugdaten</legend>
-                    <div class="grid">
-                        <label>
-                            Marke:
-                            <input type="text" id="brand" placeholder="z. B. Audi" required>
-                        </label>
-                        <label>
-                            Modell:
-                            <input type="text" id="model" placeholder="z. B. A4 Avant" required>
-                        </label>
-                        <label>
-                            Baujahr:
-                            <input type="number" id="age" min="1900" max="2099" required>
-                        </label>
-                        <label>
-                            Kennzeichen:
-                            <input type="text" id="identification" placeholder="z. B. HH-AB 1234">
-                        </label>
-                        <label>
-                            Kraftstoff / Antriebsart:
-                            <select id="type" required>
-                                <option value="">Bitte auswählen</option>
-                                <option value="petrol">Benzin</option>
-                                <option value="diesel">Diesel</option>
-                                <option value="electric">Elektro</option>
-                                <option value="gas">Gas (LPG/CNG)</option>
-                                <option value="other">Sonstige</option>
-                            </select>
-                        </label>
-                        <label>
-                            Kilometerstand:
-                            <input type="number" id="mileage" min="0" max="1000000" required>
-                        </label>
-                        <label>
-                            Letzter TÜV:
-                            <input type="date" id="tuev" placeholder="z. B. 06/24" required>
-                        </label>
-                        <label>
-                            Letzter Ölwechsel:
-                            <input type="date" id="oilchange" placeholder="z. B. 05/24" required>
-                        </label>
-                        <label>
-                            Letzter großer Service:
-                            <input type="date" id="greatservice" placeholder="z. B. 10/22" required>
-                        </label>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Zusatzinformationen</legend>
-                    <label>
-                        Notizen:
-                        <textarea id="notes" rows="3" placeholder="z. B. Keilriemen, neuer Turbo, Steuerkette …"></textarea>
-                    </label>
-                </fieldset>
-
-                <div class="actions">
-                    <button id="btn_new_vehicle_submit" type="submit">Fahrzeug speichern</button>
-                    <button type="reset">Eingaben löschen</button>
-                </div>
-            </form>
-        </section>
     </div>
+
+    <section class="vehicle">
+        <h3>Neues Fahrzeug hinzufügen</h3>
+        <form method="post" action="">
+            <input type="hidden" name="action" value="add">
+            <fieldset>
+                <legend>Fahrzeugdaten</legend>
+                <div class="grid">
+                    <label>
+                        Marke:
+                        <input type="text" name="brand" placeholder="z. B. Audi" required>
+                    </label>
+                    <label>
+                        Modell:
+                        <input type="text" name="model" placeholder="z. B. A4 Avant" required>
+                    </label>
+                    <label>
+                        Baujahr:
+                        <input type="number" name="year" min="1900" max="2099" required>
+                    </label>
+                    <label>
+                        Kennzeichen:
+                        <input type="text" name="licenseplate" placeholder="z. B. HH-AB 1234">
+                    </label>
+                    <label>
+                        Kraftstoff / Antriebsart:
+                        <select name="type" required>
+                            <option value="">Bitte auswählen</option>
+                            <option value="petrol">Benzin</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electric">Elektro</option>
+                            <option value="gas">Gas (LPG/CNG)</option>
+                            <option value="other">Sonstige</option>
+                        </select>
+                    </label>
+                    <label>
+                        Kilometerstand:
+                        <input type="number" name="mileage" min="0" max="3000000" required>
+                    </label>
+                    <label>
+                        Letzter TÜV:
+                        <input type="date" name="lasttuev" placeholder="z. B. 06/24" required>
+                    </label>
+                    <label>
+                        Letzter Ölwechsel:
+                        <input type="date" name="lastoilchange" placeholder="z. B. 05/24" required>
+                    </label>
+                    <label>
+                        Letzter großer Service:
+                        <input type="date" name="lastgreatservice" placeholder="z. B. 10/22" required>
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Zusatzinformationen</legend>
+                <label>
+                    Notizen:
+                    <textarea name="notes" rows="3" placeholder="z. B. Keilriemen, neuer Turbo, Steuerkette …"></textarea>
+                </label>
+            </fieldset>
+
+            <div class="actions">
+                <button type="submit">Fahrzeug speichern</button>
+                <button type="reset">Eingaben löschen</button>
+            </div>
+        </form>
+    </section>
 </main>
 
 <!-- Footer -->

@@ -152,22 +152,29 @@ main {
     font-size: 0.9rem;
 }
 
-.vehicle-card-actions button#edit {
+.vehicle-card-actions .button-edit {
     background: #007b4f;
+    width: 100%;
     color: white;
 }
 
-.vehicle-card-actions button#edit:hover {
+.vehicle-card-actions .button-edit:hover {
     background: #00643f;
 }
 
 .vehicle-card-actions .button-delete {
     background: #dc3545;
+    width: 100%;
     color: white;
 }
 
 .vehicle-card-actions .button-delete:hover {
     background: #c82333;
+}
+
+.vehicle-card-actions form {
+    flex: 1;
+    display: flex;
 }
 
 section.vehicle {
