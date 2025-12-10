@@ -38,7 +38,7 @@ async function fetchStatsData(carId, unit) {
         return;
     }
 
-    const apiUrl = `src/php/stats_api.php?car_id=${carId}&unit=${unit}`;
+    const apiUrl = `../php/statistiken.php?car_id=${carId}&unit=${unit}`;
     console.log(`Daten abrufen von: ${apiUrl}`);
 
     try {
@@ -124,13 +124,6 @@ function updateKpis(kpis) {
 
 	document.querySelector('.annual-total-costs .kpi__value').textContent =
 		formatNumber(kpis.annualTotalCosts, 2);
-}
-
-function renderTransactions(transactions) {
-	// Rendert oder leert die Liste der letzten Transaktionen.
-	const transactionCard = document.querySelector('.last-transactions-card');
-	console.log('Transaktionsliste wird noch nicht gerendert.');
-	// ! ------------------ noch nicht fertig ------------------------ !
 }
 
 
