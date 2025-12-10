@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout_submit'])) {
 
 <main class="auth">
     <section class="auth__card">
-        <h1>Bis bald!</h1>
+        <h1>Du bist bereits angemeldet</h1>
         <p>Hier kannst du dich abmelden</p>
 
         <!-- Ausloggen-->
@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout_submit'])) {
                 <button id="logout_submit" name="logout_submit" type="submit">Ausloggen</button>
             </fieldset>
         </form>
+        <h1>Bis bald!</h1>
     </section>
 </main>
 

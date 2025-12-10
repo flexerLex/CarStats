@@ -67,12 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 // ===== Fahrzeug löschen=====
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
-    $licenseplate = $_POST['licenseplate'] ?? 0;
+    $id = $_POST['id'] ?? 0;
 
     try {
         // Nur eigene Fahrzeuge löschen!
-        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND licenseplate = ?");
-        $stmt->execute([$_SESSION['user_id'], $licenseplate]);
+        $stmt = $conn->prepare("DELETE FROM garage WHERE user_id = ? AND id = ?");
+        $stmt->execute([$_SESSION['user_id'], $id]);
 
         if ($stmt->rowCount() > 0) {
             $success = 'Fahrzeug gelöscht!';
@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// =====Alle Fahrzeuge=====
-if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+// =====Alle Fahrzeuge holen=====
+if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] === true) {
     try {
         $stmt = $conn->prepare("
         SELECT garage.*, user.username 
@@ -202,7 +202,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                         <button class="button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</button>
                         <?php if ($vehicle['user_id'] == $_SESSION['user_id']): ?>
                             <form method="POST" action="" onsubmit="return confirm('Fahrzeug wirklich löschen?');">
-                                <input type="hidden" name="licenseplate" value="<?php echo $vehicle['id']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $vehicle['id']; ?>">
                                 <button class="button-delete" type="submit" name="action" value="delete">Löschen</button>
                             </form>
                         <?php else: ?>
