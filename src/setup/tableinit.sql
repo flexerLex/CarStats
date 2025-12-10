@@ -35,8 +35,7 @@ CREATE TABLE expenses (
     mileage INT(11),
     notes TEXT,
     fuel_type VARCHAR(20),  
-    quantity DECIMAL(8, 3), 
-    full_tank BOOLEAN,      
+    quantity DECIMAL(8, 3),
     PRIMARY KEY (id),
     FOREIGN KEY (car_id) REFERENCES garage(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
