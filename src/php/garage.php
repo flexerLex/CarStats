@@ -262,11 +262,10 @@ if ($edit_id !== null && isset($_SESSION['user_id'])) {
                     </div>
 
                     <div class="vehicle-card-actions">
-                        <!-- <button class="button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</button> -->
-                        <a href="?edit_id=<?php echo $vehicle['id']; $showeditform = true?>#vehiclemask" class="buttoneditvehicle button-edit" id="btn_edit<?php echo $vehicle['id']; ?>">Bearbeiten</a>
+                        <a href="?edit_id=<?php echo htmlspecialchars($vehicle['id']); $showeditform = true?>#vehiclemask" class="buttoneditvehicle button-edit" id="btn_edit<?php echo htmlspecialchars($vehicle['id']); ?>">Bearbeiten</a>
                         <?php if ($vehicle['user_id'] == $_SESSION['user_id']): ?>
                             <form method="POST" action="" onsubmit="return confirm('Fahrzeug wirklich löschen?');">
-                                <input type="hidden" name="id" value="<?php echo $vehicle['id']; ?>">
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($vehicle['id']); ?>">
                                 <button class="button-delete" type="submit" name="action" value="delete">Löschen</button>
                             </form>
                         <?php else: ?>
