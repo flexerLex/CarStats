@@ -3,37 +3,55 @@
 }
 
 .kosteneingabe-gridcontainer {
-    display: grid;
-    grid-template-columns: 260px 1fr 320px;
-    grid-template-areas: "sidebar center rightbar";
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background: var(--grey-bg);
     gap: 0;
 }
 
 /* Sidebar */
-.kosteneingabe-sidebar {
+/* Header styles for car selection */
+.kosteneingabe-header {
+    background: var(--color-background);
+    padding: 20px var(--page-margin);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-subtle);
     width: 100%;
-    max-width: none;
-    box-sizing: border-box;
-    grid-area: sidebar;
-    background: #f8faf7;
-    box-shadow: 0 1px 8px rgba(44, 62, 80, 0.04);
-    padding: 32px 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-height: 100vh;
 }
 
 .kosteneingabe-carselect {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(65, 91, 43, 0.08);
-    padding: 18px 16px;
-    margin-bottom: 32px;
-    width: 100%;
-    max-width: 220px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.kosteneingabe-carselect__label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin-bottom: 0;
+    margin-right: 12px;
+}
+
+.kosteneingabe-carselect__select {
+    border: 1px solid var(--color-text-middle);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    background: var(--color-card-bg);
+    color: var(--color-text-dark);
+    width:auto;
+    transition: border-color 0.2s;
 }
 
 .kosteneingabe-carselect__label {
@@ -41,6 +59,7 @@
     font-weight: 600;
     color: var(--green-600);
     margin-bottom: 8px;
+    margin-right: 12px;
 }
 
 .kosteneingabe-carselect__select {
@@ -60,14 +79,14 @@
 
 /* Center */
 .kosteneingabe-center {
-    grid-area: center;
-    padding: 40px 24px;
+    padding: 40px var(--page-margin);
     background: #f8faf7;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-height: 100vh;
     justify-content: flex-start;
+    min-height: 100vh;
+    width: 100%;
 }
 
 /* Expense Filter */
@@ -139,7 +158,7 @@
 
 /* Form */
 .kosteneingabe-form {
-    max-width: 440px;
+    max-width: 600px;
     width: 100%;
     margin: 0 auto;
     background: #fff;
@@ -150,6 +169,7 @@
     z-index: 2;
     margin-bottom: 32px;
 }
+
 .kosteneingabe-form__title {
     color: var(--green-main);
     margin-bottom: 18px;
@@ -216,37 +236,6 @@
     color: #fff;
     box-shadow: 0 6px 24px rgba(184, 92, 56, 0.22);
     outline: none;
-}
-
-/* Rightbar */
-.kosteneingabe-rightbar {
-    grid-area: rightbar;
-    background: #f9f6f2;
-    box-shadow: 0 1px 8px rgba(44, 62, 80, 0.04);
-    padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-height: 100vh;
-    max-width: 320px;
-}
-
-.kosteneingabe-QuickOverview__title {
-    color: var(--green-main);
-    margin-bottom: 12px;
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-.kosteneingabe-QuickOverview__stat-block {
-    background: #fffbe6;
-    color: #7a6c00;
-    border-radius: 10px;
-    padding: 18px 16px;
-    margin-bottom: 18px;
-    font-size: 1.05rem;
-    box-shadow: 0 1px 6px rgba(65, 91, 43, 0.08);
-    width: 100%;
-    border-left: 4px solid var(--yellow-accent);
 }
 
 .kosteneingabe-form__fields-animate {
@@ -325,28 +314,12 @@
         padding-left: 8px;
         padding-right: 8px;
     }
-    .kosteneingabe-carselect {
-        max-width: none;
-        width: 100%;
-        margin-bottom: 24px;
-        padding-left: 0;
-        padding-right: 0;
-        border-radius: 0;
-        box-shadow: none;
-    }
+
     .kosteneingabe-gridcontainer {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "sidebar"
-            "center"
-            "rightbar";
-    }
-    .kosteneingabe-sidebar,
-    .kosteneingabe-rightbar {
-        width: 100%;
-        box-shadow: none;
-        padding: 16px 8px;
-        min-height: auto;
-        max-width: none;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background: var(--grey-bg);
+        gap: 0;
     }
 }
