@@ -16,9 +16,9 @@ $sql = "
         lastoilchange DATE,
         lastgreatservice DATE,
         notes TEXT,
+        fuel_description VARCHAR(255), -- new
         PRIMARY KEY (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-    
     
     CREATE TABLE IF NOT EXISTS user (
         id INT(11) NOT NULL AUTO_INCREMENT,
@@ -29,12 +29,24 @@ $sql = "
         username VARCHAR(30) NOT NULL,
         PRIMARY KEY (id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-    ";
+";
 
 try {
     $conn->exec($sql);
-    echo "Tabelle 'garage' erfolgreich erstellt (oder existierte bereits)!";
-} catch(PDOException $e) {
+
+    // if and add fuel_description
+    $checkColumnSql = "SHOW COLUMNS FROM garage LIKE 'fuel_description'";
+    $stmt = $conn->prepare($checkColumnSql);
+    $stmt->execute();
+
+    if ($stmt->rowCount() === 0) {
+        $addColumnSql = "ALTER TABLE garage ADD COLUMN fuel_description VARCHAR(255)";
+        $conn->exec($addColumnSql);
+        echo "Spalte 'fuel_description' wurde zur Tabelle 'garage' hinzugefügt!";
+    }
+
+    echo "Tabelle 'garage' und 'user' erfolgreich erstellt (oder existierten bereits)!";
+} catch (PDOException $e) {
     die("Fehler beim Erstellen der Tabelle: " . $e->getMessage());
 }
 ?>
