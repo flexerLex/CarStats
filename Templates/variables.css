@@ -23,8 +23,9 @@
     --yellow-accent: #e5eae3;
     --gray-border: #e5eae3;
     --header-height: 72px;
-    --accent: #155A03;      /* Warm terracotta */
-    --accent-alt: #155A03;  /* Orange-copper */
+    --accent: #007b4f;      /* Warm terracotta */
+    --accent-alt: #007b4f;  /* Orange-copper */
+    --green-button-hover: #00643f;
 }
 body {
     margin: 0;

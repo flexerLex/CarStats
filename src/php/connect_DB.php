@@ -1,4 +1,6 @@
 <?php
+
+// CREATE DATABASE IF NOT EXISTS carstats
 function getDBConnection() {
     $host = 'localhost';
     $dbname = 'carstats';

@@ -1,31 +1,32 @@
 // eintraege loeschen / bearbeiten
 // neue Fahrzeuge anlegen
 
-let button_edit0 = document.getElementById('btn_edit0');
+/*  komplett anders gemacht, hier einiges Quatsch
+let button_edit0 = document.getElementById('edit');
 button_edit0.addEventListener('click', edit_vehicle0);
 
 function edit_vehicle0(){
     // Ans Backend senden und in Datenbank anpassen mit vorgefertigter SQL
 }
 
-let button_delete0 = document.getElementById('btn_delete0');
+let button_delete0 = document.getElementById('delete');
 button_edit0.addEventListener('click', e);
 
 function delete_vehicle0(){
     // Ans Backend senden und in Datenbank anpassen mit vorgefertigter SQL
 }
 
-let button_edit1 = document.getElementById('btn_edit1');
-button_edit1.addEventListener('click', edit_vehicle1);
+let button_edit1 = document.getElementById('edit');
+button_edit1.addEventListener('click', edit);
 
-function edit_vehicle1(){
+function edit(){
     // Ans Backend senden und in Datenbank anpassen mit vorgefertigter SQL
 }
 
-let button_delete1 = document.getElementById('btn_delete1');
-button_edit1.addEventListener('click', delete_vehicle1);
+let button_delete1 = document.getElementById('delete');
+button_edit1.addEventListener('click', delete);
 
-function delete_vehicle1(){
+function delete(){
     // Ans Backend senden und in Datenbank anpassen mit vorgefertigter SQL
 }
 
@@ -52,3 +53,5 @@ const response = await fetch('../../php/save_vehicle.php', {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(vehicleData)
 });
+
+ */

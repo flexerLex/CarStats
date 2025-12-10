@@ -1,4 +1,18 @@
+// KEKSEEE
+document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById("cookie-banner");
 
-let appointmentlist = document.getElementById('appointments-list').value;
+    if (!localStorage.getItem("cookieConsent")) {
+        banner.classList.remove("hidden");
+    }
 
-//füttern mit dem jeweils nächsten Termin zu jedem Fahrzeug, wird zusammen mit den anderen Erinnerungen verwaltet
+    document.getElementById("cookie-accept").addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "accepted");
+        banner.classList.add("hidden");
+    });
+
+    document.getElementById("cookie-decline").addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "declined");
+        banner.classList.add("hidden");
+    });
+});
