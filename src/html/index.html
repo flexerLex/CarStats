@@ -1,159 +1,169 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarStats</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo_green_no_text.png">
     <link rel="stylesheet" href="../css/landingpage.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../../Templates/variables.css">
     <link rel="stylesheet" href="../../Templates/header.css">
     <link rel="stylesheet" href="../../Templates/footer.css">
 </head>
+
 <body>
-<!-- Header -->
-<div id="header-placeholder"></div>
-<script src="../../assets/header.js"></script>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+    <script src="../../assets/header.js"></script>
 
-<main>
-    <!-- Hero Section -->
-    <!--Herobild über CSS eingefügt-->
-    <section class="hero">
-        <div class="container">
-            <div class="hero__grid">
-            <div class="hero__text">
-                <h1>Statistiken, Erinnerungen, Kostenerfassung - Alles rund ums Auto</h1>
-                <p>Deine zentrale Plattform für alle Fahrzeugdaten</p>
-                <a href="../src/html/kosteneingabe.html" class="btn">Dateneingabe</a>
+    <main>
+        <!-- Hero Section -->
+        <!--Herobild über CSS eingefügt-->
+        <section class="hero">
+            <div class="container">
+                <div class="hero__grid">
+                    <div class="hero__text">
+                        <h1>Statistiken, Erinnerungen, Kostenerfassung - Alles rund ums Auto</h1>
+                        <p>Deine zentrale Plattform für alle Fahrzeugdaten</p>
+                        <a href="../src/html/kosteneingabe.html" class="btn">Dateneingabe</a>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <section class="reminders-section">
+            <div class="container">
+                <div id="appointments-box" class="appointments-box" role="region" aria-labelledby="appointments-title"
+                    aria-live="polite">
+                    <h1>Termine im Überblick</h1>
+                    <ul id="appointments-list" class="appointments-list">
+                        <li class="appointment-item">
+                            <div>
+                                <div class="appointment-vehicle">Golf</div>
+                                <div class="appointment-type">TÜV-Prüfung</div>
+                            </div>
+                            <div class="appointment-meta">
+                                <div class="appointment-date">25.11.2025</div>
+                                <div class="appointment-time">09:00</div>
+                            </div>
+                        </li>
+                        <li class="appointment-item">
+                            <div>
+                                <div class="appointment-vehicle">BMW</div>
+                                <div class="appointment-type">Service fällig</div>
+                            </div>
+                            <div class="appointment-meta">
+                                <div class="appointment-date">28.11.2025</div>
+                                <div class="appointment-time">14:00</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="reminders-section">
-        <div class="container">
-            <div id="appointments-box" class="appointments-box" role="region" aria-labelledby="appointments-title" aria-live="polite">
-                <h1>Termine im Überblick</h1>
-                <ul id="appointments-list" class="appointments-list">
-                    <li class="appointment-item">
-                        <div>
-                            <div class="appointment-vehicle">Golf</div>
-                            <div class="appointment-type">TÜV-Prüfung</div>
+        <section class="testimonials">
+            <div class="container">
+                <h2>Von unseren Nutzern</h2>
+                <div class="testimonial-grid">
+                    <article class="testimonial-card">
+                        <div class="user">
+                            <img src="../../assets/images/max.jpg" alt="Nutzerbild">
+                            <div>
+                                <h3>Max Mustermann, 28</h3>
+                                <p class="role">Softwareentwickler</p>
+                            </div>
                         </div>
-                        <div class="appointment-meta">
-                            <div class="appointment-date">25.11.2025</div>
-                            <div class="appointment-time">09:00</div>
+                        <p class="text">Mit CarStats kann ich bequem alle Tank- und Servicedaten im Blick haben und
+                            meine
+                            Kosten optimieren. Dass ich dazu auch noch die Performance Statistiken aller meiner
+                            Fahrzeuge
+                            vergleichen kann macht CarsStats für mich zu dem perfekten Tool, das für mich unverzichtlich
+                            ist.</p>
+                        <div class="stars">★★★★★</div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <div class="user">
+                            <img src="../../assets/images/sabine.jpg" alt="Nutzerbild">
+                            <div>
+                                <h3>Sabine Schmid, 42</h3>
+                                <p class="role">Projektmanagerin</p>
+                            </div>
                         </div>
-                    </li>
-                    <li class="appointment-item">
-                        <div>
-                            <div class="appointment-vehicle">BMW</div>
-                            <div class="appointment-type">Service fällig</div>
+                        <p class="text">CarStats bedeutet für mich eine gute Übersicht über alle Reparaturen und
+                            Wartungen
+                            haben zu können. Da ich häufiger mal Ölwechsel vergesse sind die Erinnerungen an Ölwechsel,
+                            TÜV und Versicherung für mich Gold wert.</p>
+                        <div class="stars">★★★★★</div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <div class="user">
+                            <img src="../../assets/images/thomas.jpg" alt="Nutzerbild">
+                            <div>
+                                <h3>Thomas Bauer</h3>
+                                <p class="role">Fuhrparkmanager</p>
+                            </div>
                         </div>
-                        <div class="appointment-meta">
-                            <div class="appointment-date">28.11.2025</div>
-                            <div class="appointment-time">14:00</div>
+                        <p class="text">CarStats als zentrales, übersichtliches und verlässliches Tool zum Tracking von
+                            Fahrzeugdaten ist zu meinem täglichen Begleiter geworden.</p>
+                        <div class="stars">★★★★★</div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <div class="user">
+                            <img src="../../assets/images/lisa.jpg" alt="Nutzerbild">
+                            <div>
+                                <h3>Lisa Müller, 30</h3>
+                                <p class="role">Lehrerin</p>
+                            </div>
                         </div>
-                    </li>
-                </ul>
+                        <p class="text">CarStats ermöglicht mir nicht nur meine Kosten im Blick zu haben, sondern auch
+                            die
+                            Umwelt zu schonen</p>
+                        <div class="stars">★★★★★</div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <div class="user">
+                            <img src="../../assets/images/jens.jpg" alt="Nutzerbild">
+                            <div>
+                                <h3>Jens Hoffmann, 55</h3>
+                                <p class="role">Selbstständig</p>
+                            </div>
+                        </div>
+                        <p class="text">Der perfekte Assistent fürs Auto. Simpel und einfach ohne Zeit- und Denkaufwand.
+                        </p>
+                        <div class="stars">★★★★★</div>
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section class="testimonials">
-        <div class="container">
-            <h2>Von unseren Nutzern</h2>
-            <div class="testimonial-grid">
-                <article class="testimonial-card">
-                    <div class="user">
-                        <img src="../../assets/images/max.jpg" alt="Nutzerbild">
-                        <div>
-                            <h3>Max Mustermann, 28</h3>
-                            <p class="role">Softwareentwickler</p>
-                        </div>
-                    </div>
-                    <p class="text">Mit CarStats kann ich bequem alle Tank- und Servicedaten im Blick haben und meine
-                        Kosten optimieren. Dass ich dazu auch noch die Performance Statistiken aller meiner Fahrzeuge
-                        vergleichen kann macht CarsStats für mich zu dem perfekten Tool, das für mich unverzichtlich
-                        ist.</p>
-                    <div class="stars">★★★★★</div>
-                </article>
+    <!-- KEKSE -->
+    <div id="cookie-banner" class="cookie-banner hidden">
+        <div class="cookie-content">
+            <h3>Cookies & Datenschutz</h3>
+            <p>
+                Wir verwenden Cookies – leider keine zum Essen, sondern die digitalen.
+                Sie helfen dabei, unsere Website für Sie leckerer zu machen.
+            </p>
 
-                <article class="testimonial-card">
-                    <div class="user">
-                        <img src="../../assets/images/sabine.jpg" alt="Nutzerbild">
-                        <div>
-                            <h3>Sabine Schmid, 42</h3>
-                            <p class="role">Projektmanagerin</p>
-                        </div>
-                    </div>
-                    <p class="text">CarStats bedeutet für mich eine gute Übersicht über alle Reparaturen und Wartungen
-                        haben zu können. Da ich häufiger mal Ölwechsel vergesse sind die Erinnerungen an Ölwechsel,
-                        TÜV und Versicherung für mich Gold wert.</p>
-                    <div class="stars">★★★★★</div>
-                </article>
-
-                <article class="testimonial-card">
-                    <div class="user">
-                        <img src="../../assets/images/thomas.jpg" alt="Nutzerbild">
-                        <div>
-                            <h3>Thomas Bauer</h3>
-                            <p class="role">Fuhrparkmanager</p>
-                        </div>
-                    </div>
-                    <p class="text">CarStats als zentrales, übersichtliches und verlässliches Tool zum Tracking von
-                        Fahrzeugdaten ist zu meinem täglichen Begleiter geworden.</p>
-                    <div class="stars">★★★★★</div>
-                </article>
-
-                <article class="testimonial-card">
-                    <div class="user">
-                        <img src="../../assets/images/lisa.jpg" alt="Nutzerbild">
-                        <div>
-                            <h3>Lisa Müller, 30</h3>
-                            <p class="role">Lehrerin</p>
-                        </div>
-                    </div>
-                    <p class="text">CarStats ermöglicht mir nicht nur meine Kosten im Blick zu haben, sondern auch die
-                        Umwelt zu schonen</p>
-                    <div class="stars">★★★★★</div>
-                </article>
-
-                <article class="testimonial-card">
-                    <div class="user">
-                        <img src="../../assets/images/jens.jpg" alt="Nutzerbild">
-                        <div>
-                            <h3>Jens Hoffmann, 55</h3>
-                            <p class="role">Selbstständig</p>
-                        </div>
-                    </div>
-                    <p class="text">Der perfekte Assistent fürs Auto. Simpel und einfach ohne Zeit- und Denkaufwand.</p>
-                    <div class="stars">★★★★★</div>
-                </article>
+            <div class="cookie-buttons">
+                <button id="cookie-accept" class="btn">Alle akzeptieren</button>
+                <button id="cookie-decline" class="btn btn-outline">Nur notwendige Cookies</button>
             </div>
-        </div>
-    </section>
-</main>
-
-<!-- KEKSE -->
-<div id="cookie-banner" class="cookie-banner hidden">
-    <div class="cookie-content">
-        <h3>Cookies & Datenschutz</h3>
-        <p>
-            Wir verwenden Cookies – leider keine zum Essen, sondern die digitalen.
-            Sie helfen dabei, unsere Website für Sie leckerer zu machen.
-        </p>
-
-        <div class="cookie-buttons">
-            <button id="cookie-accept" class="btn">Alle akzeptieren</button>
-            <button id="cookie-decline" class="btn btn-outline">Nur notwendige Cookies</button>
         </div>
     </div>
-</div>
 
-<!-- Footer -->
-<div id="footer-placeholder"></div>
-<script src="../../assets/script.js"></script>
-<script src="../js/landingpage.js"></script>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="../../assets/script.js"></script>
+    <script src="../js/landingpage.js"></script>
 </body>
+
 </html>

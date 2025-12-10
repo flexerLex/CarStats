@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CarStats – Kostenübersicht</title>
+    <title>CarStats | Kostenübersicht</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo_green_no_text.png">
     <link rel="stylesheet" href="../../Templates/variables.css">
     <link rel="stylesheet" href="../../Templates/header.css">
     <link rel="stylesheet" href="../../Templates/footer.css">
@@ -13,23 +14,23 @@
 </head>
 
 <body>
-<div id="header-placeholder"></div>
-<script src="../../assets/header.js"></script>
+    <div id="header-placeholder"></div>
+    <script src="../../assets/header.js"></script>
 
-<!-- Car selection block -->
-<header class="kosteneingabe-header">
-    <div class="kosteneingabe-carselect">
-        <label for="car-select" class="kosteneingabe-carselect__label">Wählen Sie ein Auto:</label>
-        <select id="car-select" class="kosteneingabe-carselect__select">
-            <option value="vw-golf-7">VW Golf 7</option>
-            <option value="bmw-3er">BMW 3er</option>
-            <option value="tesla-model-3">Tesla Model 3</option>
-        </select>
-    </div>
-</header>
+    <!-- Car selection block -->
+    <header class="kosteneingabe-header">
+        <div class="kosteneingabe-carselect">
+            <label for="car-select" class="kosteneingabe-carselect__label">Wählen Sie ein Auto:</label>
+            <select id="car-select" class="kosteneingabe-carselect__select">
+                <option value="vw-golf-7">VW Golf 7</option>
+                <option value="bmw-3er">BMW 3er</option>
+                <option value="tesla-model-3">Tesla Model 3</option>
+            </select>
+        </div>
+    </header>
 
-<div class="kosteneingabe-gridcontainer">
-    <!-- Main content -->
+    <div class="kosteneingabe-gridcontainer">
+        <!-- Main content -->
         <main class="kosteneingabe-center">
             <div class="kosteneingabe-expense-filter">
                 <span class="kosteneingabe-expense-filter__label">Vergangene Ausgaben:</span>
@@ -91,12 +92,12 @@
                 <button class="kosteneingabe-form__submit" type="submit">Speichern</button>
             </form>
         </main>
-</div>
+    </div>
 
-<div id="footer-placeholder"></div>
-<script src="../../assets/script.js"></script>
+    <div id="footer-placeholder"></div>
+    <script src="../../assets/script.js"></script>
 
-<script>
+    <script>
         // Dynamic fields for category (switch/case)
         const expenseBtns = document.querySelectorAll(
             '.kosteneingabe-expense-filter__btn'
