@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout_submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarStats</title>
-
+	<link rel="icon" type="image/png" href="../../assets/images/fav_icon.png">
     <link rel="stylesheet" href="../../Templates/variables.css">
     <link rel="stylesheet" href="../../Templates/header.css">
     <link rel="stylesheet" href="../../Templates/footer.css">
