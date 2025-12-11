@@ -174,6 +174,7 @@ if ($edit_id !== null && isset($_SESSION['user_id'])) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CarStats | Meine Fahrzeuge</title>
+    <link rel="icon" type="image/png" href="../../assets/images/fav_icon.png">
     <link rel="stylesheet" href="../css/garagestyle.css" />
 
     <link rel="stylesheet" href="../../Templates/variables.css">

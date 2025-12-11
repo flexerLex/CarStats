@@ -275,7 +275,7 @@ $jsData = json_encode($results);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CarStats | Statistiken</title>
-  <link rel="icon" type="image/png" href="../../assets/images/logo_green_no_text.png">
+	<link rel="icon" type="image/png" href="../../assets/images/fav_icon.png">
   <link rel="stylesheet" href="../css/statistiken.css" />
   <link rel="stylesheet" href="../../Templates/variables.css" />
   <link rel="stylesheet" href="../../Templates/header.css" />
