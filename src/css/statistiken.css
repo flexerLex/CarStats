@@ -242,7 +242,7 @@ body {
 	align-items: center;
 	margin-bottom: 20px;
 	padding-bottom: 10px;
-	border-bottom: 1px solid #f0f0f0; /* Trennlinie */
+	border-bottom: 1px solid #f0f0f0; 
 }
 
 .transaction-header .section-title {
@@ -252,54 +252,37 @@ body {
 	margin: 0;
 }
 
+.transaction-list {
+    padding-left: 0; 
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 /* --- 2. Einzelner Transaktionseintrag --- */
 .transaction-item {
 	display: flex;
 	align-items: center;
-	justify-content: space-between; /* Betrag rechts ausrichten */
+	justify-content: space-between; 
 	padding: 10px 0;
-	border-bottom: 1px solid #eee; /* Trennlinie zwischen Einträgen */
+	border-bottom: 1px solid #eee; 
 	transition: background-color 0.2s;
 }
 
 .transaction-item:last-child {
-	border-bottom: none; /* Letztes Element ohne Trennlinie */
+	border-bottom: none; 
 }
 
 .transaction-item:hover {
 	background-color: #f9f9f9;
 }
 
-/* --- 3. Icon Container und SVG --- */
-.transaction-icon-container {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%; /* Rund machen */
-
-	/* Dynamische Farben basierend auf der JS-Datenbindung: */
-	/* --icon-color wird per Inline-Style vom JS gesetzt */
-	background-color: var(--icon-color, #607d8b) 1A; /* Hintergrundfarbe mit 10% Opazität (1A) */
-	color: var(--icon-color, #607d8b); /* Icon Farbe */
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-right: 15px;
-	flex-shrink: 0; /* Verhindert das Schrumpfen des Icons */
-}
-
-.transaction-item-icon {
-	width: 24px;
-	height: 24px;
-	fill: currentColor; /* Füllfarbe des Icons nutzt die 'color' des Containers */
-	/* viewBox="0 0 24 24" ist im HTML definiert */
-}
 
 /* --- 4. Details und Betrag --- */
 
-.transaction-details {
-	flex-grow: 1; /* Nimmt den meisten Platz ein */
-	min-width: 0; /* Wichtig für lange Texte */
+.transaction-details-left {
+		flex-grow: 1; 
+    display: flex; 
+    align-items: center;
 }
 
 .transaction-name {
@@ -323,7 +306,19 @@ body {
 	font-size: 1.05rem;
 	color: #333;
 	margin-left: 10px;
-	flex-shrink: 0; /* Verhindert das Schrumpfen des Betrags */
+	flex-shrink: 0; 
+}
+
+.transaction-category,
+.transaction-notes {
+    margin-left: 90px; 
+    color: #141514; 
+}
+
+
+.transaction-date {
+    flex-shrink: 0; 
+    margin-right: 0; 
 }
 
 
@@ -391,15 +386,15 @@ body {
 
 	/* Titel auf einer Zeile halten und ausrichten */
 	.kpi__header {
-		min-height: 38px; /* Mindesthöhe für zweizeilige Titel */
+		min-height: 38px; 
 		margin-bottom: 5px;
 	}
 	.kpi__title {
 		font-size: 0.8em;
 		line-height: 1.2;
-		white-space: nowrap; /* Verhindert Zeilenumbruch */
+		white-space: nowrap; 
 		overflow: hidden;
-		text-overflow: ellipsis; /* Fügt Auslassungspunkte hinzu */
+		text-overflow: ellipsis; 
 		flex-basis: 70%;
 	}
 	.kpi__icon {
@@ -421,7 +416,7 @@ body {
 
 	/* ------------------- Große Karten Anpassungen (inkl. Letzte Ausgaben) ------------------- */
 	.consumption {
-		grid-column: 1 / -1; /* Nimmt die gesamte Breite ein */
+		grid-column: 1 / -1; 
 		grid-row: auto !important;
 	}
 	.transaction {

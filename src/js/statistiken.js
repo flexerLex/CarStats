@@ -87,23 +87,21 @@ function updateKpis(kpis) {
     
 }
 
-/**
- * 辅助函数: 根据类别返回 CSS 徽章类。
- */
-function getCategoryBadge(category) {
-    switch (category) {
-        case 'Kraftstoff':
-            return 'bg-success'; // 例如：绿色
-        case 'Service':
-        case 'Reparatur':
-            return 'bg-warning'; // 例如：黄色
-        case 'Versicherung':
-        case 'Steuer':
-            return 'bg-info'; // 例如：蓝色
-        default:
-            return 'bg-secondary'; // 例如：灰色
-    }
-}
+
+// function getCategoryBadge(category) {
+//     switch (category) {
+//         case 'Kraftstoff':
+//             return 'bg-success'; // 例如：绿色
+//         case 'Service':
+//         case 'Reparatur':
+//             return 'bg-warning'; // 例如：黄色
+//         case 'Versicherung':
+//         case 'Steuer':
+//             return 'bg-info'; // 例如：蓝色
+//         default:
+//             return 'bg-secondary'; // 例如：灰色
+//     }
+// }
 // -------------------------III. Diagramm- und Interaktionslogik ---------------------
 function initializeConsumptionChart() {
     const ctx = document.getElementById('consumption-chart');
@@ -191,7 +189,6 @@ function updateConsumptionChart(labels, values, unit) {
         xAxisTitle = 'Datum'; 
     }
 
-    consumptionChartInstance.data.labels = labels; 
     consumptionChartInstance.data.datasets[0].data = values;
     consumptionChartInstance.options.scales.x.time.unit = unit;
     consumptionChartInstance.options.scales.x.time.parser = parserFormat;

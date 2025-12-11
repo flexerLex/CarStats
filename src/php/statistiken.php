@@ -84,7 +84,7 @@ try {
     $consumption_sql = "
         SELECT date, amount, mileage, quantity 
         FROM expenses 
-        WHERE car_id = ? AND category = 'Kraftstoff' AND full_tank = 1 
+        WHERE car_id = ? AND category = 'Sprit'  
         ORDER BY date ASC, mileage ASC
     ";
     $stmt = $conn->prepare($consumption_sql);
@@ -108,7 +108,7 @@ try {
         }
     }
     
-    $stmt = $conn->prepare("SELECT SUM(amount) AS total_fuel_costs FROM expenses WHERE car_id = ? AND category = 'Kraftstoff'");
+    $stmt = $conn->prepare("SELECT SUM(amount) AS total_fuel_costs FROM expenses WHERE car_id = ? AND category = 'Sprit'");
     $stmt->execute([$car_id]);
     $fuel_data = $stmt->fetch(PDO::FETCH_ASSOC);
     $total_fuel_costs = $fuel_data['total_fuel_costs'] ?? 0;
@@ -147,7 +147,7 @@ try {
         $fuel_since_full_sql = "
             SELECT SUM(quantity) AS total_added 
             FROM expenses 
-            WHERE car_id = ? AND date > ? AND full_tank = 0 AND category = 'Kraftstoff'
+            WHERE car_id = ? AND date > ? AND full_tank = 0 AND category = 'Sprit'
         ";
         $stmt = $conn->prepare($fuel_since_full_sql);
         $stmt->execute([$car_id, $last_full_tank_date]);
@@ -211,11 +211,12 @@ try {
 
     foreach ($consumption_data_by_period as $label => $data) {
         $average_consumption = round($data['sum'] / $data['count'], 2);
-        $chart_labels[] = $label;
-        $chart_values[] = $average_consumption;
+        $chart_values[] = [
+        'x' => $label, // Das Datum (z.B. '2025-12')
+        'y' => $average_consumption // Der Wert (z.B. 10.16)
+    ];
     }
-    $results['chartData']['labels'] = $chart_labels;
-    $results['chartData']['values'] = $chart_values;
+		$results['chartData']['values'] = $chart_values;
 
     // F. Letzte Transaktionen
     $transactions_sql = "
@@ -440,13 +441,12 @@ $jsData = json_encode($results);
                 <?php else: ?>
                     <?php foreach ($results['transactions'] as $transaction): ?>
                         <li class="transaction-item">
-                            <span class="transaction-date"><?= htmlspecialchars($transaction['date']) ?></span>
-                            <span class="transaction-category"> - <?= htmlspecialchars($transaction['category']) ?></span>
-                            <span class="transaction-amount"><?= htmlspecialchars(number_format($transaction['amount'], 2, ',', '.')) ?> €</span>
-                            <?php if (!empty($transaction['notes'])): ?>
-                                <span class="transaction-notes"> (<?= htmlspecialchars($transaction['notes']) ?>)</span>
-                            <?php endif; ?>
-                        </li>
+														<div class="transaction-details-left"> 
+																<span class="transaction-date"><?= htmlspecialchars($transaction['date']) ?></span>
+																<span class="transaction-category"> - <?= htmlspecialchars($transaction['category']) ?></span>
+														</div>
+														<span class="transaction-amount"><?= htmlspecialchars(number_format($transaction['amount'], 2, ',', '.')) ?> €</span>
+												</li>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </ul>
