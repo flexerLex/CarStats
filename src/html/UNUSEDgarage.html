@@ -1,198 +1,192 @@
 <!doctype html>
 <html lang="de">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CarStats | Meine Fahrzeuge</title>
-    <link rel="icon" type="image/png" href="../../assets/images/logo_green_no_text.png">
     <link rel="stylesheet" href="../css/garagestyle.css" />
 
     <link rel="stylesheet" href="../../Templates/variables.css">
     <link rel="stylesheet" href="../../Templates/header.css">
     <link rel="stylesheet" href="../../Templates/footer.css">
 </head>
-
 <body>
 
-    <!-- Header -->
-    <div id="header-placeholder"></div>
-    <script src="../../assets/header.js"></script>
+<!-- Header -->
+<div id="header-placeholder"></div>
+<script src="../../assets/header.js"></script>
 
-    <main>
-        <section class="disclaimer">
-            <h3>Hinweis</h3>
-            <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur
-                weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
+<main>
+    <section class="disclaimer">
+        <h3>Hinweis</h3>
+        <p>Diese Seite dient zur Verwaltung deiner privaten Fahrzeugdaten. Alle Angaben werden zur weiterverarbeitung bis zur manuellen Löschung gespeichert.</p>
+    </section>
+
+    <div class="vehicle">
+        <header>
+            <h2>Meine Fahrzeuge</h2>
+        </header>
+
+        <!-- Fahrzeug-Karten -->
+        <section class="vehicle-cards">
+            <!-- Fahrzeug 1: VW Golf -->
+            <article class="vehicle-card">
+                <div class="vehicle-card-header">
+                    <div class="vehicle-card-title">
+                        <h3>Volkswagen</h3>
+                        <p>Golf 7 2.0 TDI</p>
+                    </div>
+                    <span class="vehicle-card-year">2018</span>
+                </div>
+
+                <div class="vehicle-card-body">
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Kennzeichen</span>
+                        <span class="vehicle-info-value">B-AB-1234</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Kilometerstand</span>
+                        <span class="vehicle-info-value">75.342 km</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Antriebsart</span>
+                        <span class="vehicle-info-value">Diesel</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Letzter TÜV</span>
+                        <span class="vehicle-info-value">06/24</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Letzter Ölwechsel</span>
+                        <span class="vehicle-info-value">05/24</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Letzter großer Service</span>
+                        <span class="vehicle-info-value">03/22</span>
+                    </div>
+                </div>
+
+                <div class="vehicle-card-actions">
+                    <button id="btn_edit0">Bearbeiten</button>
+                    <button id="btn_delete0" class="button-delete">Löschen</button>
+                </div>
+            </article>
+
+            <!-- Fahrzeug 2: BMW -->
+            <article class="vehicle-card">
+                <div class="vehicle-card-header">
+                    <div class="vehicle-card-title">
+                        <h3>BMW</h3>
+                        <p>330i xDrive</p>
+                    </div>
+                    <span class="vehicle-card-year">2021</span>
+                </div>
+
+                <div class="vehicle-card-body">
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Kennzeichen</span>
+                        <span class="vehicle-info-value">M-XY-2021</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Kilometerstand</span>
+                        <span class="vehicle-info-value">35.092 km</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Antriebsart</span>
+                        <span class="vehicle-info-value">Super E5</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Letzter TÜV</span>
+                        <span class="vehicle-info-value">12/23</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Letzter Ölwechsel</span>
+                        <span class="vehicle-info-value">12/23</span>
+                    </div>
+                    <div class="vehicle-info-row">
+                        <span class="vehicle-info-label">Letzter großer Service</span>
+                        <span class="vehicle-info-value">10/22</span>
+                    </div>
+                </div>
+
+                <div class="vehicle-card-actions">
+                    <button id="btn_edit1">Bearbeiten</button>
+                    <button id="btn_delete1" class="button-delete">Löschen</button>
+                </div>
+            </article>
         </section>
 
-        <div class="vehicle">
-            <header>
-                <h2>Meine Fahrzeuge</h2>
-            </header>
-
-            <!-- Fahrzeug-Karten -->
-            <section class="vehicle-cards">
-                <!-- Fahrzeug 1: VW Golf -->
-                <article class="vehicle-card">
-                    <div class="vehicle-card-header">
-                        <div class="vehicle-card-title">
-                            <h3>Volkswagen</h3>
-                            <p>Golf 7 2.0 TDI</p>
-                        </div>
-                        <span class="vehicle-card-year">2018</span>
-                    </div>
-
-                    <div class="vehicle-card-body">
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Kennzeichen</span>
-                            <span class="vehicle-info-value">B-AB-1234</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Kilometerstand</span>
-                            <span class="vehicle-info-value">75.342 km</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Antriebsart</span>
-                            <span class="vehicle-info-value">Diesel</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Letzter TÜV</span>
-                            <span class="vehicle-info-value">06/24</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Letzter Ölwechsel</span>
-                            <span class="vehicle-info-value">05/24</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Letzter großer Service</span>
-                            <span class="vehicle-info-value">03/22</span>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-card-actions">
-                        <button id="btn_edit0">Bearbeiten</button>
-                        <button id="btn_delete0" class="button-delete">Löschen</button>
-                    </div>
-                </article>
-
-                <!-- Fahrzeug 2: BMW -->
-                <article class="vehicle-card">
-                    <div class="vehicle-card-header">
-                        <div class="vehicle-card-title">
-                            <h3>BMW</h3>
-                            <p>330i xDrive</p>
-                        </div>
-                        <span class="vehicle-card-year">2021</span>
-                    </div>
-
-                    <div class="vehicle-card-body">
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Kennzeichen</span>
-                            <span class="vehicle-info-value">M-XY-2021</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Kilometerstand</span>
-                            <span class="vehicle-info-value">35.092 km</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Antriebsart</span>
-                            <span class="vehicle-info-value">Super E5</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Letzter TÜV</span>
-                            <span class="vehicle-info-value">12/23</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Letzter Ölwechsel</span>
-                            <span class="vehicle-info-value">12/23</span>
-                        </div>
-                        <div class="vehicle-info-row">
-                            <span class="vehicle-info-label">Letzter großer Service</span>
-                            <span class="vehicle-info-value">10/22</span>
-                        </div>
-                    </div>
-
-                    <div class="vehicle-card-actions">
-                        <button id="btn_edit1">Bearbeiten</button>
-                        <button id="btn_delete1" class="button-delete">Löschen</button>
-                    </div>
-                </article>
-            </section>
-
-            <section>
-                <h3>Neues Fahrzeug hinzufügen</h3>
-                <form>
-                    <fieldset>
-                        <legend>Fahrzeugdaten</legend>
-                        <div class="grid">
-                            <label>
-                                Marke:
-                                <input type="text" id="brand" placeholder="z. B. Audi" required>
-                            </label>
-                            <label>
-                                Modell:
-                                <input type="text" id="model" placeholder="z. B. A4 Avant" required>
-                            </label>
-                            <label>
-                                Baujahr:
-                                <input type="number" id="age" min="1900" max="2099" required>
-                            </label>
-                            <label>
-                                Kennzeichen:
-                                <input type="text" id="identification" placeholder="z. B. HH-AB 1234">
-                            </label>
-                            <label>
-                                Kraftstoff / Antriebsart:
-                                <select id="type" required>
-                                    <option value="">Bitte auswählen</option>
-                                    <option value="petrol">Benzin</option>
-                                    <option value="diesel">Diesel</option>
-                                    <option value="electric">Elektro</option>
-                                    <option value="gas">Gas (LPG/CNG)</option>
-                                    <option value="other">Sonstige</option>
-                                </select>
-                            </label>
-                            <label>
-                                Kilometerstand:
-                                <input type="number" id="mileage" min="0" max="1000000" required>
-                            </label>
-                            <label>
-                                Letzter TÜV:
-                                <input type="date" id="tuev" placeholder="z. B. 06/24" required>
-                            </label>
-                            <label>
-                                Letzter Ölwechsel:
-                                <input type="date" id="oilchange" placeholder="z. B. 05/24" required>
-                            </label>
-                            <label>
-                                Letzter großer Service:
-                                <input type="date" id="greatservice" placeholder="z. B. 10/22" required>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Zusatzinformationen</legend>
+        <section>
+            <h3>Neues Fahrzeug hinzufügen</h3>
+            <form>
+                <fieldset>
+                    <legend>Fahrzeugdaten</legend>
+                    <div class="grid">
                         <label>
-                            Notizen:
-                            <textarea id="notes" rows="3"
-                                placeholder="z. B. Keilriemen, neuer Turbo, Steuerkette …"></textarea>
+                            Marke:
+                            <input type="text" id="brand" placeholder="z. B. Audi" required>
                         </label>
-                    </fieldset>
-
-                    <div class="actions">
-                        <button id="btn_new_vehicle_submit" type="submit">Fahrzeug speichern</button>
-                        <button type="reset">Eingaben löschen</button>
+                        <label>
+                            Modell:
+                            <input type="text" id="model" placeholder="z. B. A4 Avant" required>
+                        </label>
+                        <label>
+                            Baujahr:
+                            <input type="number" id="age" min="1900" max="2099" required>
+                        </label>
+                        <label>
+                            Kennzeichen:
+                            <input type="text" id="identification" placeholder="z. B. HH-AB 1234">
+                        </label>
+                        <label>
+                            Kraftstoff / Antriebsart:
+                            <select id="type" required>
+                                <option value="">Bitte auswählen</option>
+                                <option value="petrol">Benzin</option>
+                                <option value="diesel">Diesel</option>
+                                <option value="electric">Elektro</option>
+                                <option value="gas">Gas (LPG/CNG)</option>
+                                <option value="other">Sonstige</option>
+                            </select>
+                        </label>
+                        <label>
+                            Kilometerstand:
+                            <input type="number" id="mileage" min="0" max="1000000" required>
+                        </label>
+                        <label>
+                            Letzter TÜV:
+                            <input type="date" id="tuev" placeholder="z. B. 06/24" required>
+                        </label>
+                        <label>
+                            Letzter Ölwechsel:
+                            <input type="date" id="oilchange" placeholder="z. B. 05/24" required>
+                        </label>
+                        <label>
+                            Letzter großer Service:
+                            <input type="date" id="greatservice" placeholder="z. B. 10/22" required>
+                        </label>
                     </div>
-                </form>
-            </section>
-        </div>
-    </main>
+                </fieldset>
 
-    <!-- Footer -->
-    <div id="footer-placeholder"></div>
-    <script src="../../assets/script.js"></script>
+                <fieldset>
+                    <legend>Zusatzinformationen</legend>
+                    <label>
+                        Notizen:
+                        <textarea id="notes" rows="3" placeholder="z. B. Keilriemen, neuer Turbo, Steuerkette …"></textarea>
+                    </label>
+                </fieldset>
+
+                <div class="actions">
+                    <button id="btn_new_vehicle_submit" type="submit">Fahrzeug speichern</button>
+                    <button type="reset">Eingaben löschen</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+<script src="../../assets/script.js"></script>
 </body>
-
 </html>
