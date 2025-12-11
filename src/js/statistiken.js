@@ -105,7 +105,6 @@ function getCategoryBadge(category) {
     }
 }
 // -------------------------III. Diagramm- und Interaktionslogik ---------------------
-
 function initializeConsumptionChart() {
     const ctx = document.getElementById('consumption-chart');
     if (!ctx) return; 
@@ -201,7 +200,6 @@ function updateConsumptionChart(labels, values, unit) {
     
     consumptionChartInstance.update();
 }
-
 
 // ---------------V. Start des Skripts -------------------------
 document.addEventListener('DOMContentLoaded', initDashboard);

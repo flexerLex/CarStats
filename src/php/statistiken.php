@@ -1,6 +1,4 @@
 <?php
-// 假设您的 PHP 头部代码（包括会话、连接、数据计算和 $results 数组）
-// 已经像您之前提供的代码块一样位于此处。
 // ----------------- I. Sicherheits- und Initialisierungs-Checks (1-3) -----------------
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -28,7 +26,6 @@ try {
     $cars = $stmtCars->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     $cars = []; 
-    // Fehlerbehandlung kann hier detaillierter sein, aber wir lassen es jetzt so.
 }
 
 // 3. Ausgewähltes Auto bestimmen
@@ -36,7 +33,6 @@ $car_id = null;
 if (!empty($cars)) {
     $requestedCarId = filter_input(INPUT_GET, 'car_id', FILTER_VALIDATE_INT);
     
-    // ... Sicherheitscheck und Fallback Logik wie zuvor ...
     $isUserCar = array_filter($cars, function($car) use ($requestedCarId) {
         return (int)$car['id'] === $requestedCarId;
     });
@@ -55,24 +51,16 @@ if (!in_array($unit, ['day', 'month', 'year'])) {
 }
 $currentUnit = $unit; 
 
-// ----------------- II. Datenabruf und Berechnung (Wird nur ausgeführt, wenn $car_id vorhanden ist) -----------------
-// ... (此处是您完整的 II. Datenabruf und Berechnung 逻辑)
-// 确保此处的逻辑会填充 $results 数组
+// ----------------- II. Datenabruf und Berechnung-----------------
 if ($car_id) { 
-    // --- 复制并粘贴到您的 statistiken.php 中的 if ($car_id) { ... } 块内 ---
 
-// II. Datenabruf und Berechnung START
 try {
-    // 确保 $conn 变量在此处可用（假设它在文件顶部已设置）
-
     // 1. Fahrzeugdetails (zur Namensanzeige)
     $stmt = $conn->prepare("SELECT id, brand, model, licenseplate FROM garage WHERE id = ? AND user_id = ?");
     $stmt->execute([$car_id, $user_id]);
     $vehicle = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Optionaler Sicherheitscheck, falls das Auto nicht existiert
     if (!$vehicle) {
-        // Obwohl die Logik am Anfang das erste Auto wählt, ist dies ein guter Fallback.
         throw new Exception('Fahrzeug nicht gefunden oder keine Berechtigung.');
     }
     
@@ -105,11 +93,10 @@ try {
     $total_distance = 0;
     $total_quantity = 0;
     
-    // Durchschnittsverbrauch und Kosten pro KM berechnen (benötigt mindestens 3 Full Tank Records)
+
     for ($i = 1; $i < count($full_tank_records); $i++) {
         $prev_mileage = (float)$full_tank_records[$i-1]['mileage'];
         $curr_mileage = (float)$full_tank_records[$i]['mileage'];
-        // WICHTIG: Die Menge ist die Menge des TANKVORGANGS NACH der Distanz (also $i)
         $curr_quantity = (float)$full_tank_records[$i]['quantity']; 
         
         $distance = $curr_mileage - $prev_mileage;
@@ -121,7 +108,6 @@ try {
         }
     }
     
-    // Totale Kraftstoffkosten für Kosten pro Kilometer
     $stmt = $conn->prepare("SELECT SUM(amount) AS total_fuel_costs FROM expenses WHERE car_id = ? AND category = 'Kraftstoff'");
     $stmt->execute([$car_id]);
     $fuel_data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -138,13 +124,11 @@ try {
     $results['kpis']['averageConsumption'] = round($avg_consumption, 2); 
     $results['kpis']['fuelCostsPerKm'] = round($fuel_cost_per_km, 3);
 
-    // C. Kilometerstand
     $stmt = $conn->prepare("SELECT mileage FROM expenses WHERE car_id = ? ORDER BY date DESC, id DESC LIMIT 1");
     $stmt->execute([$car_id]);
     $latest_mileage = $stmt->fetchColumn();
     $results['kpis']['mileage'] = $latest_mileage ?? 0; 
     
-    // D. Reichweiten-KPI (Annahme: Tankkapazität von 50L)
     $TANK_CAPACITY = 50.0; 
 
     $last_full_tank_date_sql = "
@@ -179,11 +163,10 @@ try {
     }
     $results['kpis']['range'] = round($range, 0); 
 
-    // E. Kraftstoffverbrauch-Trend (Chart Data)
     $consumption_data_by_period = [];
     $date_format_php = 'Y-m-d'; 
 
-    switch ($currentUnit) { // Verwenden Sie $currentUnit, das Sie am Anfang definiert haben
+    switch ($currentUnit) { 
         case 'year':
             $date_format_php = 'Y';
             break;
@@ -246,11 +229,8 @@ try {
     $stmt->execute([$car_id]);
     $results['transactions'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Stellen Sie sicher, dass alle KPIs definiert sind, auch wenn die Berechnung fehlschlägt
-    // (wird durch die Initialisierung auf 0.00/0 schon abgedeckt, hier ist es nur ein Fallback im Falle von try/catch)
-    
 } catch (Exception $e) {
-    // Im Falle eines Fehlers (z.B. DB-Fehler) setzen wir die KPIs auf 0, um das Frontend nicht abstürzen zu lassen.
+  
     error_log("Statistiken Fehler: " . $e->getMessage());
     $results = [ 
         'kpis' => [
@@ -266,8 +246,8 @@ try {
 } else {
     $results = [ 
         'kpis' => [
-            // Alle KPI-Schlüssel müssen vorhanden sein
-            'carModel' => '', // Hält den Titel leer, wie gewünscht
+
+            'carModel' => '', 
             'averageConsumption' => 0, 
             'fuelCostsPerKm' => 0,
             'mileage' => 0,
@@ -276,10 +256,10 @@ try {
             'annualTotalCosts' => 0,
         ], 
         'chartData' => [
-            'labels' => [], // Leere Arrays für das Diagramm
+            'labels' => [], 
             'values' => []
         ], 
-        'transactions' => [] // Leeres Array für die Transaktionen
+        'transactions' => [] 
     ];
 }
 
