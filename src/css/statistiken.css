@@ -448,7 +448,10 @@ body {
 		font-size: 0.6em;
 	}
 
-	
+	.transaction-category,
+.transaction-notes {
+    margin-left: 70px;  
+}
 
 	/* ------------------- Footer Anpassung ------------------- */
 	.site-footer__container {
