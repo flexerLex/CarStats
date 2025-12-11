@@ -144,7 +144,7 @@ try {
                     <label for="note" class="kosteneingabe-form__label">Kommentar (optional)</label>
                     <textarea id="note" name="note" rows="2" class="kosteneingabe-form__input"></textarea>
                 </div>
-                <div class="kosteneingabe-form__input-row">
+        <!--    <div class="kosteneingabe-form__input-row">
                     <label for="receipt-photo" class="kosteneingabe-form__label">
                         Foto vom Beleg / Tankquittung
                         <span class="tooltip-container">
@@ -157,7 +157,7 @@ try {
                     </label>
                     <input type="file" id="receipt-photo" name="receipt-photo" accept="image/*" capture="environment"
                            class="kosteneingabe-form__input-file" />
-                </div>
+                </div> -->
                 <button class="kosteneingabe-form__submit" type="submit">Speichern</button>
             </form>
         </main>
