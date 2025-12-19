@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS garage (
     licenseplate VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     mileage INT(11) NOT NULL,
+    tankvolume FLOAT NOT NULL,
     lasttuev DATE,
     lastoilchange DATE,
     lastgreatservice DATE,
@@ -33,15 +34,13 @@ CREATE TABLE IF NOT EXISTS expenses (
     id INT(11) NOT NULL AUTO_INCREMENT,
     car_id INT(11) NOT NULL,
     date DATE NOT NULL,
-    category VARCHAR(50) NOT NULL, 
+    category VARCHAR(50) NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     mileage INT(11),
     notes TEXT,
-    fuel_type VARCHAR(20),  
+    fuel_type VARCHAR(20),
     quantity DECIMAL(8, 3),
+    full_tank BOOLEAN NOT NULL DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY (car_id) REFERENCES garage(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE expenses
-ADD COLUMN full_tank BOOLEAN NOT NULL DEFAULT 0;
