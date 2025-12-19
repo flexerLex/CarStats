@@ -282,7 +282,9 @@ body {
 .transaction-details-left {
 		flex-grow: 1; 
     display: flex; 
-    align-items: center;
+		flex-direction: column;
+		justify-content: center;
+    align-items: flex-start;
 }
 
 .transaction-name {
@@ -311,7 +313,7 @@ body {
 
 .transaction-category,
 .transaction-notes {
-    margin-left: 90px; 
+
     color: #141514; 
 }
 
@@ -448,10 +450,7 @@ body {
 		font-size: 0.6em;
 	}
 
-	.transaction-category,
-.transaction-notes {
-    margin-left: 70px;  
-}
+
 
 	/* ------------------- Footer Anpassung ------------------- */
 	.site-footer__container {

@@ -11,21 +11,22 @@
     --green-200:#B8D6B0;
     --green-250:#A3CF93;
     --green-300:#BCDBB4;
+    --green-500:#1F8505;
     --green-600:#155A03;
     --green-700:#104502;
 
     --text-main: #000000;
     --white: #ffffff;
     
-    --green-main: #415b2b;
-    --green-accent: #628243;
+    --green-main: #155A03;
+    --green-accent: #104502;
     --grey-bg: #595959;
     --yellow-accent: #e5eae3;
     --gray-border: #e5eae3;
     --header-height: 72px;
-    --accent: #155A03;/* gute farbe, leichter blaustich #007b4f */
+    --accent: #155A03;
     --accent-alt: #007b4f;
-    --green-button-hover: #0E4402;   /* passendes hovergrün zu altem accent #00643f; */
+    --green-button-hover: #0E4402;   
 }
 body {
     margin: 0;

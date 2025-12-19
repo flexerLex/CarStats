@@ -69,7 +69,7 @@
 }
 .kosteneingabe-expense-filter__label {
     font-weight: 600;
-    color: var(--green-main);
+    color: var(--green-accent);
     margin-bottom: 10px;
     font-size: 1.2rem;
 }
@@ -94,8 +94,8 @@
 .kosteneingabe-expense-filter__btn {
     background: #fff;
     scroll-snap-align: center;
-    color: var(--accent);
-    border: 2px solid var(--accent);
+    color: var(--green-accent);
+    border: 2px solid var(--green-accent);
     border-radius: 22px;
     padding: 14px 28px;
     font-size: 1.15rem;
@@ -114,9 +114,9 @@
 .kosteneingabe-expense-filter__btn.active,
 .kosteneingabe-expense-filter__btn:focus,
 .kosteneingabe-expense-filter__btn:hover {
-    background: linear-gradient(90deg, var(--accent-alt) 0%, var(--accent) 100%);
+    background: linear-gradient(90deg, var(--green-500) 0%, var(--green-accent) 100%);
     color: #fff;
-    border-color: var(--accent-alt);
+    border-color: var(--green-main);
     box-shadow: 0 6px 24px rgba(184, 92, 56, 0.22);
     transform: translateY(-2px) scale(1.04);
 }
@@ -202,7 +202,7 @@
 
 .kosteneingabe-form__submit:hover,
 .kosteneingabe-form__submit:focus {
-    background: linear-gradient(90deg, var(--accent-alt) 0%, var(--accent) 100%);
+    background: linear-gradient(90deg, var(--green-500) 0%, var(--green-accent) 100%);
     color: #fff;
     box-shadow: 0 6px 24px rgba(184, 92, 56, 0.22);
     outline: none;
