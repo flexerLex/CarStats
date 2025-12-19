@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $error = 'Bitte alle Felder ausfüllen';
     } else {
         try {
-            $stmt = $conn->prepare("INSERT INTO garage (user_id, brand, model, year, licenseplate, type, mileage, tankvolume, lasttuev, lastoilchange, lastgreatservice, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO garage (user_id, brand, model, year, licenseplate, type, mileage, tankvolume, lasttuev, lastoilchange, lastgreatservice, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->execute([$_SESSION['user_id'], $brand, $model, $year, $licenseplate, $type, $mileage, $tankvolume, $lasttuev, $lastoilchange, $lastgreatservice, $notes]);
             $success = 'Fahrzeug erfolgreich hinzugefügt!';
         } catch(PDOException $e) {

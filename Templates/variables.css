@@ -23,9 +23,9 @@
     --yellow-accent: #e5eae3;
     --gray-border: #e5eae3;
     --header-height: 72px;
-    --accent: #155A03;/* gute farbe, leichter blaustich #007b4f */
+    --accent: #155A03;
     --accent-alt: #007b4f;
-    --green-button-hover: #0E4402;   /* passendes hovergrün zu altem accent #00643f; */
+    --green-button-hover: #0E4402;   
 }
 body {
     margin: 0;

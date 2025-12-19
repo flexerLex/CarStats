@@ -1,107 +1,34 @@
 //--------------- I. Globale Variablen und Hilfsfunktionen ---------------------
 let consumptionChartInstance = null;
 
-const PLACEHOLDER_TEXT = '---'; 
-
 const PRIMARY_COLOR_SOLID = '#155A03'; 
 const COLOR_CHART_FILL = 'rgba(218, 237, 213, 0.5)';
-
-function formatNumber(num, minDecimals) {
-    if (typeof num !== 'number' || isNaN(num) || num === null) {
-        return PLACEHOLDER_TEXT;
-    }
-    const numberValue = parseFloat(num); 
-    const useGrouping = minDecimals > 0 ? true : (numberValue >= 1000);
-
-    const formatter = new Intl.NumberFormat('de-DE', {
-        minimumFractionDigits: minDecimals,
-        maximumFractionDigits: minDecimals,
-        useGrouping: useGrouping
-    });
-    
-    return formatter.format(numberValue);
-}
 
 // ------------II. Hauptinitialisierungsfunktion ------------------------
 async function initDashboard() { 
     console.log('Dashboard Frontend Initialisierung gestartet...');
     
-    if (typeof INITIAL_STATS_DATA === 'undefined') {
-        console.error("INITIAL_STATS_DATA ist nicht im globalen Scope definiert! Backend-Integration prüfen.");
-        initializeConsumptionChart(); 
+    // 检查 PHP 是否成功传递了数据
+    if (typeof INITIAL_STATS_DATA === 'undefined' || !INITIAL_STATS_DATA.chartData) {
+        console.error("INITIAL_STATS_DATA ist nicht definiert oder unvollständig!");
         return;
     }
 
-    const { kpis, chartData, transactions } = INITIAL_STATS_DATA;
+    const { chartData } = INITIAL_STATS_DATA;
     
+    // 获取当前的时间单位 (Tag, Monat, Jahr)
     const currentUnit = document.querySelector('.chart__time__btn.active')?.getAttribute('data-unit') || 'month';
 
-    // 1. Chart initialisieren und mit Daten füllen
+    // 1. 初始化图表
     initializeConsumptionChart();
-    updateConsumptionChart(chartData.labels, chartData.values, currentUnit);
     
-    updateKpis(kpis);
-
+    // 2. 填充图表数据
+    // 注意：根据你的 PHP，数据现在都在 chartData.values 中 (格式为 [{x: '...', y: ...}])
+    updateConsumptionChart(chartData.values, currentUnit);
+    
+    // 注意：KPI 数字已经在 PHP 中渲染完成，此处不再调用 updateKpis 以防干扰格式
 }
 
-// ------------ III. Funktionen zur Ansichtsaktualisierung ------------------------
-
-function updateKpis(kpis) {
-    if (!kpis) {
-        kpis = {};
-    }
-
-    const carModelElement = document.querySelector('.car-model-display');
-    if(carModelElement) {
-        carModelElement.textContent = kpis.carModel || PLACEHOLDER_TEXT;
-    }
-    
-    
-    // Verbrauch (L/100km)
-    document.querySelector('.average-consumption .kpi__value').textContent =
-        formatNumber(kpis.averageConsumption, 2);
-    
-    // Spritkosten (€/1km)
-    document.querySelector('.fuel-costs .kpi__value').textContent = 
-        formatNumber(kpis.fuelCostsPerKm, 3); 
-        
-    // Kilometerstand (km)
-    document.querySelector('.mileage .kpi__value').textContent = formatNumber(
-        kpis.mileage,
-        0
-    );
-    
-    // Reichweite (km)
-    document.querySelector('.reichweite .kpi__value').textContent = formatNumber(
-        kpis.range,
-        0
-    );
-    
-    // Monatskosten (€)
-    document.querySelector('.monthly-total-costs .kpi__value').textContent =
-    formatNumber(parseFloat(kpis.monthlyTotalCosts), 2); 
-    
-    // Jahreskosten (€)
-    document.querySelector('.annual-total-costs .kpi__value').textContent =
-    formatNumber(parseFloat(kpis.annualTotalCosts), 2); 
-    
-}
-
-
-// function getCategoryBadge(category) {
-//     switch (category) {
-//         case 'Kraftstoff':
-//             return 'bg-success'; // 例如：绿色
-//         case 'Service':
-//         case 'Reparatur':
-//             return 'bg-warning'; // 例如：黄色
-//         case 'Versicherung':
-//         case 'Steuer':
-//             return 'bg-info'; // 例如：蓝色
-//         default:
-//             return 'bg-secondary'; // 例如：灰色
-//     }
-// }
 // -------------------------III. Diagramm- und Interaktionslogik ---------------------
 function initializeConsumptionChart() {
     const ctx = document.getElementById('consumption-chart');
@@ -110,14 +37,16 @@ function initializeConsumptionChart() {
     const config = {
         type: 'line',
         data: {
-            labels: [],
             datasets: [
                 {
-                    data: [],
+                    label: 'Verbrauch (L/100km)',
+                    data: [], // 初始为空
                     borderColor: PRIMARY_COLOR_SOLID,
                     tension: 0.4,
                     fill: true,
                     backgroundColor: COLOR_CHART_FILL,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
                 },
             ],
         },
@@ -126,8 +55,13 @@ function initializeConsumptionChart() {
             locale: 'de-DE',
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                  display: false 
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `Verbrauch: ${context.parsed.y.toLocaleString('de-DE')} L/100km`;
+                        }
+                    }
                 }
             },
             scales: {
@@ -135,30 +69,25 @@ function initializeConsumptionChart() {
                     type: 'time',
                     time: {
                         unit: 'month', 
-                        tooltipFormat: 'MMM yyyy', 
-                        parser: 'yyyy-MM' 
+                        tooltipFormat: 'dd.MM.yyyy', 
                     },
                     title: {
                         display: true,
-                        text: 'Monat',
+                        text: 'Zeitraum',
                         align: 'end',
                         color:'#3B3D3B'
                     },
-                    grid: {
-                        display: false 
-                    },
+                    grid: { display: false },
                 },
                 y: {
+                    beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Verbrauch (L/100km)',
+                        text: 'L/100km',
                         align: 'end',
                         color:'#3B3D3B'
-                    },grid: {
-                        display: true, 
                     },
-                    min: 0,
-                    max: 12.0 // Beispielwert, kann dynamisch angepasst werden
+                    grid: { display: true }
                 }
             }
         },
@@ -166,32 +95,30 @@ function initializeConsumptionChart() {
     consumptionChartInstance = new Chart(ctx, config);
 }
 
-function updateConsumptionChart(labels, values, unit) {
-    if (!consumptionChartInstance) {
-        initializeConsumptionChart();
-    }
+function updateConsumptionChart(values, unit) {
+    if (!consumptionChartInstance) return;
     
-    let parserFormat;
     let displayFormat;
     let xAxisTitle = '';
 
+    // 根据选择的单位调整显示格式
     if (unit === 'year') {
-        parserFormat = 'yyyy'; 
         displayFormat = 'yyyy';
         xAxisTitle = 'Jahr'; 
     } else if (unit === 'month') {
-        parserFormat = 'yyyy-MM'; 
         displayFormat = 'MMM yyyy'; 
         xAxisTitle = 'Monat'; 
     } else { // day
-        parserFormat = 'yyyy-MM-dd'; 
-        displayFormat = 'MMM d'; 
+        displayFormat = 'dd.MM.yyyy'; 
         xAxisTitle = 'Datum'; 
     }
 
+    // 更新 Chart.js 数据集
+    // values 格式为 [{x: "2023-10-01", y: 8.5}, ...]
     consumptionChartInstance.data.datasets[0].data = values;
+    
+    // 更新 X 轴配置
     consumptionChartInstance.options.scales.x.time.unit = unit;
-    consumptionChartInstance.options.scales.x.time.parser = parserFormat;
     consumptionChartInstance.options.scales.x.time.tooltipFormat = displayFormat;
     consumptionChartInstance.options.scales.x.title.text = xAxisTitle;
     

@@ -1,44 +1,27 @@
 <?php
-// ----------- I. Sicherheits- und Initialisierungsprüfung -----------------------------------
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
-
-if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+if (!isset($_SESSION['loggedIn'])) {
     header('Location: login.php');
     exit;
-}
-$user_id = $_SESSION['user_id'] ?? null;
-if ($user_id === null) {
-    die('Keine Benutzer-ID in der Session gefunden.');
 }
 
 require_once 'connect_DB.php'; 
 require_once 'StatistikService.php';
 
 $conn = getDBConnection();
-$statistikService = new StatistikService($conn);
+$service = new StatistikService($conn);
 
-$unit = filter_input(INPUT_GET, 'unit', FILTER_DEFAULT); 
-if (!in_array($unit, ['day', 'month', 'year'])) {
-    $unit = 'month';
-}
-$currentUnit = $unit; 
-$cars = $statistikService->getUserCars($user_id);
-$car_id = $statistikService->determineSelectedCar($cars);
+// 1. 获取筛选参数
+$user_id = $_SESSION['user_id'];
+$currentUnit = filter_input(INPUT_GET, 'unit') ?: 'month';
+if (!in_array($currentUnit, ['day', 'month', 'year'])) $currentUnit = 'month';
 
-// ----------------- II. Daten abruf und Berechnung -----------------
-if ($car_id) { 
-    $results = $statistikService->getCarStatistics($car_id, $user_id, $currentUnit);
-} else {
-    $results = $statistikService->initializeEmptyResults();
-}
+// 2. 获取车辆列表和选定车辆
+$cars = $service->getUserCars($user_id);
+$car_id = $service->determineSelectedCar($cars);
 
-// ----------------- III. Die Daten werden für das Frontend in eine JS-Variable kodiert -----------------
-$jsData = json_encode($results);
-// -------------------------------------------------------------------------------------------------------
+// 3. 抓取统计结果
+$results = $car_id ? $service->getCarStatistics($car_id, $user_id, $currentUnit) : $service->initializeEmptyResults();
 
-include 'statistiken_view.php'; 
-
-?>
+// 4. 包含视图文件
+include 'statistiken_view.php';
