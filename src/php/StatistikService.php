@@ -6,9 +6,7 @@ class StatistikService {
         $this->conn = $conn;
     }
 
-    /**
-     * 初始化空数据结构，防止前端报错
-     */
+// Initializes an empty data structure to avoid frontend errors.
     public function initializeEmptyResults($carModel = '') {
         return [
             'kpis' => [
@@ -25,18 +23,14 @@ class StatistikService {
         ];
     }
 
-    /**
-     * 获取用户的所有车辆
-     */
+//  Retrieves all of the user's vehicles.
     public function getUserCars(int $user_id): array {
         $stmt = $this->conn->prepare("SELECT id, brand, model, licenseplate FROM garage WHERE user_id = :uid ORDER BY brand, model");
         $stmt->execute(['uid' => $user_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * 确定当前选中的车辆 ID
-     */
+    
     public function determineSelectedCar(array $cars): ?int {
         if (empty($cars)) return null;
         $requestedCarId = filter_input(INPUT_GET, 'car_id', FILTER_VALIDATE_INT);
@@ -46,11 +40,9 @@ class StatistikService {
         return (int)$cars[0]['id'];
     }
 
-    /**
-     * 主函数：聚合所有统计数据
-     */
+    
     public function getCarStatistics(int $car_id, int $user_id, string $unit): array {
-        // 1. 获取车辆基本信息和最新里程
+        // 1. Receive basic vehicle information and the current mileage.
         $stmt = $this->conn->prepare("
             SELECT brand, model, licenseplate, tankvolume, 
             (SELECT mileage FROM expenses WHERE car_id = g.id ORDER BY mileage DESC LIMIT 1) as latest_mileage
@@ -64,7 +56,7 @@ class StatistikService {
         $results = $this->initializeEmptyResults($vehicleData['brand'] . ' ' . $vehicleData['model']);
         $results['kpis']['mileage'] = (int)$vehicleData['latest_mileage'];
 
-        // 2. 计算费用 KPI (月度/年度)
+        // 2. Calculate cost KPIs (monthly/annually)
         $stmt = $this->conn->prepare("
             SELECT 
                 COALESCE(SUM(CASE WHEN date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH) THEN amount END), 0) as annual,
@@ -76,16 +68,16 @@ class StatistikService {
         $results['kpis']['annualTotalCosts'] = (float)$costs['annual'];
         $results['kpis']['monthlyTotalCosts'] = (float)$costs['monthly'];
 
-        // 3. 计算油耗和图表 (基于区间算法)
+        // 3. Calculate fuel consumption and create diagrams (based on interval algorithms)
         $consumptionData = $this->calculateFuelLogic($car_id, $unit);
         $results['kpis']['averageConsumption'] = round($consumptionData['avg'], 2);
         $results['kpis']['fuelCostsPerKm'] = round($consumptionData['cost_per_km'], 3);
         $results['chartData']['values'] = $consumptionData['chart'];
 
-        // 4. 计算续航里程 (基于 tankvolume)
+        // 4. Calculate range (based on tank volume)
         $results['kpis']['range'] = $this->calculateRange($car_id, $consumptionData['avg'], (float)$vehicleData['tankvolume']);
 
-        // 5. 最近交易记录
+        // 5. Recent transaction records
         $stmt = $this->conn->prepare("SELECT date, category, amount FROM expenses WHERE car_id = ? ORDER BY date DESC, id DESC LIMIT 4");
         $stmt->execute([$car_id]);
         $results['transactions'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -93,9 +85,7 @@ class StatistikService {
         return $results;
     }
 
-    /**
-     * 核心油耗逻辑：处理 full_tank 标记
-     */
+    // Core fuel consumption logic: Handles the fulltank flag
     private function calculateFuelLogic(int $car_id, string $unit): array {
         $stmt = $this->conn->prepare("SELECT date, mileage, quantity, amount, full_tank FROM expenses WHERE car_id = ? AND category = 'Sprit' ORDER BY mileage ASC");
         $stmt->execute([$car_id]);
@@ -119,7 +109,7 @@ class StatistikService {
                     if ($dist > 0) {
                         $totalDist += $dist;
                         $totalQty += $combinedQty;
-                        // 记录图表点
+
                         $chartPoints[] = ['date' => $r['date'], 'val' => ($combinedQty / $dist) * 100];
                     }
                 }
@@ -140,13 +130,13 @@ class StatistikService {
     private function calculateRange(int $car_id, float $avg, float $tankVolume): int {
         if ($avg <= 0 || $tankVolume <= 0) return 0;
 
-        // 找到最后的满油点里程
+        // Find the final full tank mileage
         $stmt = $this->conn->prepare("SELECT mileage FROM expenses WHERE car_id = ? AND full_tank = 1 ORDER BY mileage DESC LIMIT 1");
         $stmt->execute([$car_id]);
         $lastFullMileage = $stmt->fetchColumn();
         if (!$lastFullMileage) return 0;
 
-        // 计算自满油后的总消耗量和补充量
+        // Calculate the total consumption and replenishment amount after filling the tank.
         $stmt = $this->conn->prepare("
             SELECT MAX(mileage) as now, SUM(CASE WHEN full_tank = 0 THEN quantity ELSE 0 END) as extra 
             FROM expenses WHERE car_id = ? AND mileage >= ?
