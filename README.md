@@ -37,6 +37,10 @@ Browser über PHP Storm tun, Sie werden darüber funktioniert, ob alles geklappt
 Sie sind nun bereit zu starten, registrieren Sie sich, loggen Sie sich ein, erstellen Sie sich Fahrzeuge und tracken 
 auch Sie alles rund um Ihr Auto. Viel Spaß.
 
+## TESTDATEN
+
+Um Ihnen das Testen zu erleichtern gibt es bereits den Testaccount mit dem Benutzernamen "schuetz" und Passwort "fschuetz",
+unter dem bereits ein Auto sowie Betankungen eingetragen sind.
 
 ## TECHNOLOGIEN
 MySql, PHP, HTML, CSS, JavaScript
