@@ -20,14 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $notes = trim($_POST['note'] ?? '');
     $fuel_type = filter_input(INPUT_POST, 'fuel_type', FILTER_SANITIZE_STRING) ?? null;
     $quantity = filter_input(INPUT_POST, 'fuel_amount', FILTER_VALIDATE_FLOAT) ?? 0;
+    $full_tank = isset($_POST['full_tank']) ? 1 : 0;
 
     if ($car_id && $date && $category && $amount > 0) {
         try {
             $stmt = $conn->prepare("
-                INSERT INTO expenses (car_id, date, category, amount, mileage, notes, fuel_type, quantity)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO expenses (car_id, date, category, amount, mileage, notes, fuel_type, quantity, full_tank)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
-            $stmt->execute([$car_id, $date, $category, $amount, $mileage, $notes, $fuel_type, $quantity]);
+            $stmt->execute([$car_id, $date, $category, $amount, $mileage, $notes, $fuel_type, $quantity, $full_tank]);
 
             $successMessage = "Kosten erfolgreich gespeichert!";
         } catch (PDOException $e) {
