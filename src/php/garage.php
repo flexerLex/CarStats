@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $licenseplate = trim($_POST['licenseplate'] ?? '');
     $type = trim($_POST['type'] ?? '');
     $mileage = $_POST['mileage'] ?? '';
+    $tankvolume = $_POST['tankvolume'] ?? '';
     $lasttuev = $_POST['lasttuev'] ?? '';
     $lastoilchange = $_POST['lastoilchange'] ?? '';
     $lastgreatservice = $_POST['lastgreatservice'] ?? '';
@@ -49,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         empty($licenseplate) ||
         empty($type) ||
         empty($mileage) ||
+        empty($tankvolume) ||
         empty($lasttuev) ||
         empty($lastoilchange) ||
         empty($lastgreatservice)
@@ -56,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         $error = 'Bitte alle Felder ausfüllen';
     } else {
         try {
-            $stmt = $conn->prepare("INSERT INTO garage (user_id, brand, model, year, licenseplate, type, mileage, lasttuev, lastoilchange, lastgreatservice, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$_SESSION['user_id'], $brand, $model, $year, $licenseplate, $type, $mileage, $lasttuev, $lastoilchange, $lastgreatservice, $notes]);
+            $stmt = $conn->prepare("INSERT INTO garage (user_id, brand, model, year, licenseplate, type, mileage, tankvolume, lasttuev, lastoilchange, lastgreatservice, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$_SESSION['user_id'], $brand, $model, $year, $licenseplate, $type, $mileage, $tankvolume, $lasttuev, $lastoilchange, $lastgreatservice, $notes]);
             $success = 'Fahrzeug erfolgreich hinzugefügt!';
         } catch(PDOException $e) {
             $error = 'Fehler beim Speichern: ' . $e->getMessage();
@@ -74,19 +76,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $licenseplate = trim($_POST['licenseplate'] ?? '');
     $type = trim($_POST['type'] ?? '');
     $mileage = $_POST['mileage'] ?? '';
+    $tankvolume = $_POST['tankvolume'] ?? '';
     $lasttuev = $_POST['lasttuev'] ?? '';
     $lastoilchange = $_POST['lastoilchange'] ?? '';
     $lastgreatservice = $_POST['lastgreatservice'] ?? '';
     $notes = trim($_POST['notes'] ?? '');
 
     if (
-            empty($brand) || empty($model) || empty($year) || empty($licenseplate) || empty($type) || empty($mileage) || empty($lasttuev) || empty($lastoilchange) || empty($lastgreatservice)
+            empty($brand) || empty($model) || empty($year) || empty($licenseplate) || empty($type) || empty($mileage) || empty($tankvolume) || empty($lasttuev) || empty($lastoilchange) || empty($lastgreatservice)
     ) {
         $error = 'Bitte alle Felder ausfüllen';
     } else {
         try { //nur eigene
-            $stmt = $conn->prepare("UPDATE garage SET brand = ?, model = ?, year = ?, licenseplate = ?, type = ?, mileage = ?, lasttuev = ?, lastoilchange = ?, lastgreatservice = ?, notes = ? WHERE user_id = ? AND id = ?");
-            $stmt->execute([$brand, $model, $year, $licenseplate, $type, $mileage, $lasttuev, $lastoilchange, $lastgreatservice, $notes, $_SESSION['user_id'], $id]);
+            $stmt = $conn->prepare("UPDATE garage SET brand = ?, model = ?, year = ?, licenseplate = ?, type = ?, mileage = ?, tankvolume = ?, lasttuev = ?, lastoilchange = ?, lastgreatservice = ?, notes = ? WHERE user_id = ? AND id = ?");
+            $stmt->execute([$brand, $model, $year, $licenseplate, $type, $mileage, $tankvolume, $lasttuev, $lastoilchange, $lastgreatservice, $notes, $_SESSION['user_id'], $id]);
 
             if ($stmt->rowCount() > 0) {
                 $success = 'Fahrzeug erfolgreich aktualisiert!';
@@ -245,6 +248,10 @@ if ($edit_id !== null && isset($_SESSION['user_id'])) {
                             <span class="vehicle-info-value"><?php echo htmlspecialchars($vehicle['type']); ?></span>
                         </div>
                         <div class="vehicle-info-row">
+                            <span class="vehicle-info-label">Tankvolumen (Liter)</span>
+                            <span class="vehicle-info-value"><?php echo htmlspecialchars($vehicle['tankvolume']); ?></span>
+                        </div>
+                        <div class="vehicle-info-row">
                             <span class="vehicle-info-label">Letzter TÜV</span>
                             <span class="vehicle-info-value"><?php echo htmlspecialchars($vehicle['lasttuev']); ?></span>
                         </div>
@@ -303,6 +310,10 @@ if ($edit_id !== null && isset($_SESSION['user_id'])) {
                                 <span class="vehicle-info-value">Diesel</span>
                             </div>
                             <div class="vehicle-info-row">
+                                <span class="vehicle-info-label">Tankvolumen (Liter)</span>
+                                <span class="vehicle-info-value">50</span>
+                            </div>
+                            <div class="vehicle-info-row">
                                 <span class="vehicle-info-label">Letzter TÜV</span>
                                 <span class="vehicle-info-value">06/24</span>
                             </div>
@@ -348,6 +359,10 @@ if ($edit_id !== null && isset($_SESSION['user_id'])) {
                             <div class="vehicle-info-row">
                                 <span class="vehicle-info-label">Antriebsart</span>
                                 <span class="vehicle-info-value">Super E5</span>
+                            </div>
+                            <div class="vehicle-info-row">
+                                <span class="vehicle-info-label">Tankvolumen (Liter)</span>
+                                <span class="vehicle-info-value">50</span>
                             </div>
                             <div class="vehicle-info-row">
                                 <span class="vehicle-info-label">Letzter TÜV</span>
@@ -411,6 +426,10 @@ if ($edit_id !== null && isset($_SESSION['user_id'])) {
                             <option value="gas" <?php echo (($vehicleToEdit['type'] ?? '') === 'gas') ? 'selected' : ''; ?>>Gas (LPG/CNG)</option>
                             <option value="other" <?php echo (($vehicleToEdit['type'] ?? '') === 'other') ? 'selected' : ''; ?>>Sonstige</option>
                         </select>
+                    </label>
+                    <label>
+                        Tankvolumen:
+                        <input type="number" name="tankvolume" min="0" max="1000" required value="<?php echo htmlspecialchars($vehicleToEdit['tankvolume'] ?? ''); ?>">
                     </label>
                     <label>
                         Kilometerstand:

@@ -255,17 +255,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="register_mask" class="form" method="post" action="#">
             <fieldset>
                 <legend>Registrierung</legend>
-                <div class="grid">
-                    <input type="hidden" name="action" value="register">
-                    <label>
-                        Vorname:
-                        <input id="first_name_input" name="firstname" type="text" pattern="[A-Za-z]+" required placeholder="Max">
-                    </label>
-                    <label>
-                        Nachname:
-                        <input id="name_input" name="name" type="text" pattern="[A-Za-z]+" required placeholder="Mustermann">
-                    </label>
-                </div>
+                <input type="hidden" name="action" value="register">
+                <label>
+                    Vorname:
+                    <input id="first_name_input" name="firstname" type="text" pattern="[A-Za-z]+" required placeholder="Max">
+                </label>
+                <label>
+                    Nachname:
+                    <input id="name_input" name="name" type="text" pattern="[A-Za-z]+" required placeholder="Mustermann">
+                </label>
                 <label>
                     E-Mail:
                     <input id="mail_input" name="mail" type="email" required placeholder="max@beispiel.de">
