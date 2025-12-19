@@ -1,4 +1,5 @@
 <?php
+// Erstellung durch Rico Baur
 require_once '../php/connect_DB.php';
 $conn = getDBConnection();
 $passwordHash = password_hash('fschuetz', PASSWORD_DEFAULT);
