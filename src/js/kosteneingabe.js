@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             console.error(data.error);
                             return;
                         }
+                        let currentCategory = categoryField ? categoryField.value : 'Sprit';
+                        updateDynamicFields(currentCategory);
                         updateFormFields(data);
                     })
                     .catch(error => console.error('Error fetching car data:', error));
