@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+
 session_start();
 
 if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
@@ -17,14 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $notes = trim($_POST['note'] ?? '');
     $fuel_type = filter_input(INPUT_POST, 'fuel_type', FILTER_SANITIZE_STRING) ?? null;
     $quantity = filter_input(INPUT_POST, 'fuel_amount', FILTER_VALIDATE_FLOAT) ?? 0;
+    $full_tank = isset($_POST['full_tank']) ? 1 : 0;
 
     if ($car_id && $date && $category && $amount > 0) {
         try {
             $stmt = $conn->prepare("
-                INSERT INTO expenses (car_id, date, category, amount, mileage, notes, fuel_type, quantity)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO expenses (car_id, date, category, amount, mileage, notes, fuel_type, quantity, full_tank)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
-            $stmt->execute([$car_id, $date, $category, $amount, $mileage, $notes, $fuel_type, $quantity]);
+            $stmt->execute([$car_id, $date, $category, $amount, $mileage, $notes, $fuel_type, $quantity, $full_tank]);
 
             $successMessage = "Kosten erfolgreich gespeichert!";
         } catch (PDOException $e) {
@@ -141,7 +145,7 @@ try {
                     <label for="note" class="kosteneingabe-form__label">Kommentar (optional)</label>
                     <textarea id="note" name="note" rows="2" class="kosteneingabe-form__input"></textarea>
                 </div>
-                <div class="kosteneingabe-form__input-row">
+        <!--    <div class="kosteneingabe-form__input-row">
                     <label for="receipt-photo" class="kosteneingabe-form__label">
                         Foto vom Beleg / Tankquittung
                         <span class="tooltip-container">
@@ -154,7 +158,7 @@ try {
                     </label>
                     <input type="file" id="receipt-photo" name="receipt-photo" accept="image/*" capture="environment"
                            class="kosteneingabe-form__input-file" />
-                </div>
+                </div> -->
                 <button class="kosteneingabe-form__submit" type="submit">Speichern</button>
             </form>
         </main>

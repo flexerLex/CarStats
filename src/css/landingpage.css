@@ -423,7 +423,7 @@ main {
 .cookie-buttons {
     margin-top: 1rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 10px;
 }
 

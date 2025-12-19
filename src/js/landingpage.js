@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
         banner.classList.add("hidden");
     });
 
+    document.getElementById("cookie-manage").addEventListener("click", () => {
+        localStorage.setItem("cookieConsent", "accepted");
+        banner.classList.add("hidden");
+    });
+
     document.getElementById("cookie-decline").addEventListener("click", () => {
         localStorage.setItem("cookieConsent", "declined");
         banner.classList.add("hidden");

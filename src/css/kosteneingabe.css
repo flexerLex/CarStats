@@ -257,6 +257,42 @@
     font-size: 0.98em;
     pointer-events: none;
 }
+.kosteneingabe-form__input-row--inline {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-bottom: 18px;
+}
+.kosteneingabe-form__label-tank-fuel {
+    margin-right: 8px;
+    font-weight: 600;
+    color: var(--green-main);
+    font-size: 1.05rem;
+}
+
+.kosteneingabe-form__input-checkbox {
+    width: 22px;
+    height: 22px;
+    accent-color: var(--accent, #ffb300);
+    border-radius: 6px;
+    border: 2px solid var(--accent, #ffb300);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(255, 179, 0, 0.15);
+    outline: none;
+    transition: box-shadow 0.2s, border-color 0.2s;
+    vertical-align: middle;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.kosteneingabe-form__input-checkbox:focus,
+.kosteneingabe-form__input-checkbox:hover {
+    border-color: var(--green-main, #4caf50);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.18);
+}
+
+.kosteneingabe-form__input-checkbox:active {
+    border-color: var(--accent, #ffb300);
+}
 
 .tooltip-container:hover .tooltip-text,
 .tooltip-container:focus-within .tooltip-text {
