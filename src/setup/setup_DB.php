@@ -12,6 +12,7 @@ $sql = "
         licenseplate VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
         mileage INT(11) NOT NULL,
+        tankvolume FLOAT NOT NULL,
         lasttuev DATE,
         lastoilchange DATE,
         lastgreatservice DATE,
@@ -40,6 +41,7 @@ $sql = "
         notes TEXT,
         fuel_type VARCHAR(20),  
         quantity DECIMAL(8, 3),
+        full_tank BOOLEAN NOT NULL DEFAULT 0,
         PRIMARY KEY (id),
         FOREIGN KEY (car_id) REFERENCES garage(id) ON DELETE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
