@@ -85,6 +85,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         <label class="kosteneingabe-form__label" for="fuel-amount">Getankte Menge (Liter/kWh)</label>
                         <input type="number" id="fuel-amount" name="fuel_amount" min="0" step="0.01" class="kosteneingabe-form__input" placeholder="Letzte Menge">
                     </div>
+                    <div class="kosteneingabe-form__input-row kosteneingabe-form__input-row--inline">
+                        <label for="full-tank" class="kosteneingabe-form__label-tank-fuel" style="margin-right: 8px;">Tank voll
+                            <input type="checkbox" id="full-tank" name="full_tank" value="1" class="kosteneingabe-form__input-checkbox">
+                        </label>
+                    </div>
                 `;
                 dynamicFieldsContainer.innerHTML = html;
 
